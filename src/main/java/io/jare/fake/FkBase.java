@@ -20,37 +20,31 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.fake;
 
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
+import io.jare.model.Base;
+import io.jare.model.Domain;
+import io.jare.model.User;
+import java.util.Collections;
+import java.util.Iterator;
 
 /**
- * Command line entry.
+ * Fake Base.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class Entrance {
+public final class FkBase implements Base {
 
-    /**
-     * Ctor.
-     */
-    private Entrance() {
-        // utility class
+    @Override
+    public User user(final String name) {
+        return new FkUser();
     }
 
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
+    @Override
+    public Iterator<Domain> domain(final String name) {
+        return Collections.<Domain>singleton(new FkDomain()).iterator();
     }
 
 }

@@ -20,37 +20,52 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.tk;
 
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
+import com.jcabi.matchers.XhtmlMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
+import org.takes.Take;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsPrint;
 
 /**
- * Command line entry.
- *
+ * Test case for {@link TkIndex}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class Entrance {
+public final class TkIndexTest {
 
     /**
-     * Ctor.
+     * TkHome can render home page.
+     * @throws Exception If some problem inside
      */
-    private Entrance() {
-        // utility class
-    }
-
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
+    @Test
+    public void rendersHomePage() throws Exception {
+        final Take take = new TkAppAuth(new TkIndex());
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new RsPrint(
+                    take.act(
+                        new RqWithHeader(
+                            new RqFake("GET", "/"),
+                            "Accept",
+                            "text/xml"
+                        )
+                    )
+                ).printBody()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/page/millis",
+                "/page/identity/urn",
+                "/page/version",
+                "/page/links/link[@rel='home']",
+                "/page/links/link[@rel='self']",
+                "/page/links/link[@rel='takes:logout']"
+            )
+        );
     }
 
 }

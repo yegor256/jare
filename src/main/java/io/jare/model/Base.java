@@ -20,37 +20,31 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.model;
 
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
+import java.util.Iterator;
 
 /**
- * Command line entry.
+ * Base.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class Entrance {
+public interface Base {
 
     /**
-     * Ctor.
+     * Get user by GitHub handle.
+     * @param name GitHub name of the user
+     * @return The user
      */
-    private Entrance() {
-        // utility class
-    }
+    User user(String name);
 
     /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
+     * Find domain by hostname.
+     * @param name The name
+     * @return The domain
      */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
-    }
+    Iterator<Domain> domain(String name);
 
 }

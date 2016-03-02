@@ -20,37 +20,43 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.dynamo;
 
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
+import io.jare.model.Base;
+import io.jare.model.Domain;
+import io.jare.model.User;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Command line entry.
- *
+ * Integration case for {@link DyDomain}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class Entrance {
+public final class DyDomainITCase {
 
     /**
-     * Ctor.
+     * DyDomain can be added and removed.
+     * @throws Exception If some problem inside
      */
-    private Entrance() {
-        // utility class
-    }
-
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
+    @Test
+    public void addsAndRemoveDomains() throws Exception {
+        final Base base = new DyBase(new Dynamo());
+        final String john = "john";
+        final User user = base.user(john);
+        final String name = "google.com";
+        user.add(name);
+        final Domain domain = base.domain(name).next();
+        MatcherAssert.assertThat(domain.name(), Matchers.equalTo(name));
+        MatcherAssert.assertThat(domain.owner(), Matchers.equalTo(john));
+        domain.delete();
+        MatcherAssert.assertThat(
+            base.domain(name).hasNext(),
+            Matchers.equalTo(false)
+        );
     }
 
 }

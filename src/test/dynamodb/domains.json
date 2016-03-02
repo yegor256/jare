@@ -1,0 +1,45 @@
+{
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "domain",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "user",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "domain",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": "1",
+    "WriteCapacityUnits": "1"
+  },
+  "TableName": "domains",
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "mine",
+      "KeySchema": [
+        {
+          "AttributeName": "user",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "domain",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": "1",
+        "WriteCapacityUnits": "1"
+      }
+    }
+  ]
+}

@@ -20,37 +20,51 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.dynamo;
 
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
+import com.jcabi.dynamo.Attributes;
+import com.jcabi.dynamo.Item;
+import io.jare.model.Domain;
 import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
 
 /**
- * Command line entry.
+ * Dynamo domain.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class Entrance {
+public final class DyDomain implements Domain {
+
+    /**
+     * The item.
+     */
+    private final transient Item item;
 
     /**
      * Ctor.
+     * @param itm Item
      */
-    private Entrance() {
-        // utility class
+    public DyDomain(final Item itm) {
+        this.item = itm;
     }
 
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
+    @Override
+    public String owner() throws IOException {
+        return this.item.get("user").getS();
+    }
+
+    @Override
+    public String name() throws IOException {
+        return this.item.get("domain").getS();
+    }
+
+    @Override
+    public void delete() throws IOException {
+        this.item.frame().table().delete(
+            new Attributes().with("domain", this.name())
+        );
     }
 
 }
