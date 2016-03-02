@@ -1,0 +1,19 @@
+<settings>
+  <profiles>
+    <profile>
+      <id>jare</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <syslogHost>logs3.papertrailapp.com:26418</syslogHost>
+        <github.id>892640825fd7f81b651e</github.id>
+        <github.secret>1eb696cd0b5eeadbd2a0290330e2bd1cf2245b91</github.secret>
+        <security.key>jfdk&amp;^hjks00(0%432==--={{KP#</security.key>
+        <dynamo.key>AKIAITRIOTHVVTLA363A</dynamo.key>
+        <dynamo.secret>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</dynamo.secret>
+        <dynamo.prefix>jare-</dynamo.prefix>
+      </properties>
+    </profile>
+  </profiles>
+</settings>
