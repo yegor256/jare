@@ -1,0 +1,8 @@
+Jare-Revision: BUILD
+Jare-Version: ${project.version}
+Jare-Date: ${timestamp}
+Jare-DynamoKey: ${dynamo.key}
+Jare-DynamoSecret: ${dynamo.secret}
+Jare-GithubId: ${github.id}
+Jare-GithubSecret: ${github.secret}
+Jare-SecurityKey: ${security.key}
