@@ -33,11 +33,13 @@
     </xsl:template>
     <xsl:template match="page" mode="body">
         <p>
-            <xsl:text>If you know what CDN is,</xsl:text>
+            <xsl:text>If you know what </xsl:text>
+            <strong><xsl:text>CDN</xsl:text></strong>
+            <xsl:text> is,</xsl:text>
             <xsl:text> but don't want to spend time and money</xsl:text>
             <xsl:text> to employ a full-scale solution like </xsl:text>
-            <xsl:text> Akamai, AWS CloudFront, or MaxCDN,</xsl:text>
-            <xsl:text> this system is right for you.</xsl:text>
+            <xsl:text> Akamai or CloudFront,</xsl:text>
+            <xsl:text> jare.io is right for you.</xsl:text>
         </p>
         <p>
             <xsl:text>Say, you have something like this in your HTML:</xsl:text>
@@ -48,7 +50,7 @@
         <p>
             <xsl:text>Just change the URL and this </xsl:text>
             <code><xsl:text>logo.gif</xsl:text></code>
-            <xsl:text> will be delivered through AWS CloudFront,</xsl:text>
+            <xsl:text> will be delivered through AWS CloudFront delivery servers,</xsl:text>
             <xsl:text> for free:</xsl:text>
         </p>
         <pre>
