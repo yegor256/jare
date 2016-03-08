@@ -58,8 +58,8 @@
         </pre>
         <p>
             <xsl:text>Well, there is one more thing you should do.</xsl:text>
-            <xsl:text> You should register an account with us and</xsl:text>
-            <xsl:text> register your domain there.</xsl:text>
+            <xsl:text> You should login using your GitHub account and</xsl:text>
+            <xsl:text> register your domain with us.</xsl:text>
             <xsl:text> We want to know who you are, mostly in order to track usage.</xsl:text>
         </p>
         <p>
