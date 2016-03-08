@@ -22,51 +22,29 @@
  */
 package io.jare.tk;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.takes.Request;
-import org.takes.facets.auth.RqAuth;
-import org.takes.rq.RqWrap;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.facets.auth.RqWithAuth;
 
 /**
- * User in request.
- *
+ * Test case for {@link RqUser}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
+ * @since 0.2
  */
-public final class RqUser extends RqWrap {
+public final class RqUserTest {
 
     /**
-     * Pattern to fetch name.
+     * RqUser can fetch user name.
+     * @throws Exception If some problem inside
      */
-    private static final Pattern PTN = Pattern.compile(
-        "urn:(?:github|test):(.*)"
-    );
-
-    /**
-     * Ctor.
-     * @param req Request
-     */
-    public RqUser(final Request req) {
-        super(req);
-    }
-
-    /**
-     * Get user name (GitHub handle).
-     * @return Name
-     * @throws IOException If fails
-     */
-    public String name() throws IOException {
-        final String urn = new RqAuth(this).identity().urn();
-        final Matcher mtr = RqUser.PTN.matcher(urn);
-        if (!mtr.matches()) {
-            throw new IllegalArgumentException(
-                String.format("URN \"%s\" is not from GitHub", urn)
-            );
-        }
-        return mtr.group(1);
+    @Test
+    public void fetchesUserName() throws Exception {
+        MatcherAssert.assertThat(
+            new RqUser(new RqWithAuth("urn:github:yegor256")).name(),
+            Matchers.equalTo("yegor256")
+        );
     }
 
 }
