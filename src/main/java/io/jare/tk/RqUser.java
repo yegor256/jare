@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.takes.Request;
+import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
 import org.takes.rq.RqWrap;
 
@@ -59,14 +60,15 @@ public final class RqUser extends RqWrap {
      * @throws IOException If fails
      */
     public String name() throws IOException {
-        final String urn = new RqAuth(this).identity().urn();
+        final Identity identity = new RqAuth(this).identity();
+        final String urn = identity.urn();
         final Matcher mtr = RqUser.PTN.matcher(urn);
         if (!mtr.matches()) {
             throw new IllegalArgumentException(
                 String.format("URN \"%s\" is not from GitHub", urn)
             );
         }
-        return mtr.group(1);
+        return identity.properties().get("login");
     }
 
 }

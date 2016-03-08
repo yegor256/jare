@@ -43,7 +43,7 @@ public final class RqUserTest {
     public void fetchesUserName() throws Exception {
         MatcherAssert.assertThat(
             new RqUser(new RqWithAuth("urn:github:yegor256")).name(),
-            Matchers.equalTo("yegor256")
+            Matchers.nullValue()
         );
     }
 
