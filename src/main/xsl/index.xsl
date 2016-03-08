@@ -59,7 +59,9 @@
         <p>
             <xsl:text>Well, there is one more thing you should do.</xsl:text>
             <xsl:text> You should login using your GitHub account and</xsl:text>
-            <xsl:text> register your domain with us.</xsl:text>
+            <xsl:text> register your domain with us (</xsl:text>
+            <code><xsl:text>google.com</xsl:text></code>
+            <xsl:text> in this example).</xsl:text>
             <xsl:text> We want to know who you are, mostly in order to track usage.</xsl:text>
         </p>
         <p>
