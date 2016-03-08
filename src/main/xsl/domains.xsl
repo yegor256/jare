@@ -34,7 +34,8 @@
     <xsl:template match="page" mode="body">
         <form action="{links/link[@rel='add']/@href}" method="post">
             <label for="name">Register a new domain:</label>
-            <input type="text" id="name" name="name"/>
+            <input type="text" id="name" name="name"
+                size="30" maxlength="150" required="required"/>
             <button type="submit">Add</button>
         </form>
         <xsl:if test="domains/domain">
