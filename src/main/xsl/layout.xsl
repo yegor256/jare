@@ -105,6 +105,15 @@
                                 </li>
                             </ul>
                         </nav>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/yegor256/jare/stargazers">
+                                        <img src="https://img.shields.io/github/stars/yegor256/jare.svg?style=flat-square" alt="github stars"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </footer>
                 </section>
             </body>
