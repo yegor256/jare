@@ -37,6 +37,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
+import org.takes.rs.RsWithHeader;
 import org.takes.tk.TkProxy;
 
 /**
@@ -63,9 +64,15 @@ final class TkRelay implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        final URI uri = URI.create(
-            new RqHref.Base(req).href().param("u").iterator().next().trim()
-        );
+        final Iterator<String> param = new RqHref.Base(req).href()
+            .param("u").iterator();
+        if (!param.hasNext()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                "parameter \"u\" is mandatory"
+            );
+        }
+        final URI uri = URI.create(param.next().trim());
         final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
         final Iterator<Domain> domains = this.base.domain(host);
         if (!domains.hasNext()) {
@@ -80,25 +87,28 @@ final class TkRelay implements Take {
         } else {
             path = uri.getPath();
         }
-        return new TkProxy(uri.toString()).act(
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return Iterables.concat(
-                        Collections.singleton(
-                            String.format(
-                                "GET %s HTTP/1.1",
-                                path
-                            )
-                        ),
-                        Iterables.skip(req.head(), 1)
-                    );
+        return new RsWithHeader(
+            new TkProxy(uri.toString()).act(
+                new Request() {
+                    @Override
+                    public Iterable<String> head() throws IOException {
+                        return Iterables.concat(
+                            Collections.singleton(
+                                String.format(
+                                    "GET %s HTTP/1.1",
+                                    path
+                                )
+                            ),
+                            Iterables.skip(req.head(), 1)
+                        );
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        return req.body();
+                    }
                 }
-                @Override
-                public InputStream body() throws IOException {
-                    return req.body();
-                }
-            }
+            ),
+            String.format("X-Jare-Target: %s", uri)
         );
     }
 
