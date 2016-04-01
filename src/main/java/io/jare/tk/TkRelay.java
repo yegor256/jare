@@ -114,7 +114,7 @@ final class TkRelay implements Take {
         final Iterator<Domain> domains = this.base.domain(host);
         if (!domains.hasNext()) {
             throw new HttpException(
-                HttpURLConnection.HTTP_NOT_FOUND,
+                HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format("domain \"%s\" is not registered", host)
             );
         }

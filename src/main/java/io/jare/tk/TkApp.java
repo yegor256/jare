@@ -28,8 +28,10 @@ import io.jare.model.Base;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.takes.Take;
 import org.takes.facets.auth.TkSecure;
+import org.takes.facets.fallback.TkFallback;
 import org.takes.facets.flash.TkFlash;
 import org.takes.facets.fork.FkAuthenticated;
 import org.takes.facets.fork.FkFixed;
@@ -38,6 +40,10 @@ import org.takes.facets.fork.FkHost;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.facets.forward.TkForward;
+import org.takes.misc.Opt;
+import org.takes.rs.RsWithBody;
+import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsWithType;
 import org.takes.tk.TkClasspath;
 import org.takes.tk.TkFiles;
 import org.takes.tk.TkGzip;
@@ -57,6 +63,7 @@ import org.takes.tk.TkWrap;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
+@SuppressWarnings("PMD.ExcessiveImports")
 public final class TkApp extends TkWrap {
 
     /**
@@ -116,7 +123,27 @@ public final class TkApp extends TkWrap {
      */
     private static Take regex(final Base base) throws IOException {
         return new TkFork(
-            new FkHost("relay.jare.io", new TkRelay(base)),
+            new FkHost(
+                "relay.jare.io",
+                new TkFallback(
+                    new TkRelay(base),
+                    req -> new Opt.Single<>(
+                        new RsWithType(
+                            new RsWithBody(
+                                new RsWithStatus(req.code()),
+                                String.format(
+                                    // @checkstyle LineLength (1 line)
+                                    "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
+                                    ExceptionUtils.getStackTrace(
+                                        req.throwable()
+                                    )
+                                )
+                            ),
+                            "text/plain"
+                        )
+                    )
+                )
+            ),
             new FkRegex("/robots.txt", ""),
             new FkRegex(
                 "/xsl/[a-z\\-]+\\.xsl",
