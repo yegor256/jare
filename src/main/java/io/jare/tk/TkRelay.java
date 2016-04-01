@@ -73,6 +73,21 @@ final class TkRelay implements Take {
             );
         }
         final URI uri = URI.create(param.next().trim());
+        return new RsWithHeader(
+            new TkProxy(uri.toString()).act(
+                TkRelay.request(req, this.path(uri))
+            ),
+            String.format("X-Jare-Target: %s", uri)
+        );
+    }
+
+    /**
+     * Build destination path.
+     * @param uri URI of destination
+     * @return Destination path
+     * @throws HttpException If fails
+     */
+    private String path(final URI uri) throws HttpException {
         final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
         final Iterator<Domain> domains = this.base.domain(host);
         if (!domains.hasNext()) {
@@ -81,35 +96,55 @@ final class TkRelay implements Take {
                 String.format("domain \"%s\" is not registered", host)
             );
         }
+        if (!uri.isAbsolute()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format("URI \"%s\" is not absolute", uri)
+            );
+        }
+        final String protocol = uri.getScheme();
+        if (!"https".equals(protocol) && !"http".equals(protocol)) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    "protocol must be either HTTP or HTTPS at \"%s\"",
+                    uri
+                )
+            );
+        }
         final String path;
         if (uri.getPath().isEmpty()) {
             path = "/";
         } else {
             path = uri.getPath();
         }
-        return new RsWithHeader(
-            new TkProxy(uri.toString()).act(
-                new Request() {
-                    @Override
-                    public Iterable<String> head() throws IOException {
-                        return Iterables.concat(
-                            Collections.singleton(
-                                String.format(
-                                    "GET %s HTTP/1.1",
-                                    path
-                                )
-                            ),
-                            Iterables.skip(req.head(), 1)
-                        );
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return req.body();
-                    }
-                }
-            ),
-            String.format("X-Jare-Target: %s", uri)
-        );
+        return path;
     }
 
+    /**
+     * The request to send.
+     * @param req Original request
+     * @param path Destination path
+     * @return Request
+     */
+    private static Request request(final Request req, final String path) {
+        return new Request() {
+            @Override
+            public Iterable<String> head() throws IOException {
+                return Iterables.concat(
+                    Collections.singleton(
+                        String.format(
+                            "GET %s HTTP/1.1",
+                            path
+                        )
+                    ),
+                    Iterables.skip(req.head(), 1)
+                );
+            }
+            @Override
+            public InputStream body() throws IOException {
+                return req.body();
+            }
+        };
+    }
 }
