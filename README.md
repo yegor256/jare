@@ -7,3 +7,6 @@
 [www.jare.io](http://www.jare.io)
 
 Lightweight Content Delivery Network (CDN)
+
+More about it in this blog post:
+[Jare.io, an Instant and Free CDN](http://www.yegor256.com/2016/03/30/jare-instant-free-cdn.html)
