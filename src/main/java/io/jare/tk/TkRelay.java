@@ -88,14 +88,6 @@ final class TkRelay implements Take {
      * @throws HttpException If fails
      */
     private String path(final URI uri) throws HttpException {
-        final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
-        final Iterator<Domain> domains = this.base.domain(host);
-        if (!domains.hasNext()) {
-            throw new HttpException(
-                HttpURLConnection.HTTP_NOT_FOUND,
-                String.format("domain \"%s\" is not registered", host)
-            );
-        }
         if (!uri.isAbsolute()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -110,6 +102,20 @@ final class TkRelay implements Take {
                     "protocol must be either HTTP or HTTPS at \"%s\"",
                     uri
                 )
+            );
+        }
+        if (uri.getHost() == null) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format("URI \"%s\" doesn't have a host", uri)
+            );
+        }
+        final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
+        final Iterator<Domain> domains = this.base.domain(host);
+        if (!domains.hasNext()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_NOT_FOUND,
+                String.format("domain \"%s\" is not registered", host)
             );
         }
         final String path;
