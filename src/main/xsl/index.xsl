@@ -63,6 +63,10 @@
             <code><xsl:text>google.com</xsl:text></code>
             <xsl:text> in this example).</xsl:text>
             <xsl:text> We want to know who you are, mostly in order to track usage.</xsl:text>
+            <xsl:text> By the way, if you want to know how it all works, read this blog post: </xsl:text>
+            <a href="http://www.yegor256.com/2016/03/30/jare-instant-free-cdn.html">
+                <xsl:text>Jare.io, an Instant and Free CDN</xsl:text>
+            </a>
         </p>
         <p>
             <xsl:text>In the nearest future we will charge you, if the traffic is too high.</xsl:text>
