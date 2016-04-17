@@ -60,4 +60,16 @@ public final class DestinationTest {
         );
     }
 
+    /**
+     * Destination can build path with params.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void buildsPathWithParams() throws Exception {
+        MatcherAssert.assertThat(
+            new Destination(new URI("http://www.google.com?a=1")).path(),
+            Matchers.equalTo("/?a=1")
+        );
+    }
+
 }
