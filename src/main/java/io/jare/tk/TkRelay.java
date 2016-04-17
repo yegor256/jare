@@ -24,12 +24,14 @@ package io.jare.tk;
 
 import com.google.common.collect.Iterables;
 import io.jare.model.Base;
+import io.jare.model.Domain;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Locale;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -71,9 +73,17 @@ final class TkRelay implements Take {
             );
         }
         final URI uri = URI.create(param.next().trim());
+        final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
+        final Iterator<Domain> domains = this.base.domain(host);
+        if (!domains.hasNext()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format("domain \"%s\" is not registered", host)
+            );
+        }
         return new RsWithHeader(
             new TkProxy(uri.toString()).act(
-                TkRelay.request(req, new Destination(this.base, uri).path())
+                TkRelay.request(req, new Destination(uri).path())
             ),
             String.format("X-Jare-Target: %s", uri)
         );

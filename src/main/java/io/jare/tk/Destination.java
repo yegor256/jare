@@ -22,12 +22,8 @@
  */
 package io.jare.tk;
 
-import io.jare.model.Base;
-import io.jare.model.Domain;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.Iterator;
-import java.util.Locale;
 import org.takes.HttpException;
 
 /**
@@ -40,22 +36,15 @@ import org.takes.HttpException;
 final class Destination {
 
     /**
-     * Base.
-     */
-    private final transient Base base;
-
-    /**
      * Destination URI.
      */
     private final transient URI uri;
 
     /**
      * Ctor.
-     * @param bse Base
      * @param dst Destination URI (full)
      */
-    Destination(final Base bse, final URI dst) {
-        this.base = bse;
+    Destination(final URI dst) {
         this.uri = dst;
     }
 
@@ -85,14 +74,6 @@ final class Destination {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format("URI \"%s\" doesn't have a host", this.uri)
-            );
-        }
-        final String host = this.uri.getHost().toLowerCase(Locale.ENGLISH);
-        final Iterator<Domain> domains = this.base.domain(host);
-        if (!domains.hasNext()) {
-            throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format("domain \"%s\" is not registered", host)
             );
         }
         final String path;
