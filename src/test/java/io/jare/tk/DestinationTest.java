@@ -72,4 +72,16 @@ public final class DestinationTest {
         );
     }
 
+    /**
+     * Destination can build path with fragment.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void buildsPathWithFragment() throws Exception {
+        MatcherAssert.assertThat(
+            new Destination(new URI("http://www.google.com/a?x=1#t")).path(),
+            Matchers.equalTo("/a?x=1#t")
+        );
+    }
+
 }

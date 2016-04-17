@@ -86,6 +86,9 @@ final class Destination {
         if (this.uri.getQuery() != null) {
             path.append('?').append(this.uri.getQuery());
         }
+        if (this.uri.getFragment() != null) {
+            path.append('#').append(this.uri.getFragment());
+        }
         return path.toString();
     }
 
