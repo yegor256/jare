@@ -23,6 +23,7 @@
 package io.jare.tk;
 
 import com.jcabi.matchers.XhtmlMatchers;
+import io.jare.fake.FkBase;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.Take;
@@ -44,7 +45,7 @@ public final class TkIndexTest {
      */
     @Test
     public void rendersHomePage() throws Exception {
-        final Take take = new TkAppAuth(new TkIndex());
+        final Take take = new TkAppAuth(new TkIndex(new FkBase()));
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new RsPrint(

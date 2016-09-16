@@ -88,6 +88,15 @@ public final class DyBase implements Base {
             .iterator();
     }
 
+    @Override
+    public Iterable<Domain> all() {
+        return this.table()
+            .frame()
+            .stream()
+            .map(DyDomain::new)
+            .collect(Collectors.<Domain>toList());
+    }
+
     /**
      * Table to work with.
      * @return Table

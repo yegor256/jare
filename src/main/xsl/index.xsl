@@ -72,5 +72,31 @@
             <xsl:text>In the nearest future we will charge you, if the traffic is too high.</xsl:text>
             <xsl:text> In the mean time, please, don't abuse the system, keep your traffic to a reasonable limit.</xsl:text>
         </p>
+        <xsl:if test="domains/domain">
+            <p>There are </p>
+            <xsl:value-of select="count(domains/domain)"/>
+            <p> domains registered now:</p>
+            <xsl:apply-templates select="domains"/>
+        </xsl:if>
+        <xsl:if test="not(domains/domain)">
+            <p>
+                <xsl:text>There are no registered domains yet.</xsl:text>
+            </p>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="domains">
+        <ul>
+            <xsl:apply-templates select="domain"/>
+        </ul>
+    </xsl:template>
+    <xsl:template match="domain">
+        <li>
+            <xsl:value-of select="name"/>
+            <xsl:text> by </xsl:text>
+            <a href="https://github.com/">
+                <xsl:text>@</xsl:text>
+                <xsl:value-of select="owner"/>
+            </a>
+        </li>
     </xsl:template>
 </xsl:stylesheet>

@@ -173,7 +173,7 @@ public final class TkApp extends TkWrap {
                     "image/png"
                 )
             ),
-            new FkRegex("/", new TkIndex()),
+            new FkRegex("/", new TkIndex(base)),
             new FkAuthenticated(
                 new TkSecure(
                     new TkFork(

@@ -47,4 +47,9 @@ public final class FkBase implements Base {
         return Collections.<Domain>singleton(new FkDomain()).iterator();
     }
 
+    @Override
+    public Iterable<Domain> all() {
+        return Collections.<Domain>singleton(new FkDomain());
+    }
+
 }

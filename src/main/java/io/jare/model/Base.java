@@ -47,4 +47,10 @@ public interface Base {
      */
     Iterator<Domain> domain(String name);
 
+    /**
+     * All domains.
+     * @return Full list of all domains
+     */
+    Iterable<Domain> all();
+
 }
