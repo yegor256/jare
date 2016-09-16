@@ -23,9 +23,11 @@
 package io.jare.dynamo;
 
 import com.amazonaws.services.dynamodbv2.model.Select;
+import com.jcabi.aspects.Tv;
 import com.jcabi.dynamo.Conditions;
 import com.jcabi.dynamo.QueryValve;
 import com.jcabi.dynamo.Region;
+import com.jcabi.dynamo.ScanValve;
 import com.jcabi.dynamo.Table;
 import io.jare.model.Base;
 import io.jare.model.Domain;
@@ -92,6 +94,7 @@ public final class DyBase implements Base {
     public Iterable<Domain> all() {
         return this.table()
             .frame()
+            .through(new ScanValve().withLimit(Tv.HUNDRED))
             .stream()
             .map(DyDomain::new)
             .collect(Collectors.<Domain>toList());
