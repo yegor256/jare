@@ -36,6 +36,7 @@ import org.takes.rs.RsPrint;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class TkIndexTest {
 
@@ -64,7 +65,28 @@ public final class TkIndexTest {
                 "/page/version",
                 "/page/links/link[@rel='home']",
                 "/page/links/link[@rel='self']",
-                "/page/links/link[@rel='takes:logout']"
+                "/page/links/link[@rel='takes:logout']",
+                "/page/domains/domain[name and owner]"
+            )
+        );
+    }
+
+    /**
+     * TkIndex can render home page in HTML.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void rendersHomePageInHtml() throws Exception {
+        final Take take = new TkAppAuth(new TkIndex(new FkBase()));
+        MatcherAssert.assertThat(
+            XhtmlMatchers.xhtml(
+                new RsPrint(
+                    take.act(new RqFake("GET", "/"))
+                ).printBody()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/xhtml:html",
+                "/xhtml:html/xhtml:body"
             )
         );
     }

@@ -73,9 +73,11 @@
             <xsl:text> In the mean time, please, don't abuse the system, keep your traffic to a reasonable limit.</xsl:text>
         </p>
         <xsl:if test="domains/domain">
-            <p>There are </p>
-            <xsl:value-of select="count(domains/domain)"/>
-            <p> domains registered now:</p>
+            <p>
+                <xsl:text>There are </xsl:text>
+                <strong><xsl:value-of select="count(domains/domain)"/></strong>
+                <xsl:text> domains registered now (yours will be in this list too):</xsl:text>
+            </p>
             <xsl:apply-templates select="domains"/>
         </xsl:if>
         <xsl:if test="not(domains/domain)">
@@ -86,17 +88,29 @@
     </xsl:template>
     <xsl:template match="domains">
         <ul>
-            <xsl:apply-templates select="domain"/>
+            <xsl:for-each select="domain">
+                <xsl:sort select="./owner" data-type="text" />
+                <xsl:if test="not(./owner = preceding-sibling::domain/owner)">
+                    <xsl:apply-templates select="./owner"/>
+                </xsl:if>
+            </xsl:for-each>
         </ul>
     </xsl:template>
-    <xsl:template match="domain">
+    <xsl:template match="owner">
+        <xsl:variable name="self" select="."/>
         <li>
-            <xsl:value-of select="name"/>
-            <xsl:text> by </xsl:text>
-            <a href="https://github.com/">
+            <a href="https://github.com/{.}">
                 <xsl:text>@</xsl:text>
-                <xsl:value-of select="owner"/>
+                <xsl:value-of select="."/>
             </a>
+            <xsl:text>: </xsl:text>
+            <xsl:for-each select="/page/domains/domain[owner=$self]">
+                <xsl:sort select="./name" data-type="text" />
+                <xsl:if test="position() &gt; 1">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="name"/>
+            </xsl:for-each>
         </li>
     </xsl:template>
 </xsl:stylesheet>
