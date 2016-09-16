@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class DyBase implements Base {
 
@@ -94,7 +95,11 @@ public final class DyBase implements Base {
     public Iterable<Domain> all() {
         return this.table()
             .frame()
-            .through(new ScanValve().withLimit(Tv.HUNDRED))
+            .through(
+                new ScanValve()
+                    .withAttributeToGet("user", "domain")
+                    .withLimit(Tv.THOUSAND)
+            )
             .stream()
             .map(DyDomain::new)
             .collect(Collectors.<Domain>toList());
