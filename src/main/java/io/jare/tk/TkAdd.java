@@ -58,7 +58,11 @@ final class TkAdd implements Take {
     public Response act(final Request req) throws IOException {
         final String name = new RqForm.Base(req).param("name")
             .iterator().next().trim();
-        new SafeUser(this.base.user(new RqUser(req).name())).add(name);
+        try {
+            new SafeUser(this.base.user(new RqUser(req).name())).add(name);
+        } catch (final SafeUser.InvalidNameException ex) {
+            throw new RsForward(new RsFlash(ex));
+        }
         return new RsForward(
             new RsFlash(
                 String.format(
