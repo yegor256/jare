@@ -65,8 +65,8 @@ final class TkInvalidate implements Take {
      * @param scrt AWS secret
      */
     TkInvalidate(final String akey, final String scrt) {
-        this.secret = akey;
-        this.key = scrt;
+        this.key = akey;
+        this.secret = scrt;
     }
 
     @Override
