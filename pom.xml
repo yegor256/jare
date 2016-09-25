@@ -32,7 +32,7 @@
     </parent>
     <groupId>io.jare</groupId>
     <artifactId>web</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.5</version>
     <packaging>jar</packaging>
     <name>jare</name>
     <description>jare</description>
