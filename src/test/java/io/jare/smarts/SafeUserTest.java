@@ -62,6 +62,7 @@ public final class SafeUserTest {
      * @throws Exception If some problem inside
      */
     @Test
+    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     public void rejectsInvalidDomains() throws Exception {
         final User user = new SafeUser(new FkUser());
         final String[] domains = {
@@ -70,6 +71,7 @@ public final class SafeUserTest {
             "www-1 .google.com",
             "google.УА",
             "www-8=9.google.ua",
+            "127.0.0.1",
         };
         for (final String domain : domains) {
             try {

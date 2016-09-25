@@ -61,16 +61,24 @@ final class TkAdd implements Take {
         try {
             new SafeUser(this.base.user(new RqUser(req).name())).add(name);
         } catch (final SafeUser.InvalidNameException ex) {
-            throw new RsForward(new RsFlash(ex));
+            throw TkAdd.forward(new RsFlash(ex));
         }
-        return new RsForward(
+        return TkAdd.forward(
             new RsFlash(
                 String.format(
                     "domain \"%s\" added", name
                 )
-            ),
-            "/domains"
+            )
         );
+    }
+
+    /**
+     * Make forward.
+     * @param rsp Response
+     * @return Forward
+     */
+    private static RsForward forward(final Response rsp) {
+        return new RsForward(rsp, "/domains");
     }
 
 }
