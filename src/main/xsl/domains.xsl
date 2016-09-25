@@ -35,11 +35,17 @@
         <form action="{links/link[@rel='add']/@href}" method="post">
             <label for="name">Register a new domain:</label>
             <input type="text" id="name" name="name"
-                size="50" maxlength="150" required="required"/>
+                size="45" maxlength="150" required="required"/>
             <button type="submit">Add</button>
         </form>
         <xsl:if test="domains/domain">
             <xsl:apply-templates select="domains"/>
+            <form action="{links/link[@rel='invalidate']/@href}" method="get">
+                <label for="name">You can invalidate any URL at your domain:</label>
+                <input type="text" id="url" name="url"
+                    size="60" required="required"/>
+                <button type="submit">Invalidate</button>
+            </form>
         </xsl:if>
         <xsl:if test="not(domains/domain)">
             <p>

@@ -72,7 +72,8 @@ final class TkDomains implements Take {
                     TkDomains::source
                 )
             ),
-            new XeLink("add", "/add")
+            new XeLink("add", "/add"),
+            new XeLink("invalidate", "/invalidate")
         );
     }
 

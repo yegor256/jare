@@ -26,7 +26,7 @@ import io.jare.dynamo.DyBase;
 import io.jare.tk.TkApp;
 import java.io.IOException;
 import org.takes.http.Exit;
-import org.takes.http.FtCLI;
+import org.takes.http.FtCli;
 
 /**
  * Command line entry.
@@ -50,7 +50,7 @@ public final class Entrance {
      * @throws IOException If fails
      */
     public static void main(final String... args) throws IOException {
-        new FtCLI(new TkApp(new DyBase()), args).start(Exit.NEVER);
+        new FtCli(new TkApp(new DyBase()), args).start(Exit.NEVER);
     }
 
 }

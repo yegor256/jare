@@ -174,6 +174,13 @@ public final class TkApp extends TkWrap {
                 )
             ),
             new FkRegex("/", new TkIndex(base)),
+            new FkRegex(
+                "/invalidate",
+                new TkInvalidate(
+                    Manifests.read("Jare-CloudFrontKey"),
+                    Manifests.read("Jare-CloudFrontSecret")
+                )
+            ),
             new FkAuthenticated(
                 new TkSecure(
                     new TkFork(

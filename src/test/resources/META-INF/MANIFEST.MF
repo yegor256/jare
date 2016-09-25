@@ -3,6 +3,8 @@ Jare-Version: 1.0
 Jare-Date: ${timestamp}
 Jare-DynamoKey: ${failsafe.dynamo.key}
 Jare-DynamoSecret: ${failsafe.dynamo.secret}
+Jare-CloudFrontKey: -
+Jare-CloudFrontSecret: -
 Jare-GithubId: ${failsafe.github.id}
 Jare-GithubSecret: ${failsafe.github.secret}
 Jare-SecurityKey: ${failsafe.security.key}
