@@ -71,10 +71,12 @@ final class TkInvalidate implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        final String url = String.format(
+        final String url = new RqHref.Base(req).href()
+            .param("url").iterator().next();
+        final String path = String.format(
             "/?u=%s",
             URLEncoder.encode(
-                new RqHref.Base(req).href().param("url").iterator().next(),
+                url,
                 "UTF-8"
             )
         );
@@ -85,7 +87,7 @@ final class TkInvalidate implements Take {
             new CreateInvalidationRequest(
                 "E2QC66VZY6F0QA",
                 new InvalidationBatch(
-                    new Paths().withItems(url).withQuantity(1),
+                    new Paths().withItems(path).withQuantity(1),
                     UUID.randomUUID().toString()
                 )
             )
@@ -98,7 +100,8 @@ final class TkInvalidate implements Take {
                     result.getInvalidation().getId(),
                     result.getInvalidation().getStatus()
                 )
-            )
+            ),
+            "/domains"
         );
     }
 
