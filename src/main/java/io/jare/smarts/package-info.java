@@ -20,53 +20,12 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare.tk;
-
-import io.jare.model.Base;
-import io.jare.smarts.SafeUser;
-import java.io.IOException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.facets.flash.RsFlash;
-import org.takes.facets.forward.RsForward;
-import org.takes.rq.RqForm;
 
 /**
- * Add pipe.
+ * Smarts.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-final class TkAdd implements Take {
-
-    /**
-     * Base.
-     */
-    private final transient Base base;
-
-    /**
-     * Ctor.
-     * @param bse Base
-     */
-    TkAdd(final Base bse) {
-        this.base = bse;
-    }
-
-    @Override
-    public Response act(final Request req) throws IOException {
-        final String name = new RqForm.Base(req).param("name")
-            .iterator().next().trim();
-        new SafeUser(this.base.user(new RqUser(req).name())).add(name);
-        return new RsForward(
-            new RsFlash(
-                String.format(
-                    "domain \"%s\" added", name
-                )
-            ),
-            "/domains"
-        );
-    }
-
-}
+package io.jare.smarts;

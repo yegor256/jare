@@ -34,7 +34,6 @@ import io.jare.model.User;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -46,13 +45,6 @@ import java.util.stream.Collectors;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class DyUser implements User {
-
-    /**
-     * Pattern to match.
-     */
-    private static final Pattern PTN = Pattern.compile(
-        "[a-zA-Z0-9\\.\\-]+"
-    );
 
     /**
      * The region to work with.
@@ -93,15 +85,6 @@ public final class DyUser implements User {
 
     @Override
     public void add(final String name) throws IOException {
-        if (!DyUser.PTN.matcher(name).matches()) {
-            throw new IllegalArgumentException(
-                String.format(
-                    // @checkstyle LineLength (1 line)
-                    "invalid domain name \"%s\", must contain letters, dots and dashes",
-                    name
-                )
-            );
-        }
         synchronized (this.region) {
             final Iterator<Domain> before = new DyBase(this.region)
                 .domain(name);
