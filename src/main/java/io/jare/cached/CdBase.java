@@ -20,40 +20,52 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
+package io.jare.cached;
 
-import io.jare.cached.CdBase;
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCli;
+import com.jcabi.aspects.Cacheable;
+import io.jare.model.Base;
+import io.jare.model.Domain;
+import io.jare.model.User;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Command line entry.
+ * Cached Base.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class Entrance {
+public final class CdBase implements Base {
+
+    /**
+     * Original.
+     */
+    private final transient Base origin;
 
     /**
      * Ctor.
+     * @param base Original
      */
-    private Entrance() {
-        // utility class
+    public CdBase(final Base base) {
+        this.origin = base;
     }
 
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCli(
-            new TkApp(new CdBase(new DyBase())), args
-        ).start(Exit.NEVER);
+    @Override
+    @Cacheable(forever = true)
+    public User user(final String name) {
+        return this.origin.user(name);
     }
 
+    @Override
+    @Cacheable(forever = true)
+    public Iterator<Domain> domain(final String name) {
+        return this.origin.domain(name);
+    }
+
+    @Override
+    @Cacheable(unit = TimeUnit.HOURS, lifetime = 1)
+    public Iterable<Domain> all() {
+        throw new UnsupportedOperationException("#all()");
+    }
 }

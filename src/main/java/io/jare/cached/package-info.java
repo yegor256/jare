@@ -20,40 +20,12 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare;
-
-import io.jare.cached.CdBase;
-import io.jare.dynamo.DyBase;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCli;
 
 /**
- * Command line entry.
+ * Cached.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
+ * @since 0.7
  */
-public final class Entrance {
-
-    /**
-     * Ctor.
-     */
-    private Entrance() {
-        // utility class
-    }
-
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        new FtCli(
-            new TkApp(new CdBase(new DyBase())), args
-        ).start(Exit.NEVER);
-    }
-
-}
+package io.jare.cached;
