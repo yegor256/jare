@@ -60,7 +60,7 @@ public final class CdBase implements Base {
     }
 
     @Override
-    @Cacheable(forever = true)
+    @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
     public Iterator<Domain> domain(final String name) {
         return Iterators.transform(
             this.origin.domain(name),
