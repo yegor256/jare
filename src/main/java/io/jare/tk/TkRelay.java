@@ -81,7 +81,17 @@ final class TkRelay implements Take {
                 "parameter \"u\" is mandatory"
             );
         }
-        final URI uri = URI.create(param.next().trim());
+        final String target = param.next().trim();
+        if (!TkRelay.PTN.matcher(target).matches()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    "target URL \"%s\" is not compliant with RFC3986",
+                    target
+                )
+            );
+        }
+        final URI uri = URI.create(target);
         final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
         final Iterator<Domain> domains = this.base.domain(host);
         if (!domains.hasNext()) {
