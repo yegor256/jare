@@ -66,6 +66,6 @@ public final class CdBase implements Base {
     @Override
     @Cacheable(unit = TimeUnit.HOURS, lifetime = 1)
     public Iterable<Domain> all() {
-        throw new UnsupportedOperationException("#all()");
+        return this.origin.all();
     }
 }
