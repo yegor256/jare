@@ -32,6 +32,7 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -48,6 +49,14 @@ import org.takes.tk.TkProxy;
  * @since 1.0
  */
 final class TkRelay implements Take {
+
+    /**
+     * Validation pattern for destination URLs.
+     * @link https://tools.ietf.org/html/rfc3986
+     */
+    private static final Pattern PTN = Pattern.compile(
+        "[A-Za-z0-9-._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[]]+"
+    );
 
     /**
      * Base.

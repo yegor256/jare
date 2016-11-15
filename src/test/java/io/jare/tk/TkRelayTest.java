@@ -27,6 +27,7 @@ import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -94,6 +95,23 @@ public final class TkRelayTest {
                     )
                 ).printBody(),
                 Matchers.containsString("home")
+            )
+        );
+    }
+
+    /**
+     * TkRelay can tolerate complex URLs.
+     * @throws Exception If some problem inside
+     */
+    @Test(expected = HttpException.class)
+    public void catchesInvalidURLs() throws Exception {
+        new TkRelay(new FkBase()).act(
+            new RqFake(
+                Arrays.asList(
+                    "GET /?u=http://www.yegor256.com/i+%D1%85%D0%BC",
+                    "Host: 127.0.0.1"
+                ),
+                ""
             )
         );
     }
