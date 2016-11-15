@@ -104,7 +104,7 @@ public final class TkRelayTest {
      * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void catchesInvalidURLs() throws Exception {
+    public void catchesInvalidUrls() throws Exception {
         new TkRelay(new FkBase()).act(
             new RqFake(
                 Arrays.asList(
