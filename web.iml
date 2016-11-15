@@ -43,14 +43,14 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.jcabi:jcabi-xml:0.17.2" level="project" />
     <orderEntry type="library" name="Maven: com.jcabi:jcabi-immutable:1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jcabi:jcabi-http:1.16" level="project" />
     <orderEntry type="library" name="Maven: com.jcabi:jcabi-aspects:0.22.3" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.jcabi:jcabi-http:1.16" level="project" />
     <orderEntry type="library" name="Maven: com.jcabi:jcabi-log:0.17.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: com.jcabi:jcabi-dynamo:0.21.2" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
-    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.9" level="project" />
     <orderEntry type="library" name="Maven: com.jcabi:jcabi-matchers:1.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.velocity:velocity:1.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />

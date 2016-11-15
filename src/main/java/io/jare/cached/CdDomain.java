@@ -22,58 +22,46 @@
  */
 package io.jare.cached;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.jcabi.aspects.Cacheable;
-import io.jare.model.Base;
 import io.jare.model.Domain;
-import io.jare.model.User;
-import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 /**
- * Cached Base.
+ * Cached Domain.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
  */
-public final class CdBase implements Base {
+public final class CdDomain implements Domain {
 
     /**
      * Original.
      */
-    private final transient Base origin;
+    private final transient Domain origin;
 
     /**
      * Ctor.
-     * @param base Original
+     * @param domain Original
      */
-    public CdBase(final Base base) {
-        this.origin = base;
+    public CdDomain(final Domain domain) {
+        this.origin = domain;
     }
 
     @Override
     @Cacheable(forever = true)
-    public User user(final String name) {
-        return this.origin.user(name);
+    public String owner() throws IOException {
+        return this.origin.owner();
     }
 
     @Override
     @Cacheable(forever = true)
-    public Iterator<Domain> domain(final String name) {
-        return Iterators.transform(
-            this.origin.domain(name),
-            CdDomain::new
-        );
+    public String name() throws IOException {
+        return this.origin.name();
     }
 
     @Override
-    @Cacheable(unit = TimeUnit.HOURS, lifetime = 1)
-    public Iterable<Domain> all() {
-        return Iterables.transform(
-            this.origin.all(),
-            CdDomain::new
-        );
+    public void delete() throws IOException {
+        this.origin.delete();
     }
 }
