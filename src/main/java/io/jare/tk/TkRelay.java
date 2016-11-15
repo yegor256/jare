@@ -55,7 +55,7 @@ final class TkRelay implements Take {
      * @link https://tools.ietf.org/html/rfc3986
      */
     private static final Pattern PTN = Pattern.compile(
-        "[A-Za-z0-9-._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[]]+"
+        "[A-Za-z0-9-._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[\\]]+"
     );
 
     /**
