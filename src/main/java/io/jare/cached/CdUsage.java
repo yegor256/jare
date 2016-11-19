@@ -20,57 +20,52 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare.dynamo;
+package io.jare.cached;
 
-import com.jcabi.dynamo.Attributes;
-import com.jcabi.dynamo.Item;
-import io.jare.model.Domain;
+import com.jcabi.aspects.Cacheable;
 import io.jare.model.Usage;
 import java.io.IOException;
+import java.util.Date;
+import java.util.SortedMap;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Dynamo domain.
+ * Cached Usage.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @since 0.7
  */
-public final class DyDomain implements Domain {
+final class CdUsage implements Usage {
 
     /**
-     * The item.
+     * Original.
      */
-    private final transient Item item;
+    private final transient Usage origin;
 
     /**
      * Ctor.
-     * @param itm Item
+     * @param usage Original
      */
-    public DyDomain(final Item itm) {
-        this.item = itm;
+    CdUsage(final Usage usage) {
+        this.origin = usage;
     }
 
     @Override
-    public String owner() throws IOException {
-        return this.item.get("user").getS();
+    @Cacheable.FlushBefore
+    public void add(final Date date, final long bytes) throws IOException {
+        this.origin.add(date, bytes);
     }
 
     @Override
-    public String name() throws IOException {
-        return this.item.get("domain").getS();
+    @Cacheable(lifetime = 1, unit = TimeUnit.HOURS)
+    public long total() throws IOException {
+        return this.origin.total();
     }
 
     @Override
-    public void delete() throws IOException {
-        this.item.frame().table().delete(
-            new Attributes().with("domain", this.name())
-        );
+    @Cacheable(lifetime = 1, unit = TimeUnit.HOURS)
+    public SortedMap<Date, Long> history() throws IOException {
+        return this.origin.history();
     }
-
-    @Override
-    public Usage usage() throws IOException {
-        return new DyUsage(this.item);
-    }
-
 }

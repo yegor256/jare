@@ -22,55 +22,40 @@
  */
 package io.jare.dynamo;
 
-import com.jcabi.dynamo.Attributes;
-import com.jcabi.dynamo.Item;
+import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.Usage;
-import java.io.IOException;
+import io.jare.model.User;
+import java.util.Date;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Dynamo domain.
- *
+ * Integration case for {@link DyUsage}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @since 0.7
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class DyDomain implements Domain {
+public final class DyUsageITCase {
 
     /**
-     * The item.
+     * DyUsage can be record usage.
+     * @throws Exception If some problem inside
      */
-    private final transient Item item;
-
-    /**
-     * Ctor.
-     * @param itm Item
-     */
-    public DyDomain(final Item itm) {
-        this.item = itm;
-    }
-
-    @Override
-    public String owner() throws IOException {
-        return this.item.get("user").getS();
-    }
-
-    @Override
-    public String name() throws IOException {
-        return this.item.get("domain").getS();
-    }
-
-    @Override
-    public void delete() throws IOException {
-        this.item.frame().table().delete(
-            new Attributes().with("domain", this.name())
-        );
-    }
-
-    @Override
-    public Usage usage() throws IOException {
-        return new DyUsage(this.item);
+    @Test
+    public void recordsUsage() throws Exception {
+        final Base base = new DyBase(new Dynamo());
+        final User user = base.user("Erik");
+        final String name = "yegor256.com";
+        user.add(name);
+        final Domain domain = base.domain(name).next();
+        final Usage usage = domain.usage();
+        usage.add(new Date(), 1L);
+        usage.add(new Date(), 1L);
+        MatcherAssert.assertThat(usage.total(), Matchers.equalTo(2L));
+        domain.delete();
     }
 
 }

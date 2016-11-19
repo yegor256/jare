@@ -53,4 +53,11 @@ public interface Domain {
      */
     void delete() throws IOException;
 
+    /**
+     * Usage.
+     * @return Usage
+     * @throws IOException If fails
+     */
+    Usage usage() throws IOException;
+
 }

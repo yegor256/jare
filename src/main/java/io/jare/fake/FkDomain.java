@@ -23,6 +23,8 @@
 package io.jare.fake;
 
 import io.jare.model.Domain;
+import io.jare.model.Usage;
+import java.io.IOException;
 
 /**
  * Fake domain.
@@ -46,5 +48,10 @@ public final class FkDomain implements Domain {
     @Override
     public void delete() {
         // nothing
+    }
+
+    @Override
+    public Usage usage() throws IOException {
+        return new FkUsage();
     }
 }

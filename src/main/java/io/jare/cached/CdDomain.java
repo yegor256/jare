@@ -24,6 +24,7 @@ package io.jare.cached;
 
 import com.jcabi.aspects.Cacheable;
 import io.jare.model.Domain;
+import io.jare.model.Usage;
 import java.io.IOException;
 
 /**
@@ -33,7 +34,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 1.0
  */
-public final class CdDomain implements Domain {
+final class CdDomain implements Domain {
 
     /**
      * Original.
@@ -44,7 +45,7 @@ public final class CdDomain implements Domain {
      * Ctor.
      * @param domain Original
      */
-    public CdDomain(final Domain domain) {
+    CdDomain(final Domain domain) {
         this.origin = domain;
     }
 
@@ -63,5 +64,10 @@ public final class CdDomain implements Domain {
     @Override
     public void delete() throws IOException {
         this.origin.delete();
+    }
+
+    @Override
+    public Usage usage() throws IOException {
+        return new CdUsage(this.usage());
     }
 }

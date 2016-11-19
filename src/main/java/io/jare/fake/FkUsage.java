@@ -20,57 +20,34 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare.dynamo;
+package io.jare.fake;
 
-import com.jcabi.dynamo.Attributes;
-import com.jcabi.dynamo.Item;
-import io.jare.model.Domain;
 import io.jare.model.Usage;
-import java.io.IOException;
+import java.util.Date;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
- * Dynamo domain.
+ * Fake usage.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @since 0.7
  */
-public final class DyDomain implements Domain {
+public final class FkUsage implements Usage {
 
-    /**
-     * The item.
-     */
-    private final transient Item item;
-
-    /**
-     * Ctor.
-     * @param itm Item
-     */
-    public DyDomain(final Item itm) {
-        this.item = itm;
+    @Override
+    public void add(final Date date, final long bytes) {
+        // nothing
     }
 
     @Override
-    public String owner() throws IOException {
-        return this.item.get("user").getS();
+    public long total() {
+        return 1L;
     }
 
     @Override
-    public String name() throws IOException {
-        return this.item.get("domain").getS();
+    public SortedMap<Date, Long> history() {
+        return new TreeMap<>();
     }
-
-    @Override
-    public void delete() throws IOException {
-        this.item.frame().table().delete(
-            new Attributes().with("domain", this.name())
-        );
-    }
-
-    @Override
-    public Usage usage() throws IOException {
-        return new DyUsage(this.item);
-    }
-
 }

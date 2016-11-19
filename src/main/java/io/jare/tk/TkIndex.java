@@ -83,6 +83,7 @@ final class TkIndex implements Take {
                 .add("domain")
                 .add("name").set(domain.name()).up()
                 .add("owner").set(domain.owner()).up()
+                .add("usage").set(domain.usage().total()).up()
                 .up()
         );
     }

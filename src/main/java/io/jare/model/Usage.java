@@ -20,57 +20,41 @@
  * in connection with the software or  the  use  or other dealings in the
  * software.
  */
-package io.jare.dynamo;
+package io.jare.model;
 
-import com.jcabi.dynamo.Attributes;
-import com.jcabi.dynamo.Item;
-import io.jare.model.Domain;
-import io.jare.model.Usage;
 import java.io.IOException;
+import java.util.Date;
+import java.util.SortedMap;
 
 /**
- * Dynamo domain.
+ * Usage.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @since 0.7
  */
-public final class DyDomain implements Domain {
+public interface Usage {
 
     /**
-     * The item.
+     * Add more usage in bytes.
+     * @param date When did it happen
+     * @param bytes How many bytes
+     * @throws IOException If fails
      */
-    private final transient Item item;
+    void add(Date date, long bytes) throws IOException;
 
     /**
-     * Ctor.
-     * @param itm Item
+     * Total, over the last ten days.
+     * @return The total in bytes
+     * @throws IOException If fails
      */
-    public DyDomain(final Item itm) {
-        this.item = itm;
-    }
+    long total() throws IOException;
 
-    @Override
-    public String owner() throws IOException {
-        return this.item.get("user").getS();
-    }
-
-    @Override
-    public String name() throws IOException {
-        return this.item.get("domain").getS();
-    }
-
-    @Override
-    public void delete() throws IOException {
-        this.item.frame().table().delete(
-            new Attributes().with("domain", this.name())
-        );
-    }
-
-    @Override
-    public Usage usage() throws IOException {
-        return new DyUsage(this.item);
-    }
+    /**
+     * History.
+     * @return Full usage history
+     * @throws IOException If fails
+     */
+    SortedMap<Date, Long> history() throws IOException;
 
 }

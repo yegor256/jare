@@ -76,7 +76,8 @@
             <p>
                 <xsl:text>There are </xsl:text>
                 <strong><xsl:value-of select="count(domains/domain)"/></strong>
-                <xsl:text> domains registered now (yours will be in this list too):</xsl:text>
+                <xsl:text> domains registered now:</xsl:text>
+                <xsl:text> (you see top 50 most active, by Kbytes for the last ten days):</xsl:text>
             </p>
             <xsl:apply-templates select="domains"/>
         </xsl:if>
@@ -89,28 +90,23 @@
     <xsl:template match="domains">
         <ul>
             <xsl:for-each select="domain">
-                <xsl:sort select="./owner" data-type="text" />
-                <xsl:if test="not(./owner = preceding-sibling::domain/owner)">
-                    <xsl:apply-templates select="./owner"/>
+                <xsl:sort select="./total" data-type="number" case-order="upper-first" />
+                <xsl:if test="position() &lt; 50">
+                    <xsl:apply-templates select="."/>
                 </xsl:if>
             </xsl:for-each>
         </ul>
     </xsl:template>
-    <xsl:template match="owner">
-        <xsl:variable name="self" select="."/>
+    <xsl:template match="domain">
         <li>
-            <a href="https://github.com/{.}">
+            <xsl:value-of select="name"/>
+            <a href="https://github.com/{owner}">
                 <xsl:text>@</xsl:text>
-                <xsl:value-of select="."/>
+                <xsl:value-of select="owner"/>
             </a>
             <xsl:text>: </xsl:text>
-            <xsl:for-each select="/page/domains/domain[owner=$self]">
-                <xsl:sort select="./name" data-type="text" />
-                <xsl:if test="position() &gt; 1">
-                    <xsl:text>, </xsl:text>
-                </xsl:if>
-                <xsl:value-of select="name"/>
-            </xsl:for-each>
+            <xsl:value-of select="format-number(total div 1024, '###,###,###')"/>
+            <xsl:text>Kb</xsl:text>
         </li>
     </xsl:template>
 </xsl:stylesheet>

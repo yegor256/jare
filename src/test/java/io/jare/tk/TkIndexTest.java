@@ -66,7 +66,7 @@ public final class TkIndexTest {
                 "/page/links/link[@rel='home']",
                 "/page/links/link[@rel='self']",
                 "/page/links/link[@rel='takes:logout']",
-                "/page/domains/domain[name and owner]"
+                "/page/domains/domain[name and owner and usage]"
             )
         );
     }
