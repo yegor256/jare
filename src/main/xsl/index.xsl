@@ -106,14 +106,9 @@
         </xsl:if>
     </xsl:template>
     <xsl:template match="domains">
-        <xsl:variable name="sorted">
+        <ul>
             <xsl:for-each select="domain">
                 <xsl:sort select="usage" data-type="number" case-order="upper-first" />
-                <xsl:copy-of select=".|@*" />
-            </xsl:for-each>
-        </xsl:variable>
-        <ul>
-            <xsl:for-each select="$sorted">
                 <xsl:if test="position() &lt; $max">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
