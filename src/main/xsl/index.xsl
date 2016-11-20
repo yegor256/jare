@@ -89,8 +89,11 @@
             <xsl:apply-templates select="domains"/>
             <p>
                 <xsl:text>Total traffic over the last ten days: </xsl:text>
-                <strong><xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024), '###,###,###')"/></strong>
-                <xsl:text>Gb.</xsl:text>
+                <strong>
+                    <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024), '###,###,###')"/>
+                    <xsl:text>Gb</xsl:text>
+                </strong>
+                <xsl:text>.</xsl:text>
             </p>
             <p>
                 <xsl:text>It's an open source system.</xsl:text>
