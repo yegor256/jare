@@ -75,8 +75,11 @@
         <xsl:if test="domains/domain">
             <p>
                 <xsl:text>There are </xsl:text>
-                <strong><xsl:value-of select="count(domains/domain)"/></strong>
-                <xsl:text> domains registered now.</xsl:text>
+                <strong>
+                    <xsl:value-of select="count(domains/domain)"/>
+                    <xsl:text> domains</xsl:text>
+                </strong>
+                <xsl:text> registered now.</xsl:text>
                 <xsl:text> This is the list of </xsl:text>
                 <xsl:value-of select="$max"/>
                 <xsl:text> most active of them.</xsl:text>
