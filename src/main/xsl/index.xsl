@@ -31,6 +31,7 @@
             <xsl:text>jare</xsl:text>
         </title>
     </xsl:template>
+    <xsl:variable name="max" select="25"/>
     <xsl:template match="page" mode="body">
         <p>
             <xsl:text>If you know what </xsl:text>
@@ -77,7 +78,9 @@
                 <xsl:text>There are </xsl:text>
                 <strong><xsl:value-of select="count(domains/domain)"/></strong>
                 <xsl:text> domains registered now.</xsl:text>
-                <xsl:text> This is the list of 50 most active of them.</xsl:text>
+                <xsl:text> This is the list of </xsl:text>
+                <xsl:value-of select="$max"/>
+                <xsl:text> most active of them.</xsl:text>
                 <xsl:text> The amount of Mb is calculated over the last ten days.</xsl:text>
                 <xsl:text> If you see yourself on top of the list, you most probably have to upgrade your account to premium.</xsl:text>
                 <xsl:text> Please, </xsl:text>
@@ -100,7 +103,7 @@
         </xsl:variable>
         <ul>
             <xsl:for-each select="$sorted">
-                <xsl:if test="position() &lt; 50">
+                <xsl:if test="position() &lt; $max">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
             </xsl:for-each>
