@@ -68,6 +68,8 @@
             <a href="http://www.yegor256.com/2016/03/30/jare-instant-free-cdn.html">
                 <xsl:text>Jare.io, an Instant and Free CDN</xsl:text>
             </a>
+            <xsl:text> by </xsl:text>
+            <a href="https://github.com/yegor256"><xsl:text>@yegor256</xsl:text></a>
             <xsl:text>.</xsl:text>
         </p>
         <p>
