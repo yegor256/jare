@@ -40,6 +40,11 @@
             <button type="submit">Add</button>
         </form>
         <xsl:if test="domains/domain">
+            <p>
+                <xsl:text>There are </xsl:text>
+                <xsl:value-of select="count(domains/domain)"/>
+                <xsl:text> domains registered:</xsl:text>
+            </p>
             <xsl:apply-templates select="domains"/>
             <form action="{links/link[@rel='invalidate']/@href}" method="get">
                 <label for="name">You can invalidate any URL at your domain:</label>
