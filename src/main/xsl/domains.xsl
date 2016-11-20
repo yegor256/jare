@@ -63,7 +63,7 @@
         <li>
             <xsl:value-of select="name"/>
             <xsl:text>: </xsl:text>
-            <xsl:value-of select="format-number(usage, '###,###,###')"/>
+            <xsl:value-of select="format-number(usage div 1024, '###,###,###')"/>
             <xsl:text>Kb </xsl:text>
             <a href="{links/link[@rel='delete']/@href}">
                 <xsl:text>delete</xsl:text>
