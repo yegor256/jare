@@ -22,6 +22,7 @@
  */
 package io.jare.fake;
 
+import com.jcabi.log.Logger;
 import io.jare.model.Usage;
 import java.util.Date;
 import java.util.SortedMap;
@@ -38,7 +39,7 @@ public final class FkUsage implements Usage {
 
     @Override
     public void add(final Date date, final long bytes) {
-        // nothing
+        Logger.info(this, "usage, date=%s, bytes=%d", date, bytes);
     }
 
     @Override

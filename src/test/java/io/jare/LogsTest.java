@@ -22,47 +22,49 @@
  */
 package io.jare;
 
-import com.jcabi.manifests.Manifests;
-import com.jcabi.s3.Region;
-import io.jare.cached.CdBase;
-import io.jare.dynamo.DyBase;
-import io.jare.model.Base;
-import io.jare.tk.TkApp;
-import java.io.IOException;
-import org.takes.http.Exit;
-import org.takes.http.FtCli;
+import com.jcabi.s3.Bucket;
+import com.jcabi.s3.Ocket;
+import io.jare.fake.FkBase;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.zip.GZIPOutputStream;
+import org.apache.commons.io.IOUtils;
+import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
- * Command line entry.
- *
+ * Test case for {@link Logs}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class Entrance {
+public final class LogsTest {
 
     /**
-     * Ctor.
+     * Logs can unzip and log.
+     * @throws Exception If some problem inside
      */
-    private Entrance() {
-        // utility class
-    }
-
-    /**
-     * Main entry point.
-     * @param args Arguments
-     * @throws IOException If fails
-     */
-    public static void main(final String... args) throws IOException {
-        final Base base = new CdBase(new DyBase());
-        new Logs(
-            base,
-            new Region.Simple(
-                Manifests.read("Jare-S3Key"),
-                Manifests.read("Jare-S3Secret")
-            ).bucket("logs.jare.io")
-        );
-        new FtCli(new TkApp(base), args).start(Exit.NEVER);
+    @Test
+    public void unzipsAndLogs() throws Exception {
+        final Ocket ocket = Mockito.mock(Ocket.class);
+        Mockito.doAnswer(
+            inv -> {
+                final GZIPOutputStream gzip = new GZIPOutputStream(
+                    OutputStream.class.cast(inv.getArgument(0))
+                );
+                IOUtils.copyLarge(
+                    Logs.class.getResourceAsStream("test"),
+                    gzip
+                );
+                gzip.close();
+                return null;
+            }
+        ).when(ocket).read(Mockito.any(OutputStream.class));
+        final Bucket bucket = Mockito.mock(Bucket.class);
+        Mockito.doReturn(ocket).when(bucket).ocket(Mockito.anyString());
+        Mockito.doReturn(Collections.singleton("x")).when(bucket).list("");
+        new Logs(new FkBase(), bucket).run();
     }
 
 }
