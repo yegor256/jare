@@ -100,12 +100,13 @@
     <xsl:template match="domain">
         <li>
             <xsl:value-of select="name"/>
+            <xsl:text> by </xsl:text>
             <a href="https://github.com/{owner}">
                 <xsl:text>@</xsl:text>
                 <xsl:value-of select="owner"/>
             </a>
             <xsl:text>: </xsl:text>
-            <xsl:value-of select="format-number(total div 1024, '###,###,###')"/>
+            <xsl:value-of select="format-number(usage div 1024, '###,###,###')"/>
             <xsl:text>Kb</xsl:text>
         </li>
     </xsl:template>
