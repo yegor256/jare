@@ -109,6 +109,7 @@
         <xsl:variable name="sorted">
             <xsl:for-each select="domain">
                 <xsl:sort select="usage" data-type="number" case-order="lower-first" />
+                <xsl:copy-of select=".|@*" />
             </xsl:for-each>
         </xsl:variable>
         <ul>
