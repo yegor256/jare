@@ -78,7 +78,7 @@
                 <strong><xsl:value-of select="count(domains/domain)"/></strong>
                 <xsl:text> domains registered now.</xsl:text>
                 <xsl:text> This is the list of 50 most active of them.</xsl:text>
-                <xsl:text> The amount of Kbytes is calculated over the last ten days.</xsl:text>
+                <xsl:text> The amount of Mb is calculated over the last ten days.</xsl:text>
                 <xsl:text> If you see yourself on top of the list, you most probably have to upgrade your account to premium.</xsl:text>
                 <xsl:text> Please, </xsl:text>
                 <a href="mailto:premium@jare.io"><xsl:text>email us</xsl:text></a>
@@ -111,8 +111,8 @@
                 <xsl:value-of select="owner"/>
             </a>
             <xsl:text>: </xsl:text>
-            <xsl:value-of select="format-number(usage div 1024, '###,###,###')"/>
-            <xsl:text>Kb</xsl:text>
+            <xsl:value-of select="format-number(usage div 1048576, '###,###,###')"/>
+            <xsl:text>Mb</xsl:text>
         </li>
     </xsl:template>
 </xsl:stylesheet>
