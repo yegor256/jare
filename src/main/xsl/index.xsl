@@ -68,6 +68,7 @@
             <a href="http://www.yegor256.com/2016/03/30/jare-instant-free-cdn.html">
                 <xsl:text>Jare.io, an Instant and Free CDN</xsl:text>
             </a>
+            <xsl:text>.</xsl:text>
         </p>
         <p>
             <xsl:text>In the nearest future we will charge you, if the traffic is too high.</xsl:text>
