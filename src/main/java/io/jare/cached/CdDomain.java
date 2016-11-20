@@ -68,6 +68,6 @@ final class CdDomain implements Domain {
 
     @Override
     public Usage usage() throws IOException {
-        return new CdUsage(this.usage());
+        return new CdUsage(this.origin.usage());
     }
 }
