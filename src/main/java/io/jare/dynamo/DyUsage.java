@@ -71,11 +71,8 @@ public final class DyUsage implements Usage {
 
     @Override
     public void add(final Date date, final long bytes) throws IOException {
-        if (!this.item.has("usage")) {
-            this.save("<usage/>");
-        }
         final int day = DyUsage.asNumber(date);
-        final XML xml = new XMLDocument(this.item.get("usage").getS());
+        final XML xml = this.xml();
         final String xpath = String.format("/usage/day[@id='%d']/text()", day);
         final List<String> items = xml.xpath(xpath);
         final long before;
@@ -98,33 +95,41 @@ public final class DyUsage implements Usage {
                 )
             ).remove()
         ).applyQuietly(node);
-        this.save(new XMLDocument(node).toString());
-        this.item.put(
-            "total",
-            new AttributeValueUpdate().withValue(
-                new AttributeValue().withN(
-                    new XMLDocument(node).xpath("sum(/usage/day)").get(0)
-                )
-            ).withAction(AttributeAction.PUT)
-        );
+        final XML after = new XMLDocument(node);
+        this.save(after.toString());
+        this.save(Long.parseLong(after.xpath("sum(/usage/day)").get(0)));
     }
 
     @Override
     public long total() throws IOException {
+        if (!this.item.has("total")) {
+            this.save(0L);
+        }
         return Long.parseLong(this.item.get("total").getN());
     }
 
     @Override
     public SortedMap<Date, Long> history() throws IOException {
-        final XML xml = new XMLDocument(this.item.get("usage").getS());
         final SortedMap<Date, Long> map = new TreeMap<>();
-        for (final XML day : xml.nodes("/usage/day")) {
+        for (final XML day : this.xml().nodes("/usage/day")) {
             map.put(
                 DyUsage.asDate(Integer.parseInt(day.xpath("@id").get(0))),
                 Long.parseLong(day.xpath("text()").get(0))
             );
         }
         return map;
+    }
+
+    /**
+     * Load XML.
+     * @return The XML with usage
+     * @throws IOException If fails
+     */
+    private XML xml() throws IOException {
+        if (!this.item.has("usage")) {
+            this.save("<usage/>");
+        }
+        return new XMLDocument(this.item.get("usage").getS());
     }
 
     /**
@@ -137,6 +142,20 @@ public final class DyUsage implements Usage {
             "usage",
             new AttributeValueUpdate()
                 .withValue(new AttributeValue().withS(xml))
+                .withAction(AttributeAction.PUT)
+        );
+    }
+
+    /**
+     * Save total.
+     * @param total Total usage
+     * @throws IOException If fails
+     */
+    private void save(final long total) throws IOException {
+        this.item.put(
+            "total",
+            new AttributeValueUpdate()
+                .withValue(new AttributeValue().withN(Long.toString(total)))
                 .withAction(AttributeAction.PUT)
         );
     }
