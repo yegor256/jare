@@ -25,6 +25,7 @@
     xmlns="http://www.w3.org/1999/xhtml" version="1.0">
     <xsl:output method="html" doctype-system="about:legacy-compat"
         encoding="UTF-8" indent="yes" />
+    <xsl:strip-space elements="*"/>
     <xsl:include href="/xsl/layout.xsl"/>
     <xsl:template match="page" mode="head">
         <title>
@@ -114,7 +115,7 @@
     <xsl:template match="domains">
         <ul>
             <xsl:for-each select="domain">
-                <xsl:sort select="usage" data-type="number" case-order="upper-first" />
+                <xsl:sort select="./usage/text()" data-type="number" case-order="upper-first" />
                 <xsl:if test="position() &lt; $max">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
