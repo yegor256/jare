@@ -26,7 +26,6 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
 import java.util.Collections;
-import java.util.Iterator;
 
 /**
  * Fake Base.
@@ -43,8 +42,8 @@ public final class FkBase implements Base {
     }
 
     @Override
-    public Iterator<Domain> domain(final String name) {
-        return Collections.<Domain>singleton(new FkDomain()).iterator();
+    public Iterable<Domain> domain(final String name) {
+        return Collections.<Domain>singleton(new FkDomain());
     }
 
     @Override

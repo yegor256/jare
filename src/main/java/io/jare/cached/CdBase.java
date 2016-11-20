@@ -23,12 +23,10 @@
 package io.jare.cached;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.jcabi.aspects.Cacheable;
 import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,8 +59,8 @@ public final class CdBase implements Base {
 
     @Override
     @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
-    public Iterator<Domain> domain(final String name) {
-        return Iterators.transform(
+    public Iterable<Domain> domain(final String name) {
+        return Iterables.transform(
             this.origin.domain(name),
             CdDomain::new
         );

@@ -32,7 +32,6 @@ import com.jcabi.dynamo.Table;
 import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -72,7 +71,7 @@ public final class DyBase implements Base {
     }
 
     @Override
-    public Iterator<Domain> domain(final String name) {
+    public Iterable<Domain> domain(final String name) {
         return this.table()
             .frame()
             .through(
@@ -87,8 +86,7 @@ public final class DyBase implements Base {
             )
             .stream()
             .map(DyDomain::new)
-            .collect(Collectors.<Domain>toList())
-            .iterator();
+            .collect(Collectors.<Domain>toList());
     }
 
     @Override

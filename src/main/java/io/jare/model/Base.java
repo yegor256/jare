@@ -22,8 +22,6 @@
  */
 package io.jare.model;
 
-import java.util.Iterator;
-
 /**
  * Base.
  *
@@ -45,7 +43,7 @@ public interface Base {
      * @param name The name
      * @return The domain
      */
-    Iterator<Domain> domain(String name);
+    Iterable<Domain> domain(String name);
 
     /**
      * All domains.

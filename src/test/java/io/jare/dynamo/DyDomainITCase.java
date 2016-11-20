@@ -49,12 +49,12 @@ public final class DyDomainITCase {
         final User user = base.user(john);
         final String name = "google.com";
         user.add(name);
-        final Domain domain = base.domain(name).next();
+        final Domain domain = base.domain(name).iterator().next();
         MatcherAssert.assertThat(domain.name(), Matchers.equalTo(name));
         MatcherAssert.assertThat(domain.owner(), Matchers.equalTo(john));
         domain.delete();
         MatcherAssert.assertThat(
-            base.domain(name).hasNext(),
+            base.domain(name).iterator().hasNext(),
             Matchers.equalTo(false)
         );
     }

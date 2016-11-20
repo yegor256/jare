@@ -43,7 +43,8 @@ public final class CdUsageTest {
      */
     @Test
     public void makesObjects() throws Exception {
-        final Usage usage = new CdBase(new FkBase()).domain("").next().usage();
+        final Usage usage = new CdBase(new FkBase()).domain("")
+            .iterator().next().usage();
         MatcherAssert.assertThat(usage.total(), Matchers.notNullValue());
     }
 

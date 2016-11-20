@@ -50,7 +50,7 @@ public final class DyUsageITCase {
         final User user = base.user("Erik");
         final String name = "yegor256.com";
         user.add(name);
-        final Domain domain = base.domain(name).next();
+        final Domain domain = base.domain(name).iterator().next();
         final Usage usage = domain.usage();
         usage.add(new Date(), 1L);
         usage.add(new Date(), 1L);

@@ -87,7 +87,7 @@ public final class DyUser implements User {
     public void add(final String name) throws IOException {
         synchronized (this.region) {
             final Iterator<Domain> before = new DyBase(this.region)
-                .domain(name);
+                .domain(name).iterator();
             if (before.hasNext()) {
                 final Domain domain = before.next();
                 if (!domain.owner().equals(this.handle)) {

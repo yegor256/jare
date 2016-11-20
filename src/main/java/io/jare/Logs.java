@@ -149,7 +149,7 @@ final class Logs implements Runnable {
             for (final Map.Entry<Date, Long> usg
                 : entry.getValue().entrySet()) {
                 final Iterator<Domain> domains =
-                    this.base.domain(entry.getKey());
+                    this.base.domain(entry.getKey()).iterator();
                 if (domains.hasNext()) {
                     domains.next().usage().add(
                         usg.getKey(),

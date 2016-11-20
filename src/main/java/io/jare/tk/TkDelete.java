@@ -59,7 +59,7 @@ final class TkDelete implements Take {
     public Response act(final Request req) throws IOException {
         final String name = new RqHref.Base(req).href()
             .param("name").iterator().next();
-        final Iterator<Domain> domains = this.base.domain(name);
+        final Iterator<Domain> domains = this.base.domain(name).iterator();
         if (!domains.hasNext()) {
             throw new RsForward(
                 new RsFlash(

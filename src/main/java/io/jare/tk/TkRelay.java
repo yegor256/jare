@@ -93,7 +93,7 @@ final class TkRelay implements Take {
         }
         final URI uri = URI.create(target);
         final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
-        final Iterator<Domain> domains = this.base.domain(host);
+        final Iterator<Domain> domains = this.base.domain(host).iterator();
         if (!domains.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
