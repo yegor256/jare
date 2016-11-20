@@ -117,6 +117,7 @@ final class Logs implements Runnable {
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
+        Logger.info(this, "S3 checked for logs");
     }
 
     /**
