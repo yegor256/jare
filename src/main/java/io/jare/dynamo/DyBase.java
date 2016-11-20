@@ -97,7 +97,7 @@ public final class DyBase implements Base {
             .frame()
             .through(
                 new ScanValve()
-                    .withAttributeToGet("user", "domain")
+                    .withAttributeToGet("user", "domain", "total", "usage")
                     .withLimit(Tv.THOUSAND)
             )
             .stream()
