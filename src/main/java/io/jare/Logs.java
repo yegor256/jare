@@ -59,7 +59,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id$
  * @since 0.7
  */
-@ScheduleWithFixedDelay(delay = Tv.FIVE, unit = TimeUnit.MINUTES)
+@ScheduleWithFixedDelay(delay = 1, unit = TimeUnit.MINUTES)
 final class Logs implements Runnable {
 
     /**
