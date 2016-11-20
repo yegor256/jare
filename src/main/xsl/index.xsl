@@ -72,10 +72,6 @@
             <a href="https://github.com/yegor256"><xsl:text>@yegor256</xsl:text></a>
             <xsl:text>.</xsl:text>
         </p>
-        <p>
-            <xsl:text>In the nearest future we will charge you, if the traffic is too high.</xsl:text>
-            <xsl:text> In the mean time, please, don't abuse the system, keep your traffic to a reasonable limit.</xsl:text>
-        </p>
         <xsl:if test="domains/domain">
             <p>
                 <xsl:text>There are </xsl:text>
