@@ -87,6 +87,11 @@
                 <xsl:text> to get an upgrade before we ban you.</xsl:text>
             </p>
             <xsl:apply-templates select="domains"/>
+            <p>
+                <xsl:text>Total traffic over the last ten days: </xsl:text>
+                <strong><xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024), '###,###,###')"/></strong>
+                <xsl:text>Gb.</xsl:text>
+            </p>
         </xsl:if>
         <xsl:if test="not(domains/domain)">
             <p>
