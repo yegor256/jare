@@ -24,6 +24,7 @@ package io.jare;
 
 import com.jcabi.aspects.ScheduleWithFixedDelay;
 import com.jcabi.aspects.Tv;
+import com.jcabi.log.Logger;
 import com.jcabi.s3.Bucket;
 import com.jcabi.s3.Ocket;
 import io.jare.model.Base;
@@ -105,8 +106,9 @@ final class Logs implements Runnable {
             final Iterator<String> ockets = this.bucket.list("").iterator();
             if (ockets.hasNext()) {
                 final String name = ockets.next();
-                this.process(name);
+                final long bytes = this.process(name);
                 this.bucket.remove(name);
+                Logger.info(this, "ocket %s processed, %d bytes", name, bytes);
             }
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
@@ -116,9 +118,10 @@ final class Logs implements Runnable {
     /**
      * Process one ocket.
      * @param name The name of the ocket
+     * @return Bytes in total
      * @throws IOException If fails
      */
-    private void process(final String name) throws IOException {
+    private long process(final String name) throws IOException {
         final Ocket ocket = this.bucket.ocket(name);
         final Path path = Files.createTempFile("jare", ".gz");
         ocket.read(new FileOutputStream(path.toFile()));
@@ -141,6 +144,7 @@ final class Logs implements Runnable {
         } finally {
             input.close();
         }
+        long total = 0L;
         for (final Map.Entry<String, Map<Date, Long>> entry : map.entrySet()) {
             for (final Map.Entry<Date, Long> usg
                 : entry.getValue().entrySet()) {
@@ -152,8 +156,10 @@ final class Logs implements Runnable {
                         usg.getValue()
                     );
                 }
+                total += usg.getValue();
             }
         }
+        return total;
     }
 
     /**
