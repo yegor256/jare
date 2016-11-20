@@ -98,6 +98,11 @@
                     <xsl:text>Gb</xsl:text>
                 </strong>
                 <xsl:text>.</xsl:text>
+                <xsl:text> AWS charges us </xsl:text>
+                <a href="https://aws.amazon.com/cloudfront/pricing/"><xsl:text>approximately</xsl:text></a>
+                <xsl:text> $</xsl:text>
+                <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024) * 0.150 * 3, '###,###.00')"/>
+                <xsl:text> per month for current traffic.</xsl:text>
             </p>
             <p>
                 <xsl:text>It's an open source system.</xsl:text>
