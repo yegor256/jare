@@ -97,7 +97,11 @@ final class TkRelay implements Take {
         if (!domains.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format("domain \"%s\" is not registered", host)
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "domain \"%s\" is not registered, check your account at www.jare.io",
+                    host
+                )
             );
         }
         final Domain domain = domains.next();
