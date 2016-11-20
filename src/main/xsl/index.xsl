@@ -84,7 +84,7 @@
                 <xsl:text> This is the list of </xsl:text>
                 <xsl:value-of select="$max"/>
                 <xsl:text> most active of them.</xsl:text>
-                <xsl:text> The amount of Mb is calculated over the last ten days.</xsl:text>
+                <xsl:text> The amount of Mb is calculated over the last month.</xsl:text>
                 <xsl:text> If you see yourself on top of the list, you most probably have to upgrade your account to premium.</xsl:text>
                 <xsl:text> Please, </xsl:text>
                 <a href="mailto:premium@jare.io"><xsl:text>email us</xsl:text></a>
@@ -92,7 +92,7 @@
             </p>
             <xsl:apply-templates select="domains"/>
             <p>
-                <xsl:text>Total traffic over the last ten days: </xsl:text>
+                <xsl:text>Total traffic over the last month: </xsl:text>
                 <strong>
                     <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024), '###,###,###')"/>
                     <xsl:text>Gb</xsl:text>
@@ -102,7 +102,7 @@
                 <a href="https://aws.amazon.com/cloudfront/pricing/"><xsl:text>approximately</xsl:text></a>
                 <xsl:text> $</xsl:text>
                 <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024) * 0.150 * 3, '###,###.00')"/>
-                <xsl:text> per month for current traffic.</xsl:text>
+                <xsl:text> monthly.</xsl:text>
             </p>
             <p>
                 <xsl:text>It's an open source system.</xsl:text>

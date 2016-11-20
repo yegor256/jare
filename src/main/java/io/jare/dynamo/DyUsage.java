@@ -91,7 +91,7 @@ public final class DyUsage implements Usage {
             new Directives().xpath(
                 String.format(
                     "/usage/day[number(@id) < %d]",
-                    DyUsage.asNumber(DateUtils.addDays(new Date(), -Tv.TEN))
+                    DyUsage.asNumber(DateUtils.addDays(new Date(), -Tv.THIRTY))
                 )
             ).remove()
         ).applyQuietly(node);
