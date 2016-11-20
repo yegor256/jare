@@ -86,7 +86,7 @@ public final class TkIndexTest {
             ),
             XhtmlMatchers.hasXPaths(
                 "/xhtml:html",
-                "/xhtml:html/xhtml:bfody"
+                "/xhtml:html/xhtml:body"
             )
         );
     }
