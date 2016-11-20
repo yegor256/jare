@@ -41,9 +41,14 @@
         </form>
         <xsl:if test="domains/domain">
             <p>
-                <xsl:text>There are </xsl:text>
-                <xsl:value-of select="count(domains/domain)"/>
-                <xsl:text> domains registered:</xsl:text>
+                <xsl:if test="count(domains/domain) = 1">
+                    <xsl:text>There is just one domain:</xsl:text>
+                </xsl:if>
+                <xsl:if test="count(domains/domain) &gt; 1">
+                    <xsl:text>There are </xsl:text>
+                    <xsl:value-of select="count(domains/domain)"/>
+                    <xsl:text> domains registered:</xsl:text>
+                </xsl:if>
             </p>
             <xsl:apply-templates select="domains"/>
             <form action="{links/link[@rel='invalidate']/@href}" method="get">
