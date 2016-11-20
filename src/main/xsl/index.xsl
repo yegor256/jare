@@ -92,6 +92,12 @@
                 <strong><xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024), '###,###,###')"/></strong>
                 <xsl:text>Gb.</xsl:text>
             </p>
+            <p>
+                <xsl:text>It's an open source system.</xsl:text>
+                <xsl:text> If you want to contribute, </xsl:text>
+                <a href="https://github.com/yegor256/jare"><xsl:text>please do</xsl:text></a>
+                <xsl:text>.</xsl:text>
+            </p>
         </xsl:if>
         <xsl:if test="not(domains/domain)">
             <p>
