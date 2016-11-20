@@ -106,9 +106,13 @@ final class Logs implements Runnable {
             final Iterator<String> ockets = this.bucket.list("").iterator();
             if (ockets.hasNext()) {
                 final String name = ockets.next();
+                Logger.info(this, "ocket %s found...", name);
                 final long bytes = this.process(name);
                 this.bucket.remove(name);
-                Logger.info(this, "ocket %s processed, %d bytes", name, bytes);
+                Logger.info(
+                    this, "ocket %s processed and removed, %d bytes",
+                    name, bytes
+                );
             }
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
