@@ -76,8 +76,10 @@
             <p>
                 <xsl:text>There are </xsl:text>
                 <strong><xsl:value-of select="count(domains/domain)"/></strong>
-                <xsl:text> domains registered now:</xsl:text>
-                <xsl:text> (you see top 50 most active, by Kbytes for the last ten days):</xsl:text>
+                <xsl:text> domains registered now.</xsl:text>
+                <xsl:text> This is the list of 50 most active of them.</xsl:text>
+                <xsl:text> The amount of Kbytes is calculated over the last ten days.</xsl:text>
+                <xsl:text> If you see yourself on top of the list, you are abusing our system and will be blocked soon.</xsl:text>
             </p>
             <xsl:apply-templates select="domains"/>
         </xsl:if>
