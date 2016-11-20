@@ -115,7 +115,7 @@
     <xsl:template match="domains">
         <ul>
             <xsl:for-each select="domain">
-                <xsl:sort select="usage" data-type="number" />
+                <xsl:sort select="- usage" data-type="number"/>
                 <xsl:if test="position() &lt; $max">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
