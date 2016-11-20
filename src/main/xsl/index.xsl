@@ -95,7 +95,7 @@
     <xsl:template match="domains">
         <ul>
             <xsl:for-each select="domain">
-                <xsl:sort select="./total" data-type="number" case-order="upper-first" />
+                <xsl:sort select="./usage" data-type="number" case-order="upper-first" />
                 <xsl:if test="position() &lt; 50">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
