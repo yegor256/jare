@@ -38,7 +38,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
-import org.takes.rs.RsWithHeader;
+import org.takes.rs.RsWithHeaders;
 import org.takes.tk.TkProxy;
 
 /**
@@ -100,11 +100,13 @@ final class TkRelay implements Take {
                 String.format("domain \"%s\" is not registered", host)
             );
         }
-        return new RsWithHeader(
+        final Domain domain = domains.next();
+        return new RsWithHeaders(
             new TkProxy(uri.toString()).act(
                 TkRelay.request(req, new Destination(uri).path())
             ),
-            String.format("X-Jare-Target: %s", uri)
+            String.format("X-Jare-Target: %s", uri),
+            String.format("X-Jare-Usage: %d", domain.usage().total())
         );
     }
 
