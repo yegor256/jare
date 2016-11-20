@@ -58,7 +58,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id$
  * @since 0.7
  */
-@ScheduleWithFixedDelay(delay = 1, unit = TimeUnit.HOURS)
+@ScheduleWithFixedDelay(delay = Tv.TEN, unit = TimeUnit.MINUTES)
 final class Logs implements Runnable {
 
     /**
