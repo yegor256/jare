@@ -93,9 +93,13 @@
         </xsl:if>
     </xsl:template>
     <xsl:template match="domains">
-        <ul>
+        <xsl:variable name="sorted">
             <xsl:for-each select="domain">
                 <xsl:sort select="usage" data-type="number" case-order="lower-first" />
+            </xsl:for-each>
+        </xsl:variable>
+        <ul>
+            <xsl:for-each select="$sorted">
                 <xsl:if test="position() &lt; 50">
                     <xsl:apply-templates select="."/>
                 </xsl:if>
