@@ -26,6 +26,8 @@ import com.jcabi.aspects.Cacheable;
 import io.jare.model.Domain;
 import io.jare.model.Usage;
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Cached Domain.
@@ -34,6 +36,8 @@ import java.io.IOException;
  * @version $Id$
  * @since 1.0
  */
+@ToString
+@EqualsAndHashCode(of = "origin")
 final class CdDomain implements Domain {
 
     /**

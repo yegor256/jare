@@ -27,6 +27,8 @@ import com.jcabi.dynamo.Item;
 import io.jare.model.Domain;
 import io.jare.model.Usage;
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Dynamo domain.
@@ -36,6 +38,8 @@ import java.io.IOException;
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@ToString
+@EqualsAndHashCode(of = "item")
 public final class DyDomain implements Domain {
 
     /**

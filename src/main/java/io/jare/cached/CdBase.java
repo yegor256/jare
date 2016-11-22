@@ -28,6 +28,8 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
 import java.util.concurrent.TimeUnit;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Cached Base.
@@ -36,6 +38,8 @@ import java.util.concurrent.TimeUnit;
  * @version $Id$
  * @since 1.0
  */
+@ToString
+@EqualsAndHashCode(of = "origin")
 public final class CdBase implements Base {
 
     /**

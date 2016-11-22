@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Cached Usage.
@@ -36,6 +38,8 @@ import java.util.concurrent.TimeUnit;
  * @version $Id$
  * @since 0.7
  */
+@ToString
+@EqualsAndHashCode(of = "origin")
 final class CdUsage implements Usage {
 
     /**

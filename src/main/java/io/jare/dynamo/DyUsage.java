@@ -40,6 +40,8 @@ import java.util.Locale;
 import java.util.SortedMap;
 import java.util.TimeZone;
 import java.util.TreeMap;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.commons.lang3.time.DateUtils;
 import org.w3c.dom.Node;
 import org.xembly.Directives;
@@ -53,6 +55,8 @@ import org.xembly.Xembler;
  * @since 0.7
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@ToString
+@EqualsAndHashCode(of = "item")
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyUsage implements Usage {
 

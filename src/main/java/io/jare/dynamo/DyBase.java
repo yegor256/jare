@@ -34,6 +34,8 @@ import io.jare.model.Domain;
 import io.jare.model.User;
 import java.util.Locale;
 import java.util.stream.Collectors;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Dynamo Base.
@@ -43,6 +45,8 @@ import java.util.stream.Collectors;
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@ToString
+@EqualsAndHashCode(of = "region")
 public final class DyBase implements Base {
 
     /**

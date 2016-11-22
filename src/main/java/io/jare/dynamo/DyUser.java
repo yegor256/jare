@@ -35,6 +35,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Collectors;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Dynamo user.
@@ -44,6 +46,8 @@ import java.util.stream.Collectors;
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@ToString
+@EqualsAndHashCode(of = { "region", "handle" })
 public final class DyUser implements User {
 
     /**
