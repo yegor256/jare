@@ -73,6 +73,13 @@
             <a href="https://github.com/yegor256"><xsl:text>@yegor256</xsl:text></a>
             <xsl:text>.</xsl:text>
         </p>
+        <p>
+            <xsl:text>
+                Keep in mind that we explicitly set all HTTP caching
+                headers to "cache forever" values. Thus, the only way
+                to modify resources is to change their URLs/names.
+            </xsl:text>
+        </p>
         <xsl:if test="domains/domain">
             <p>
                 <xsl:text>There are </xsl:text>
