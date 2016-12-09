@@ -74,11 +74,12 @@
             <xsl:text>.</xsl:text>
         </p>
         <p>
-            <xsl:text>
-                Keep in mind that we explicitly set all HTTP caching
-                headers to "cache forever" values. Thus, the only way
-                to modify resources is to change their URLs/names.
-            </xsl:text>
+            <xsl:text>Keep in mind that we </xsl:text>
+            <a href="https://github.com/yegor256/jare/issues/25">
+                <xsl:text>explicitly set</xsl:text>
+            </a>
+            <xsl:text> all HTTP caching headers to "cache forever" values.</xsl:text>
+            <xsl:text> Thus, the only way to modify resources is to change their URLs/names.</xsl:text>
         </p>
         <xsl:if test="domains/domain">
             <p>
