@@ -39,6 +39,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeaders;
+import org.takes.rs.RsWithoutHeader;
 import org.takes.tk.TkProxy;
 
 /**
@@ -105,12 +106,34 @@ final class TkRelay implements Take {
             );
         }
         final Domain domain = domains.next();
+        return TkRelay.cached(
+            new RsWithHeaders(
+                new TkProxy(uri.toString()).act(
+                    TkRelay.request(req, new Destination(uri).path())
+                ),
+                String.format("X-Jare-Target: %s", uri),
+                String.format("X-Jare-Usage: %d", domain.usage().total())
+            )
+        );
+    }
+
+    /**
+     * Response that is cached forever.
+     * @param rsp Response
+     * @return New response
+     */
+    private static Response cached(final Response rsp) {
         return new RsWithHeaders(
-            new TkProxy(uri.toString()).act(
-                TkRelay.request(req, new Destination(uri).path())
+            new RsWithoutHeader(
+                new RsWithoutHeader(
+                    new RsWithoutHeader(rsp, "Age"),
+                    "Expires"
+                ),
+                "Cached-Control"
             ),
-            String.format("X-Jare-Target: %s", uri),
-            String.format("X-Jare-Usage: %d", domain.usage().total())
+            "Age: 31536000",
+            "Cache-Control: max-age=31536000",
+            "Expires: Sun, 19 Jul 2020 18:06:32 GMT"
         );
     }
 

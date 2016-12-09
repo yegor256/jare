@@ -31,10 +31,12 @@ import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkText;
+import org.takes.tk.TkWithHeaders;
 
 /**
  * Test case for {@link TkRelay}.
@@ -112,6 +114,40 @@ public final class TkRelayTest {
                     "Host: 127.0.0.1"
                 ),
                 ""
+            )
+        );
+    }
+
+    /**
+     * TkRelay can set cache headers to "forever".
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void setsCachingHeaders() throws Exception {
+        final Take target = new TkWithHeaders(
+            new TkText("cacheable forever"),
+            "Age: 600",
+            "Cache-control: max-age=600",
+            "Expires: Thu, 08 Dec 2016 22:51:37 GMT"
+        );
+        new FtRemote(target).exec(
+            home -> MatcherAssert.assertThat(
+                new RsPrint(
+                    new TkRelay(new FkBase()).act(
+                        new RqFake(
+                            Arrays.asList(
+                                String.format("GET /?u=%s&whatever", home),
+                                "Host: test.jare.io"
+                            ),
+                            ""
+                        )
+                    )
+                ),
+                Matchers.allOf(
+                    new HmRsHeader("Age", "31536000"),
+                    new HmRsHeader("Cache-Control", "max-age=31536000"),
+                    new HmRsHeader("Expires", "Sun, 19 Jul 2020 18:06:32 GMT")
+                )
             )
         );
     }
