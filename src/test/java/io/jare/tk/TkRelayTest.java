@@ -145,7 +145,7 @@ public final class TkRelayTest {
                 ),
                 Matchers.allOf(
                     new HmRsHeader("Age", "31536000"),
-                    new HmRsHeader("Cache-Control", "max-age=31536000"),
+                    new HmRsHeader("Cache-control", "max-age=31536000"),
                     new HmRsHeader("Expires", "Sun, 19 Jul 2020 18:06:32 GMT"),
                     Matchers.not(
                         new HmRsHeader("Cache-Control", "max-age=600")
