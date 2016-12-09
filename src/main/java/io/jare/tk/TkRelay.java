@@ -129,7 +129,7 @@ final class TkRelay implements Take {
                     new RsWithoutHeader(rsp, "Age"),
                     "Expires"
                 ),
-                "Cached-Control"
+                "Cache-Control"
             ),
             "Age: 31536000",
             "Cache-Control: max-age=31536000",
