@@ -109,7 +109,7 @@
                 <xsl:text> AWS charges us </xsl:text>
                 <a href="https://aws.amazon.com/cloudfront/pricing/"><xsl:text>approximately</xsl:text></a>
                 <xsl:text> $</xsl:text>
-                <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024) * 0.150 * 3, '###,###.00')"/>
+                <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024) * 0.150, '###,###.00')"/>
                 <xsl:text> monthly.</xsl:text>
             </p>
             <p>
@@ -144,7 +144,15 @@
                 <xsl:value-of select="owner"/>
             </a>
             <xsl:text>: </xsl:text>
-            <xsl:value-of select="format-number(usage div 1048576, '###,###,###')"/>
+            <xsl:variable name="mb" select="usage div 1048576"/>
+            <xsl:choose>
+                <xsl:when test="$mb &lt; 1">
+                    <xsl:value-of select="format-number($mb, '###.##')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="format-number($mb, '###,###,###')"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:text>Mb</xsl:text>
         </li>
     </xsl:template>
