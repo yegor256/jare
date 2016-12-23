@@ -33,7 +33,6 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
 import java.util.Locale;
-import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -90,7 +89,8 @@ public final class DyBase implements Base {
             )
             .stream()
             .map(DyDomain::new)
-            .collect(Collectors.<Domain>toList());
+            .map(Domain.class::cast)
+            ::iterator;
     }
 
     @Override
@@ -104,7 +104,8 @@ public final class DyBase implements Base {
             )
             .stream()
             .map(DyDomain::new)
-            .collect(Collectors.<Domain>toList());
+            .map(Domain.class::cast)
+            ::iterator;
     }
 
     /**

@@ -34,7 +34,6 @@ import io.jare.model.User;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -84,7 +83,8 @@ public final class DyUser implements User {
             .where("user", Conditions.equalTo(this.handle))
             .stream()
             .map(DyDomain::new)
-            .collect(Collectors.toList());
+            .map(Domain.class::cast)
+            ::iterator;
     }
 
     @Override

@@ -74,8 +74,8 @@ public final class DyUserITCase {
             user.add(String.format("facebook-%d.com", idx));
         }
         MatcherAssert.assertThat(
-            user.mine().spliterator().getExactSizeIfKnown(),
-            Matchers.equalTo((long) Tv.TEN)
+            user.mine(),
+            Matchers.iterableWithSize(Tv.TEN)
         );
     }
 
