@@ -3,9 +3,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.m2
-rvm:
-  - 2.2.2
-script:
+    script:
   - set -e
   - mvn clean install -Pqulice --errors --batch-mode
   - mvn clean
@@ -16,6 +14,8 @@ addons:
     packages:
     - libmagic1
     - libmagic-dev
+pre_install:
+  - rvm use 2.2.2
 install:
   - gem install pdd
   - gem install est
