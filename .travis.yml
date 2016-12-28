@@ -14,7 +14,7 @@ addons:
     packages:
     - libmagic1
     - libmagic-dev
-pre_install:
+before_install:
   - rvm use 2.2.2
 install:
   - gem install pdd
