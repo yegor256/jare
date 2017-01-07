@@ -39,6 +39,7 @@ import org.takes.facets.fork.FkHitRefresh;
 import org.takes.facets.fork.FkHost;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.facets.fork.TkMethods;
 import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;
@@ -185,7 +186,10 @@ public final class TkApp extends TkWrap {
                 new TkSecure(
                     new TkFork(
                         new FkRegex("/domains", new TkDomains(base)),
-                        new FkRegex("/add", new TkAdd(base)),
+                        new FkRegex(
+                            "/add",
+                            new TkMethods(new TkAdd(base), "POST")
+                        ),
                         new FkRegex("/delete", new TkDelete(base))
                     )
                 )
