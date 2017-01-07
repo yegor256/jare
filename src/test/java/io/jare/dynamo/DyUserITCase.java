@@ -27,6 +27,7 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
 import java.io.IOException;
+import java.util.Iterator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -73,8 +74,13 @@ public final class DyUserITCase {
         for (int idx = 0; idx < Tv.TEN; ++idx) {
             user.add(String.format("facebook-%d.com", idx));
         }
+        final Iterable<Domain> list = user.mine();
         MatcherAssert.assertThat(
-            user.mine(),
+            list,
+            Matchers.iterableWithSize(Tv.TEN)
+        );
+        MatcherAssert.assertThat(
+            list,
             Matchers.iterableWithSize(Tv.TEN)
         );
     }
