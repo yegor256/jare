@@ -59,6 +59,13 @@
             <xsl:text>&lt;img src="http://cf.jare.io/?u=http://google.com/logo.gif"/&gt;</xsl:text>
         </pre>
         <p>
+            <xsl:text>SSL is supported, you can use either</xsl:text>
+            <code><xsl:text>http://cf.jare.io</xsl:text></code>
+            <xsl:text> or </xsl:text>
+            <code><xsl:text>https://cf.jare.io</xsl:text></code>
+            <xsl:text>.</xsl:text>
+        </p>
+        <p>
             <xsl:text>Well, there is one more thing you should do.</xsl:text>
             <xsl:text> You should login using your GitHub account and</xsl:text>
             <xsl:text> register your domain with us (</xsl:text>
