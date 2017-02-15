@@ -37,11 +37,15 @@
         <p>
             <xsl:text>If you know what </xsl:text>
             <strong><xsl:text>CDN</xsl:text></strong>
-            <xsl:text> is,</xsl:text>
+            <xsl:text> (</xsl:text>
+            <a href="https://en.wikipedia.org/wiki/Content_delivery_network">
+                <xsl:text>Content Delivery Network</xsl:text>
+            </a>
+            <xsl:text>) is,</xsl:text>
             <xsl:text> but don't want to spend time and money</xsl:text>
             <xsl:text> to employ a full-scale solution like </xsl:text>
             <xsl:text> Akamai or CloudFront,</xsl:text>
-            <xsl:text> jare.io is right for you.</xsl:text>
+            <xsl:text> this system is the right choice for you.</xsl:text>
         </p>
         <p>
             <xsl:text>Say, you have something like this in your HTML:</xsl:text>
@@ -52,7 +56,11 @@
         <p>
             <xsl:text>Just change the URL and this </xsl:text>
             <code><xsl:text>logo.gif</xsl:text></code>
-            <xsl:text> will be delivered through AWS CloudFront delivery servers,</xsl:text>
+            <xsl:text> will be delivered through </xsl:text>
+            <a href="https://aws.amazon.com/cloudfront/">
+                <xsl:text>AWS CloudFront</xsl:text>
+            </a>
+            <xsl:text> delivery servers,</xsl:text>
             <xsl:text> for free:</xsl:text>
         </p>
         <pre>
@@ -113,7 +121,7 @@
                     <xsl:text>Gb</xsl:text>
                 </strong>
                 <xsl:text>.</xsl:text>
-                <xsl:text> AWS charges us </xsl:text>
+                <xsl:text> AWS charges all of us together </xsl:text>
                 <a href="https://aws.amazon.com/cloudfront/pricing/"><xsl:text>approximately</xsl:text></a>
                 <xsl:text> $</xsl:text>
                 <xsl:value-of select="format-number(sum(domains/domain/usage) div (1024 * 1024 * 1024) * 0.150, '###,###.00')"/>
