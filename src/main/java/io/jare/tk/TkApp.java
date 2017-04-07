@@ -63,11 +63,6 @@ import org.takes.tk.TkWrap;
 public final class TkApp extends TkWrap {
 
     /**
-     * Revision of app.
-     */
-    private static final String REV = Manifests.read("Jare-Revision");
-
-    /**
      * Ctor.
      * @param base Base
      * @throws IOException If fails
@@ -176,7 +171,10 @@ public final class TkApp extends TkWrap {
                     )
                 )
             ),
-            String.format("X-Jare-Revision: %s", TkApp.REV),
+            String.format(
+                "X-Jare-Revision: %s",
+                Manifests.read("Jare-Revision")
+            ),
             "Vary: Cookie"
         );
     }
