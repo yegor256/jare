@@ -63,6 +63,7 @@ import org.takes.tk.TkWrap;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
+ * @checkstyle LineLength (500 lines)
  */
 @SuppressWarnings("PMD.ExcessiveImports")
 public final class TkApp extends TkWrap {
@@ -103,7 +104,77 @@ public final class TkApp extends TkWrap {
                             new TkAppFallback(
                                 new TkAppAuth(
                                     new TkForward(
-                                        TkApp.regex(base)
+                                        new TkFork(
+                                            new FkHost(
+                                                "relay.jare.io",
+                                                new TkFallback(
+                                                    new TkRelay(base),
+                                                    req -> new Opt.Single<>(
+                                                        new RsWithType(
+                                                            new RsWithBody(
+                                                                new RsWithStatus(req.code()),
+                                                                String.format(
+                                                                    "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
+                                                                    ExceptionUtils.getStackTrace(
+                                                                        req.throwable()
+                                                                    )
+                                                                )
+                                                            ),
+                                                            "text/plain"
+                                                        )
+                                                    )
+                                                )
+                                            ),
+                                            new FkRegex("/robots.txt", ""),
+                                            new FkRegex(
+                                                "/xsl/[a-z\\-]+\\.xsl",
+                                                new TkWithType(
+                                                    TkApp.refresh("./src/main/xsl"),
+                                                    "text/xsl"
+                                                )
+                                            ),
+                                            new FkRegex(
+                                                "/css/[a-z]+\\.css",
+                                                new TkWithType(
+                                                    TkApp.refresh("./src/main/scss"),
+                                                    "text/css"
+                                                )
+                                            ),
+                                            new FkRegex(
+                                                "/images/[a-z]+\\.svg",
+                                                new TkWithType(
+                                                    TkApp.refresh("./src/main/resources"),
+                                                    "image/svg+xml"
+                                                )
+                                            ),
+                                            new FkRegex(
+                                                "/images/[a-z]+\\.png",
+                                                new TkWithType(
+                                                    TkApp.refresh("./src/main/resources"),
+                                                    "image/png"
+                                                )
+                                            ),
+                                            new FkRegex("/", new TkIndex(base)),
+                                            new FkRegex(
+                                                "/invalidate",
+                                                new TkInvalidate(
+                                                    Manifests.read("Jare-CloudFrontKey"),
+                                                    Manifests.read("Jare-CloudFrontSecret")
+                                                )
+                                            ),
+                                            new FkAuthenticated(
+                                                new TkSecure(
+                                                    new TkFork(
+                                                        new FkRegex("/domains", new TkDomains(base)),
+                                                        new FkRegex(
+                                                            "/add",
+                                                            new TkMethods(new TkAdd(base), "POST")
+                                                        ),
+                                                        new FkRegex("/delete", new TkDelete(base))
+                                                    )
+                                                )
+                                            )
+                                        )
                                     )
                                 )
                             )
@@ -113,87 +184,6 @@ public final class TkApp extends TkWrap {
             ),
             String.format("X-Jare-Revision: %s", TkApp.REV),
             "Vary: Cookie"
-        );
-    }
-
-    /**
-     * Regex takes.
-     * @param base Base
-     * @return Takes
-     * @throws IOException If fails
-     */
-    private static Take regex(final Base base) throws IOException {
-        return new TkFork(
-            new FkHost(
-                "relay.jare.io",
-                new TkFallback(
-                    new TkRelay(base),
-                    req -> new Opt.Single<>(
-                        new RsWithType(
-                            new RsWithBody(
-                                new RsWithStatus(req.code()),
-                                String.format(
-                                    // @checkstyle LineLength (1 line)
-                                    "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
-                                    ExceptionUtils.getStackTrace(
-                                        req.throwable()
-                                    )
-                                )
-                            ),
-                            "text/plain"
-                        )
-                    )
-                )
-            ),
-            new FkRegex("/robots.txt", ""),
-            new FkRegex(
-                "/xsl/[a-z\\-]+\\.xsl",
-                new TkWithType(
-                    TkApp.refresh("./src/main/xsl"),
-                    "text/xsl"
-                )
-            ),
-            new FkRegex(
-                "/css/[a-z]+\\.css",
-                new TkWithType(
-                    TkApp.refresh("./src/main/scss"),
-                    "text/css"
-                )
-            ),
-            new FkRegex(
-                "/images/[a-z]+\\.svg",
-                new TkWithType(
-                    TkApp.refresh("./src/main/resources"),
-                    "image/svg+xml"
-                )
-            ),
-            new FkRegex(
-                "/images/[a-z]+\\.png",
-                new TkWithType(
-                    TkApp.refresh("./src/main/resources"),
-                    "image/png"
-                )
-            ),
-            new FkRegex("/", new TkIndex(base)),
-            new FkRegex(
-                "/invalidate",
-                new TkInvalidate(
-                    Manifests.read("Jare-CloudFrontKey"),
-                    Manifests.read("Jare-CloudFrontSecret")
-                )
-            ),
-            new FkAuthenticated(
-                new TkSecure(
-                    new TkFork(
-                        new FkRegex("/domains", new TkDomains(base)),
-                        new FkRegex(
-                            "/add",
-                            new TkMethods(new TkAdd(base), "POST")
-                        ),
-                        new FkRegex("/delete", new TkDelete(base))
-                    )
-                )
-            )
         );
     }
 
