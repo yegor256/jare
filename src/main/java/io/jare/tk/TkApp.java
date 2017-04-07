@@ -22,10 +22,8 @@
  */
 package io.jare.tk;
 
-import com.jcabi.log.VerboseProcess;
 import com.jcabi.manifests.Manifests;
 import io.jare.model.Base;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -34,8 +32,6 @@ import org.takes.facets.auth.TkSecure;
 import org.takes.facets.fallback.TkFallback;
 import org.takes.facets.flash.TkFlash;
 import org.takes.facets.fork.FkAuthenticated;
-import org.takes.facets.fork.FkFixed;
-import org.takes.facets.fork.FkHitRefresh;
 import org.takes.facets.fork.FkHost;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -45,8 +41,6 @@ import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
-import org.takes.tk.TkClasspath;
-import org.takes.tk.TkFiles;
 import org.takes.tk.TkGzip;
 import org.takes.tk.TkMeasured;
 import org.takes.tk.TkVersioned;
@@ -129,28 +123,28 @@ public final class TkApp extends TkWrap {
                                             new FkRegex(
                                                 "/xsl/[a-z\\-]+\\.xsl",
                                                 new TkWithType(
-                                                    TkApp.refresh("./src/main/xsl"),
+                                                    new TkRefresh("./src/main/xsl"),
                                                     "text/xsl"
                                                 )
                                             ),
                                             new FkRegex(
                                                 "/css/[a-z]+\\.css",
                                                 new TkWithType(
-                                                    TkApp.refresh("./src/main/scss"),
+                                                    new TkRefresh("./src/main/scss"),
                                                     "text/css"
                                                 )
                                             ),
                                             new FkRegex(
                                                 "/images/[a-z]+\\.svg",
                                                 new TkWithType(
-                                                    TkApp.refresh("./src/main/resources"),
+                                                    new TkRefresh("./src/main/resources"),
                                                     "image/svg+xml"
                                                 )
                                             ),
                                             new FkRegex(
                                                 "/images/[a-z]+\\.png",
                                                 new TkWithType(
-                                                    TkApp.refresh("./src/main/resources"),
+                                                    new TkRefresh("./src/main/resources"),
                                                     "image/png"
                                                 )
                                             ),
@@ -184,30 +178,6 @@ public final class TkApp extends TkWrap {
             ),
             String.format("X-Jare-Revision: %s", TkApp.REV),
             "Vary: Cookie"
-        );
-    }
-
-    /**
-     * Hit refresh fork.
-     * @param path Path of files
-     * @return Fork
-     * @throws IOException If fails
-     */
-    private static Take refresh(final String path) throws IOException {
-        return new TkFork(
-            new FkHitRefresh(
-                new File(path),
-                () -> {
-                    new VerboseProcess(
-                        new ProcessBuilder(
-                            "mvn",
-                            "generate-resources"
-                        )
-                    ).stdout();
-                },
-                new TkFiles("./target/classes")
-            ),
-            new FkFixed(new TkClasspath())
         );
     }
 
