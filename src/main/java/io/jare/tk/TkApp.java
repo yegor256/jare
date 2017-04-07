@@ -36,6 +36,7 @@ import org.takes.facets.fork.TkFork;
 import org.takes.facets.fork.TkMethods;
 import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
+import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -84,7 +85,7 @@ public final class TkApp extends TkWrap {
                                                             new RsWithType(
                                                                 new RsWithBody(
                                                                     new RsWithStatus(req.code()),
-                                                                    String.format(
+                                                                    new Sprintf(
                                                                         "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
                                                                         ExceptionUtils.getStackTrace(
                                                                             req.throwable()
@@ -153,10 +154,10 @@ public final class TkApp extends TkWrap {
                         )
                     )
                 ),
-                String.format(
+                new Sprintf(
                     "X-Jare-Revision: %s",
                     Manifests.read("Jare-Revision")
-                ),
+                ).toString(),
                 "Vary: Cookie"
             )
         );
