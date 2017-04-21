@@ -108,6 +108,15 @@
                         <nav>
                             <ul>
                                 <li>
+                                    <a href="http://www.sixnines.io/h/c292">
+                                        <img src="http://www.sixnines.io/b/c292?style=flat"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav>
+                            <ul>
+                                <li>
                                     <a href="https://github.com/yegor256/jare/stargazers">
                                         <img src="https://img.shields.io/github/stars/yegor256/jare.svg?style=flat-square" alt="github stars"/>
                                     </a>
