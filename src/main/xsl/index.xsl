@@ -108,10 +108,8 @@
                 <xsl:value-of select="$max"/>
                 <xsl:text> most active of them.</xsl:text>
                 <xsl:text> The amount of Mb is calculated over the last month.</xsl:text>
-                <xsl:text> If you see yourself on top of the list, you most probably have to upgrade your account to premium.</xsl:text>
-                <xsl:text> Please, </xsl:text>
-                <a href="mailto:premium@jare.io"><xsl:text>email us</xsl:text></a>
-                <xsl:text> to get an upgrade before we ban you.</xsl:text>
+                <xsl:text> If your traffic is bigger than 50Gb/mo, you are not welcome here:</xsl:text>
+                <xsl:text> please, use some other CDN.</xsl:text>
             </p>
             <xsl:apply-templates select="domains"/>
             <p>
