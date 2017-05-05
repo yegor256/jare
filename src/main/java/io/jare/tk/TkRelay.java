@@ -79,7 +79,7 @@ final class TkRelay implements Take {
         if (!param.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                "parameter \"u\" is mandatory"
+                "Parameter \"u\" is mandatory"
             );
         }
         final String target = param.next().trim();
@@ -87,7 +87,7 @@ final class TkRelay implements Take {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    "target URL \"%s\" is not compliant with RFC3986",
+                    "Target URL \"%s\" is not compliant with RFC3986",
                     target
                 )
             );
@@ -100,7 +100,7 @@ final class TkRelay implements Take {
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
                     // @checkstyle LineLength (1 line)
-                    "domain \"%s\" is not registered, check your account at www.jare.io",
+                    "Domain \"%s\" is not registered, check your account at www.jare.io",
                     host
                 )
             );

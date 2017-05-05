@@ -23,6 +23,7 @@
 package io.jare.tk;
 
 import io.jare.fake.FkBase;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -81,7 +82,7 @@ public final class TkRelayTest {
     @Test
     public void sendsRequestThroughToHome() throws Exception {
         final Take target = new TkFork(
-            new FkRegex("/", new TkText("it's home"))
+            new FkRegex("/.*", new TkText("it's home"))
         );
         new FtRemote(target).exec(
             home -> MatcherAssert.assertThat(
@@ -89,7 +90,13 @@ public final class TkRelayTest {
                     new TkRelay(new FkBase()).act(
                         new RqFake(
                             Arrays.asList(
-                                String.format("GET /?u=%s", home),
+                                String.format(
+                                    "GET /?u=%s",
+                                    URLEncoder.encode(
+                                        home.resolve("/альфа").toASCIIString(),
+                                        "UTF-8"
+                                    )
+                                ),
                                 "Host: localhost "
                             ),
                             ""
