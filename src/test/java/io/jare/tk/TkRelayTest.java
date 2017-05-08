@@ -71,11 +71,15 @@ public final class TkRelayTest {
             home -> MatcherAssert.assertThat(
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
-                        TkRelayTest.fake(home, "/alpha/%D0%B4%D0%B0?a=%D0%B0")
+                        TkRelayTest.fake(
+                            home, "/alpha/%D0%B4%D0%B0?%D0%B0=%D0%B0"
+                        )
                     )
                 ).printBody(),
                 Matchers.equalTo(
-                    String.format("%s/alpha/%%D0%%B4%%D0%%B0?a=%%D0%%B0", home)
+                    String.format(
+                        "%s/alpha/%%D0%%B4%%D0%%B0?%%D0%%B0=%%D0%%B0", home
+                    )
                 )
             )
         );
