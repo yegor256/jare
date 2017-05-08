@@ -66,7 +66,7 @@ final class Destination {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    "protocol must be either HTTP or HTTPS at \"%s\"",
+                    "Protocol must be either HTTP or HTTPS at \"%s\"",
                     this.uri
                 )
             );
@@ -81,13 +81,13 @@ final class Destination {
         if (this.uri.getPath().isEmpty()) {
             path.append('/');
         } else {
-            path.append(this.uri.getPath());
+            path.append(this.uri.getRawPath());
         }
         if (this.uri.getQuery() != null) {
-            path.append('?').append(this.uri.getQuery());
+            path.append('?').append(this.uri.getRawQuery());
         }
         if (this.uri.getFragment() != null) {
-            path.append('#').append(this.uri.getFragment());
+            path.append('#').append(this.uri.getRawFragment());
         }
         return path.toString();
     }

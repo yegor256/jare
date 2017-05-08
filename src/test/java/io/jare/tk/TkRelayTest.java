@@ -23,19 +23,24 @@
 package io.jare.tk;
 
 import io.jare.fake.FkBase;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
+import org.takes.Request;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqHref;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 import org.takes.tk.TkText;
 import org.takes.tk.TkWithHeaders;
 
@@ -53,63 +58,31 @@ public final class TkRelayTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void sendsRequestThrough() throws Exception {
-        final Take target = new TkFork(
-            new FkRegex("/alpha/beta", new TkText("it's success"))
-        );
-        new FtRemote(target).exec(
-            home -> MatcherAssert.assertThat(
-                new RsPrint(
-                    new TkRelay(new FkBase()).act(
-                        new RqFake(
-                            Arrays.asList(
-                                String.format("GET /?u=%s/alpha/beta", home),
-                                "Host: localhost"
-                            ),
-                            ""
-                        )
-                    )
-                ).printBody(),
-                Matchers.containsString("success")
-            )
-        );
-    }
-
-    /**
-     * TkRelay can send the request through.
-     * @throws Exception If some problem inside
-     */
-    @Test
     public void sendsRequestThroughToHome() throws Exception {
         final Take target = new TkFork(
-            new FkRegex("/.*", new TkText("it's home"))
+            new FkRegex(
+                "/alpha/.*",
+                (Take) req -> new RsText(
+                    new RqHref.Base(req).href().toString()
+                )
+            )
         );
         new FtRemote(target).exec(
             home -> MatcherAssert.assertThat(
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
-                        new RqFake(
-                            Arrays.asList(
-                                String.format(
-                                    "GET /?u=%s",
-                                    URLEncoder.encode(
-                                        home.resolve("/альфа").toASCIIString(),
-                                        "UTF-8"
-                                    )
-                                ),
-                                "Host: localhost "
-                            ),
-                            ""
-                        )
+                        TkRelayTest.fake(home, "/alpha/%D0%B4%D0%B0?a=%D0%B0")
                     )
                 ).printBody(),
-                Matchers.containsString("home")
+                Matchers.equalTo(
+                    String.format("%s/alpha/%%D0%%B4%%D0%%B0?a=%%D0%%B0", home)
+                )
             )
         );
     }
 
     /**
-     * TkRelay can tolerate complex URLs.
+     * TkRelay can fail if URL is not valid (space is not allowed).
      * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
@@ -117,7 +90,7 @@ public final class TkRelayTest {
         new TkRelay(new FkBase()).act(
             new RqFake(
                 Arrays.asList(
-                    "GET /?u=http://www.yegor256.com/i+%D1%85%D0%BC",
+                    "GET /?u=http://www.yegor256.com/a+b",
                     "Host: 127.0.0.1"
                 ),
                 ""
@@ -141,13 +114,7 @@ public final class TkRelayTest {
             home -> MatcherAssert.assertThat(
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
-                        new RqFake(
-                            Arrays.asList(
-                                String.format("GET /?u=%s&whatever", home),
-                                "Host: test.jare.io"
-                            ),
-                            ""
-                        )
+                        TkRelayTest.fake(home, "/&whatever")
                     )
                 ),
                 Matchers.allOf(
@@ -159,6 +126,30 @@ public final class TkRelayTest {
                     )
                 )
             )
+        );
+    }
+
+    /**
+     * Fake request.
+     * @param home Base URI
+     * @param path Path
+     * @return Request
+     * @throws UnsupportedEncodingException If fails
+     */
+    private static Request fake(final URI home, final String path)
+        throws UnsupportedEncodingException {
+        return new RqFake(
+            Arrays.asList(
+                String.format(
+                    "GET /?u=%s",
+                    URLEncoder.encode(
+                        home.resolve(path).toString(),
+                        "UTF-8"
+                    )
+                ),
+                "Host: localhost"
+            ),
+            ""
         );
     }
 

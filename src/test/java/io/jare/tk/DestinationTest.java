@@ -43,8 +43,12 @@ public final class DestinationTest {
     @Test
     public void buildsPath() throws Exception {
         MatcherAssert.assertThat(
-            new Destination(new URI("http://www.google.com/a/b/c")).path(),
-            Matchers.equalTo("/a/b/c")
+            new Destination(
+                new URI(
+                    "http://www.google.com/a/b/%D0%B4%D0%B0?z=%D0%B0#%D0%B0"
+                )
+            ).path(),
+            Matchers.equalTo("/a/b/%D0%B4%D0%B0?z=%D0%B0#%D0%B0")
         );
     }
 

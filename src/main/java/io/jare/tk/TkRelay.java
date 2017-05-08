@@ -56,7 +56,7 @@ final class TkRelay implements Take {
      * @link https://tools.ietf.org/html/rfc3986
      */
     private static final Pattern PTN = Pattern.compile(
-        "[A-Za-z0-9-._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[\\]]+"
+        "[A-Za-z0-9-%._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[\\]]+"
     );
 
     /**
@@ -109,7 +109,10 @@ final class TkRelay implements Take {
         return TkRelay.cached(
             new RsWithHeaders(
                 new TkProxy(uri.toString()).act(
-                    TkRelay.request(req, new Destination(uri).path())
+                    TkRelay.request(
+                        req,
+                        new Destination(uri).path()
+                    )
                 ),
                 String.format("X-Jare-Target: %s", uri),
                 String.format("X-Jare-Usage: %d", domain.usage().total())
