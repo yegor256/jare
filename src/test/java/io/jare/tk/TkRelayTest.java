@@ -72,13 +72,14 @@ public final class TkRelayTest {
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
                         TkRelayTest.fake(
-                            home, "/alpha/%D0%B4%D0%B0?%D0%B0=%D0%B0"
+                            home, "/alpha/%D0%B4%D0%B0?abc=cde"
                         )
                     )
                 ).printBody(),
                 Matchers.equalTo(
                     String.format(
-                        "%s/alpha/%%D0%%B4%%D0%%B0?%%D0%%B0=%%D0%%B0", home
+                        "%s/alpha/%%D0%%B4%%D0%%B0?abc=cde",
+                        home
                     )
                 )
             )
