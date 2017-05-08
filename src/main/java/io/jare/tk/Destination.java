@@ -30,7 +30,7 @@ import org.takes.HttpException;
 /**
  * Destination for relay.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.4
  */
@@ -78,15 +78,15 @@ final class Destination {
             );
         }
         final StringBuilder path = new StringBuilder(Tv.HUNDRED);
-        if (this.uri.getPath().isEmpty()) {
+        if (this.uri.getRawPath().isEmpty()) {
             path.append('/');
         } else {
             path.append(this.uri.getRawPath());
         }
-        if (this.uri.getQuery() != null) {
+        if (this.uri.getRawQuery() != null) {
             path.append('?').append(this.uri.getRawQuery());
         }
-        if (this.uri.getFragment() != null) {
+        if (this.uri.getRawFragment() != null) {
             path.append('#').append(this.uri.getRawFragment());
         }
         return path.toString();

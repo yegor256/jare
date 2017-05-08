@@ -37,7 +37,7 @@ import org.xembly.Directives;
 /**
  * Index page, for anonymous users.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.0
  */

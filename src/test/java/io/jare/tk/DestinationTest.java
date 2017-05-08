@@ -29,7 +29,7 @@ import org.junit.Test;
 
 /**
  * Test case for {@link Destination}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
@@ -71,8 +71,10 @@ public final class DestinationTest {
     @Test
     public void buildsPathWithParams() throws Exception {
         MatcherAssert.assertThat(
-            new Destination(new URI("http://www.google.com?a=1")).path(),
-            Matchers.equalTo("/?a=1")
+            new Destination(
+                new URI("http://www.google.com?%D0%B0=1")
+            ).path(),
+            Matchers.equalTo("/?%D0%B0=1")
         );
     }
 
@@ -83,8 +85,10 @@ public final class DestinationTest {
     @Test
     public void buildsPathWithFragment() throws Exception {
         MatcherAssert.assertThat(
-            new Destination(new URI("http://www.google.com/a?x=1#t")).path(),
-            Matchers.equalTo("/a?x=1#t")
+            new Destination(
+                new URI("http://www.google.com/%D0%B0?%D0%B0=1#t")
+            ).path(),
+            Matchers.equalTo("/%D0%B0?%D0%B0=1#t")
         );
     }
 
