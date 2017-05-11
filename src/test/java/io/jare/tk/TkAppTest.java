@@ -30,6 +30,7 @@ import com.jcabi.matchers.XhtmlMatchers;
 import io.jare.fake.FkBase;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Take;
 import org.takes.http.FtRemote;
@@ -99,6 +100,21 @@ public final class TkAppTest {
                     .as(XmlResponse.class)
                     .assertXPath("/page/version");
             }
+        );
+    }
+
+    /**
+     * App can render not found.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void rendersNotFoundPage() throws Exception {
+        final Take take = new TkApp(new FkBase());
+        MatcherAssert.assertThat(
+            new RsPrint(
+                take.act(new RqFake("HEAD", "/not-found"))
+            ).printBody(),
+            Matchers.equalTo("Page not found")
         );
     }
 

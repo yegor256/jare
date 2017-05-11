@@ -74,14 +74,14 @@ final class TkAppFallback extends TkWrap {
                 new FbStatus(
                     HttpURLConnection.HTTP_NOT_FOUND,
                     new RsWithStatus(
-                        new RsText("page not found"),
+                        new RsText("Page not found"),
                         HttpURLConnection.HTTP_NOT_FOUND
                     )
                 ),
                 new FbStatus(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     new RsWithStatus(
-                        new RsText("bad request"),
+                        new RsText("Bad request"),
                         HttpURLConnection.HTTP_BAD_REQUEST
                     )
                 ),
