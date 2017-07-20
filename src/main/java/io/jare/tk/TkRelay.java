@@ -22,7 +22,6 @@
  */
 package io.jare.tk;
 
-import com.google.common.collect.Iterables;
 import io.jare.model.Base;
 import io.jare.model.Domain;
 import java.io.IOException;
@@ -33,6 +32,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import org.cactoos.list.ConcatIterable;
+import org.cactoos.list.SkippedIterable;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -48,6 +49,7 @@ import org.takes.tk.TkProxy;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkRelay implements Take {
 
@@ -150,14 +152,14 @@ final class TkRelay implements Take {
         return new Request() {
             @Override
             public Iterable<String> head() throws IOException {
-                return Iterables.concat(
+                return new ConcatIterable<String>(
                     Collections.singleton(
                         String.format(
                             "GET %s HTTP/1.1",
                             path
                         )
                     ),
-                    Iterables.skip(req.head(), 1)
+                    new SkippedIterable<>(req.head(), 1)
                 );
             }
             @Override
