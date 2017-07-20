@@ -28,6 +28,7 @@ import io.jare.cached.CdBase;
 import io.jare.dynamo.DyBase;
 import io.jare.model.Base;
 import io.jare.tk.TkApp;
+import io.sentry.Sentry;
 import java.io.IOException;
 import org.takes.http.Exit;
 import org.takes.http.FtCli;
@@ -54,6 +55,7 @@ public final class Entrance {
      * @throws IOException If fails
      */
     public static void main(final String... args) throws IOException {
+        Sentry.init(Manifests.read("Jare-SentryDsn"));
         final Base base = new CdBase(new DyBase());
         new Logs(
             base,

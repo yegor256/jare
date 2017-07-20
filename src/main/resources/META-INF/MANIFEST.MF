@@ -10,3 +10,4 @@ Jare-CloudFrontSecret: ${cloudfront.secret}
 Jare-GithubId: ${github.id}
 Jare-GithubSecret: ${github.secret}
 Jare-SecurityKey: ${security.key}
+Jare-SentryDsn: ${sentry.dsn}

@@ -10,3 +10,4 @@ Jare-CloudFrontSecret: -
 Jare-GithubId: ${failsafe.github.id}
 Jare-GithubSecret: ${failsafe.github.secret}
 Jare-SecurityKey: ${failsafe.security.key}
+Jare-SentryDsn: test

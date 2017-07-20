@@ -23,6 +23,7 @@
 package io.jare.tk;
 
 import com.jcabi.manifests.Manifests;
+import io.sentry.Sentry;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -85,6 +86,10 @@ final class TkAppFallback extends TkWrap {
                         HttpURLConnection.HTTP_BAD_REQUEST
                     )
                 ),
+                req -> {
+                    Sentry.capture(req.throwable());
+                    return new Opt.Empty<>();
+                },
                 req -> new Opt.Single<>(TkAppFallback.fatal(req))
             )
         );
