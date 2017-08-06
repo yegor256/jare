@@ -1,4 +1,4 @@
-[![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
+[![Managed by Zerocracy](http://www.zerocracy.com/badge.svg)](http://www.zerocracy.com)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jare)](http://www.rultor.com/p/yegor256/jare)
 
 [![Availability at SixNines](http://www.sixnines.io/b/c292)](http://www.sixnines.io/h/c292)
