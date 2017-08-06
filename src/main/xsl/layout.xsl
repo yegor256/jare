@@ -99,8 +99,8 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="http://www.teamed.io">
-                                        <img src="http://img.teamed.io/btn.svg"/>
+                                    <a href="http://www.zerocracy.com">
+                                        <img src="http://www.zerocracy.com/badge.svg"/>
                                     </a>
                                 </li>
                             </ul>
