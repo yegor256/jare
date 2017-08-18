@@ -29,7 +29,7 @@ import io.jare.model.User;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.list.MappedIterable;
+import org.cactoos.iterable.Mapped;
 
 /**
  * Cached Base.
@@ -64,7 +64,7 @@ public final class CdBase implements Base {
     @Override
     @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
     public Iterable<Domain> domain(final String name) {
-        return new MappedIterable<>(
+        return new Mapped<>(
             this.origin.domain(name),
             CdDomain::new
         );
@@ -73,7 +73,7 @@ public final class CdBase implements Base {
     @Override
     @Cacheable(unit = TimeUnit.HOURS, lifetime = 1)
     public Iterable<Domain> all() {
-        return new MappedIterable<>(
+        return new Mapped<>(
             this.origin.all(),
             CdDomain::new
         );

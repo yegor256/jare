@@ -32,12 +32,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.regex.Pattern;
-import org.cactoos.list.ConcatIterable;
-import org.cactoos.list.SkippedIterable;
+import org.cactoos.iterable.Skipped;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Concat;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithoutHeader;
@@ -152,14 +152,14 @@ final class TkRelay implements Take {
         return new Request() {
             @Override
             public Iterable<String> head() throws IOException {
-                return new ConcatIterable<String>(
+                return new Concat<String>(
                     Collections.singleton(
                         String.format(
                             "GET %s HTTP/1.1",
                             path
                         )
                     ),
-                    new SkippedIterable<>(req.head(), 1)
+                    new Skipped<>(req.head(), 1)
                 );
             }
             @Override

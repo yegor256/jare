@@ -22,9 +22,10 @@
  */
 package io.jare.tk;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.cloudfront.AmazonCloudFront;
-import com.amazonaws.services.cloudfront.AmazonCloudFrontClient;
+import com.amazonaws.services.cloudfront.AmazonCloudFrontClientBuilder;
 import com.amazonaws.services.cloudfront.model.CreateInvalidationRequest;
 import com.amazonaws.services.cloudfront.model.CreateInvalidationResult;
 import com.amazonaws.services.cloudfront.model.InvalidationBatch;
@@ -80,9 +81,13 @@ final class TkInvalidate implements Take {
                 "UTF-8"
             )
         );
-        final AmazonCloudFront aws = new AmazonCloudFrontClient(
-            new BasicAWSCredentials(this.key, this.secret)
-        );
+        final AmazonCloudFront aws = AmazonCloudFrontClientBuilder.standard()
+            .withCredentials(
+                new AWSStaticCredentialsProvider(
+                    new BasicAWSCredentials(this.key, this.secret)
+                )
+            )
+            .build();
         final CreateInvalidationResult result = aws.createInvalidation(
             new CreateInvalidationRequest(
                 "E2QC66VZY6F0QA",
