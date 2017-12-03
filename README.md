@@ -1,4 +1,4 @@
-[![Managed by Zerocracy](http://www.zerocracy.com/badge.svg)](http://www.zerocracy.com)
+[![Managed by Zerocracy](http://www.0crat.com/badge/C3RFVLU72.svg)](http://www.0crat.com/p/C3RFVLU72)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jare)](http://www.rultor.com/p/yegor256/jare)
 
 [![Availability at SixNines](http://www.sixnines.io/b/c292)](http://www.sixnines.io/h/c292)
