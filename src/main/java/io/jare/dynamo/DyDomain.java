@@ -40,6 +40,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(of = "item")
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyDomain implements Domain {
 
     /**

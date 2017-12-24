@@ -59,7 +59,12 @@ import org.takes.tk.TkWrap;
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  * @checkstyle LineLength (500 lines)
  */
-@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.ExcessiveMethodLength" })
+@SuppressWarnings(
+    {
+        "PMD.ExcessiveImports", "PMD.ExcessiveMethodLength",
+        "PMD.AvoidDuplicateLiterals"
+    }
+)
 public final class TkApp extends TkWrap {
 
     /**

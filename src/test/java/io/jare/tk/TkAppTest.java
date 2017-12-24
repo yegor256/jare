@@ -45,6 +45,7 @@ import org.takes.rs.RsPrint;
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class TkAppTest {
 
     /**

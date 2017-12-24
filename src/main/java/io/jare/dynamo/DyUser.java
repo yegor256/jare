@@ -48,6 +48,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(of = { "region", "handle" })
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyUser implements User {
 
     /**

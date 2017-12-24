@@ -47,6 +47,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(of = "region")
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyBase implements Base {
 
     /**
