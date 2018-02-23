@@ -3,6 +3,7 @@
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 [![Managed by Zerocracy](https://www.0crat.com/badge/C3RFVLU72.svg)](https://www.0crat.com/p/C3RFVLU72)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jare)](http://www.rultor.com/p/yegor256/jare)
+[![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Availability at SixNines](http://www.sixnines.io/b/c292)](http://www.sixnines.io/h/c292)
 [![Build Status](https://travis-ci.org/yegor256/jare.svg?branch=master)](https://travis-ci.org/yegor256/jare)
