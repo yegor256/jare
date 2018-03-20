@@ -53,21 +53,21 @@ software.
                   </xsl:if>
                   <xsl:if test="not(identity)">
                     <a href="{links/link[@rel='takes:github']/@href}">
-                      <xsl:text>login</xsl:text>
+                      <xsl:text>Login</xsl:text>
                     </a>
                   </xsl:if>
                 </li>
                 <xsl:if test="identity">
                   <li>
                     <a href="{links/link[@rel='domains']/@href}">
-                      <xsl:text>domains</xsl:text>
+                      <xsl:text>Domains</xsl:text>
                     </a>
                   </li>
                 </xsl:if>
                 <xsl:if test="identity">
                   <li>
                     <a href="{links/link[@rel='takes:logout']/@href}">
-                      <xsl:text>exit</xsl:text>
+                      <xsl:text>Exit</xsl:text>
                     </a>
                   </li>
                 </xsl:if>

@@ -27,7 +27,7 @@ software.
   <xsl:include href="/xsl/layout.xsl"/>
   <xsl:template match="page" mode="head">
     <title>
-      <xsl:text>jare</xsl:text>
+      <xsl:text>Jare</xsl:text>
     </title>
   </xsl:template>
   <xsl:variable name="max" select="25"/>
