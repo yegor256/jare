@@ -31,11 +31,11 @@ import org.takes.facets.auth.PsCookie;
 import org.takes.facets.auth.PsFake;
 import org.takes.facets.auth.PsLogout;
 import org.takes.facets.auth.TkAuth;
+import org.takes.facets.auth.codecs.CcAes;
 import org.takes.facets.auth.codecs.CcCompact;
 import org.takes.facets.auth.codecs.CcHex;
 import org.takes.facets.auth.codecs.CcSafe;
 import org.takes.facets.auth.codecs.CcSalted;
-import org.takes.facets.auth.codecs.CcXor;
 import org.takes.facets.auth.social.PsGithub;
 import org.takes.facets.fork.FkFixed;
 import org.takes.facets.fork.FkParams;
@@ -96,7 +96,7 @@ final class TkAppAuth extends TkWrap {
                 new PsCookie(
                     new CcSafe(
                         new CcHex(
-                            new CcXor(
+                            new CcAes(
                                 new CcSalted(new CcCompact()),
                                 Manifests.read("Jare-SecurityKey")
                             )
