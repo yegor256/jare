@@ -74,7 +74,7 @@ public final class DyDomain implements Domain {
     }
 
     @Override
-    public Usage usage() throws IOException {
+    public Usage usage() {
         return new DyUsage(this.item);
     }
 

@@ -99,7 +99,7 @@ public final class DyUser implements User {
                 if (!domain.owner().equals(this.handle)) {
                     throw new IOException(
                         String.format(
-                            "domain \"%s\" is occupied by @%s",
+                            "Domain \"%s\" is occupied by @%s",
                             domain.name(), domain.owner()
                         )
                     );
