@@ -3,10 +3,10 @@ readers:
 docker:
   image: yegor256/java8
 assets:
-  settings.xml: zerocracy/home#assets/jare/settings.xml
-  id_rsa: zerocracy/home#assets/heroku-key
-  id_rsa.pub: zerocracy/home#assets/heroku-key.pub
-  s3cfg: zerocracy/home#assets/s3cfg
+  settings.xml: yegor256/home#assets/jare/settings.xml
+  id_rsa: yegor256/home#assets/heroku-key
+  id_rsa.pub: yegor256/home#assets/heroku-key.pub
+  s3cfg: yegor256/home#assets/s3cfg
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
 install: |-
