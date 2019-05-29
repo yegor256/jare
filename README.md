@@ -2,10 +2,10 @@
 
 [![Donate via Zerocracy](https://www.0crat.com/contrib-badge/C9V3GAG9H.svg)](https://www.0crat.com/contrib/C9V3GAG9H)
 
-[![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
+[![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![Managed by Zerocracy](https://www.0crat.com/badge/C9V3GAG9H.svg)](https://www.0crat.com/p/C9V3GAG9H)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jare)](http://www.rultor.com/p/yegor256/jare)
-[![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
+[![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Availability at SixNines](https://www.sixnines.io/b/c292)](https://www.sixnines.io/h/c292)
 [![Build Status](https://travis-ci.org/yegor256/jare.svg?branch=master)](https://travis-ci.org/yegor256/jare)
