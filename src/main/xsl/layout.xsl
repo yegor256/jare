@@ -82,7 +82,8 @@ software.
             <nav>
               <ul style="color:gray;">
                 <li>
-                  <xsl:text>v</xsl:text>
+                  <xsl:value-of select="version/heroku"/>
+                  <xsl:text>/</xsl:text>
                   <xsl:value-of select="version/name"/>
                 </li>
                 <li>
@@ -107,8 +108,8 @@ software.
             <nav>
               <ul>
                 <li>
-                  <a href="http://www.sixnines.io/h/c292">
-                    <img src="http://www.sixnines.io/b/c292?style=flat"/>
+                  <a href="https://www.sixnines.io/h/c292">
+                    <img src="https://www.sixnines.io/b/c292?style=flat"/>
                   </a>
                 </li>
               </ul>

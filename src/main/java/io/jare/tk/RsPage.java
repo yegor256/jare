@@ -132,7 +132,8 @@ public final class RsPage extends RsWrap {
                     "version",
                     new XeAppend("name", Manifests.read("Jare-Version")),
                     new XeAppend("revision", Manifests.read("Jare-Revision")),
-                    new XeAppend("date", Manifests.read("Jare-Date"))
+                    new XeAppend("date", Manifests.read("Jare-Date")),
+                    new XeAppend("heroku", RsPage.heroku())
                 )
             )
         );
@@ -147,6 +148,18 @@ public final class RsPage extends RsWrap {
                 new RsXslt(new RsWithType(raw, "text/html"))
             )
         );
+    }
+
+    /**
+     * Current Heroku release version.
+     * @return The version
+     */
+    private static String heroku() {
+        String ver = System.getenv("HEROKU_RELEASE_VERSION");
+        if (ver == null) {
+            ver = "?";
+        }
+        return ver;
     }
 
 }
