@@ -19,6 +19,8 @@ deploy:
     pdd --source=$(pwd) --verbose --file=jare.xml
     s3cmd --no-progress put jare.xml --config=../s3cfg s3://pdd.teamed.io/jare.xml
 release:
+  sensitive:
+    - settings.xml
   script: |
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
