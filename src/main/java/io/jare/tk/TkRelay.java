@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2016-2022 Yegor Bugayenko
@@ -163,6 +163,7 @@ final class TkRelay implements Take {
                     new Skipped<>(1, req.head())
                 );
             }
+
             @Override
             public InputStream body() throws IOException {
                 return req.body();

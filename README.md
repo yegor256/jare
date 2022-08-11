@@ -1,4 +1,4 @@
-<img src="http://www.jare.io/images/logo.svg" width="64" height="64"/>
+<img alt="logo" src="http://www.jare.io/images/logo.svg" width="64" height="64"/>
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![Managed by Zerocracy](https://www.0crat.com/badge/C9V3GAG9H.svg)](https://www.0crat.com/p/C9V3GAG9H)

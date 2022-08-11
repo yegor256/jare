@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2016-2022 Yegor Bugayenko
@@ -30,8 +30,6 @@ import com.jcabi.s3.Ocket;
 import io.jare.model.Base;
 import io.jare.model.Domain;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -122,11 +120,11 @@ final class Logs implements Runnable {
     private long process(final String name) throws IOException {
         final Ocket ocket = this.bucket.ocket(name);
         final Path path = Files.createTempFile("jare", ".gz");
-        ocket.read(new FileOutputStream(path.toFile()));
+        ocket.read(Files.newOutputStream(path));
         final BufferedReader input = new BufferedReader(
             new InputStreamReader(
                 new GZIPInputStream(
-                    new FileInputStream(path.toFile())
+                    Files.newInputStream(path)
                 )
             )
         );

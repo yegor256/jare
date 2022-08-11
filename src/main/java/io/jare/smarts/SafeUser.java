@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2016-2022 Yegor Bugayenko
@@ -69,12 +69,15 @@ public final class SafeUser implements User {
 
     /**
      * When name is not valid.
+     *
+     * @since 0.1
      */
     public static final class InvalidNameException extends IOException {
         /**
          * Serialization marker.
          */
         private static final long serialVersionUID = -869776873934626730L;
+
         /**
          * Ctor.
          * @param name Domain name

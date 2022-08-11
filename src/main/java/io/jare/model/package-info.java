@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2016-2022 Yegor Bugayenko
@@ -19,5 +19,11 @@
  * in an action of contract,  tort or otherwise,  arising from, out of or
  * in connection with the software or  the  use  or other dealings in the
  * software.
+ */
+
+/**
+ * The model.
+ *
+ * @since 0.1
  */
 package io.jare.model;
