@@ -37,7 +37,6 @@ import org.takes.facets.fork.TkFork;
 import org.takes.facets.fork.TkMethods;
 import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
-import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -51,8 +50,6 @@ import org.takes.tk.TkWrap;
 /**
  * App.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
@@ -90,7 +87,7 @@ public final class TkApp extends TkWrap {
                                                         new RsWithType(
                                                             new RsWithBody(
                                                                 new RsWithStatus(req.code()),
-                                                                new Sprintf(
+                                                                String.format(
                                                                     "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
                                                                     ExceptionUtils.getStackTrace(
                                                                         req.throwable()
@@ -164,10 +161,10 @@ public final class TkApp extends TkWrap {
                         )
                     )
                 ),
-                new Sprintf(
+                String.format(
                     "X-Jare-Revision: %s",
                     Manifests.read("Jare-Revision")
-                ).toString(),
+                ),
                 "Vary: Cookie"
             )
         );

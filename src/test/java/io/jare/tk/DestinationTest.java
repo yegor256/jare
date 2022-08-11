@@ -29,8 +29,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link Destination}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

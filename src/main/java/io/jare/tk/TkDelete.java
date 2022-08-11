@@ -36,8 +36,6 @@ import org.takes.rq.RqHref;
 /**
  * Delete domain.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 final class TkDelete implements Take {

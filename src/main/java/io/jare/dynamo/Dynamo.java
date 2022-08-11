@@ -33,8 +33,6 @@ import com.jcabi.manifests.Manifests;
 /**
  * Dynamo.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -61,7 +59,7 @@ final class Dynamo implements Region {
      */
     private static Region connect() {
         final String key = Manifests.read("Jare-DynamoKey");
-        final Credentials creds = new Credentials.Simple(
+        final Credentials.Simple creds = new Credentials.Simple(
             key, Manifests.read("Jare-DynamoSecret")
         );
         final Region region;

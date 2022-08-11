@@ -32,12 +32,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import org.cactoos.iterable.Joined;
 import org.cactoos.iterable.Skipped;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Concat;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithoutHeader;
@@ -46,8 +46,6 @@ import org.takes.tk.TkProxy;
 /**
  * Relay.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -75,13 +73,16 @@ final class TkRelay implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final Iterator<String> param = new RqHref.Base(req).href()
             .param("u").iterator();
         if (!param.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                "Parameter \"u\" is mandatory"
+                String.format(
+                    "Parameter \"u\" is mandatory in %s",
+                    new RqHref.Base(req).href()
+                )
             );
         }
         final String target = param.next().trim();
@@ -152,14 +153,14 @@ final class TkRelay implements Take {
         return new Request() {
             @Override
             public Iterable<String> head() throws IOException {
-                return new Concat<String>(
+                return new Joined<String>(
                     Collections.singleton(
                         String.format(
                             "GET %s HTTP/1.1",
                             path
                         )
                     ),
-                    new Skipped<>(req.head(), 1)
+                    new Skipped<>(1, req.head())
                 );
             }
             @Override

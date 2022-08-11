@@ -27,8 +27,6 @@ import java.io.IOException;
 /**
  * Domain.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 public interface Domain {

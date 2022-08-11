@@ -29,8 +29,6 @@ import org.takes.facets.auth.RqWithAuth;
 
 /**
  * Test case for {@link RqUser}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.2
  */
 public final class RqUserTest {

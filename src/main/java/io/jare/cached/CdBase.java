@@ -34,8 +34,6 @@ import org.cactoos.iterable.Mapped;
 /**
  * Cached Base.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @ToString
@@ -65,8 +63,8 @@ public final class CdBase implements Base {
     @Cacheable(lifetime = 1, unit = TimeUnit.MINUTES)
     public Iterable<Domain> domain(final String name) {
         return new Mapped<>(
-            this.origin.domain(name),
-            CdDomain::new
+            CdDomain::new,
+            this.origin.domain(name)
         );
     }
 
@@ -74,8 +72,8 @@ public final class CdBase implements Base {
     @Cacheable(unit = TimeUnit.HOURS, lifetime = 1)
     public Iterable<Domain> all() {
         return new Mapped<>(
-            this.origin.all(),
-            CdDomain::new
+            CdDomain::new,
+            this.origin.all()
         );
     }
 }

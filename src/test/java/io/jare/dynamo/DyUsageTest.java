@@ -39,8 +39,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link DyUsage}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.7
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)

@@ -31,8 +31,6 @@ import java.util.TreeMap;
 /**
  * Fake usage.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.7
  */
 public final class FkUsage implements Usage {

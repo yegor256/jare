@@ -30,8 +30,6 @@ import org.takes.HttpException;
 /**
  * Destination for relay.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.4
  */
 final class Destination {

@@ -35,7 +35,6 @@ import org.takes.Request;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
@@ -46,8 +45,6 @@ import org.takes.tk.TkWithHeaders;
 
 /**
  * Test case for {@link TkRelay}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -121,14 +118,12 @@ public final class TkRelayTest {
                     new TkRelay(new FkBase()).act(
                         TkRelayTest.fake(home, "/&whatever")
                     )
-                ),
+                ).print(),
                 Matchers.allOf(
-                    new HmRsHeader("Age", "31536000"),
-                    new HmRsHeader("Cache-control", "max-age=31536000"),
-                    new HmRsHeader("Expires", "Sun, 19 Jul 2020 18:06:32 GMT"),
-                    Matchers.not(
-                        new HmRsHeader("Cache-Control", "max-age=600")
-                    )
+                    Matchers.containsString("Age: 31536000"),
+                    Matchers.containsString("Cache-Control: max-age=31536000"),
+                    Matchers.containsString("Expires: Sun, 19 Jul 2020 18:06:32 GMT"),
+                    Matchers.not(Matchers.containsString("Cache-Control: max-age=600"))
                 )
             )
         );

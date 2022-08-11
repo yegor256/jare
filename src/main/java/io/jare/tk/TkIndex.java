@@ -37,8 +37,6 @@ import org.xembly.Directives;
 /**
  * Index page, for anonymous users.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 final class TkIndex implements Take {

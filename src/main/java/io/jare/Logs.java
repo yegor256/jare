@@ -55,8 +55,6 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Logs in S3.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.7
  */
 @ScheduleWithFixedDelay(delay = 1, unit = TimeUnit.MINUTES)
