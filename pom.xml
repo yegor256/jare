@@ -58,7 +58,7 @@ software.
         <role>Architect</role>
         <role>Developer</role>
       </roles>
-      <timezone>-7</timezone>
+      <timezone>+3</timezone>
     </developer>
   </developers>
   <issueManagement>
@@ -71,11 +71,11 @@ software.
     <url>https://github.com/yegor256/jare</url>
   </scm>
   <ciManagement>
-    <system>travis</system>
-    <url>https://travis-ci.org/yegor256/jare</url>
+    <system>GitHub</system>
+    <url>https://github.com/yegor256/jare</url>
   </ciManagement>
   <properties>
-    <timestamp>${maven.build.timestamp}</timestamp>
+    <argLine/>
   </properties>
   <dependencies>
     <dependency>
@@ -275,13 +275,13 @@ software.
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
           <configuration>
-            <argLine>-Djava.awt.headless=true</argLine>
+            <argLine>@{argLine} -Djava.awt.headless=true</argLine>
           </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
-            <argLine>-Duser.language=en -Duser.region=US -Djava.awt.headless=true</argLine>
+            <argLine>@{argLine} -Duser.language=en -Duser.region=US -Djava.awt.headless=true</argLine>
           </configuration>
         </plugin>
       </plugins>
@@ -553,6 +553,7 @@ software.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
+            <version>0.21.1</version>
             <configuration>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/main/resources/images/.*</exclude>
