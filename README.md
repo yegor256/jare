@@ -9,6 +9,7 @@
 [![Build Status](https://travis-ci.org/yegor256/jare.svg?branch=master)](https://travis-ci.org/yegor256/jare)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/jare)](http://www.0pdd.com/p?name=teamed/yegor256/jare)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/jare)](https://hitsofcode.com/view/github/yegor256/jare)
+[![codecov](https://codecov.io/gh/yegor256/jare/branch/master/graph/badge.svg)](https://codecov.io/gh/yegor256/jare)
 
 [www.jare.io](http://www.jare.io)
 
