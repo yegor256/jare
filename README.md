@@ -5,8 +5,8 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/jare)](http://www.rultor.com/p/yegor256/jare)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
+[![mvn](https://github.com/yegor256/jare/actions/workflows/mvn.yml/badge.svg)](https://github.com/yegor256/jare/actions/workflows/mvn.yml)
 [![Availability at SixNines](https://www.sixnines.io/b/c292)](https://www.sixnines.io/h/c292)
-[![Build Status](https://travis-ci.org/yegor256/jare.svg?branch=master)](https://travis-ci.org/yegor256/jare)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/jare)](http://www.0pdd.com/p?name=teamed/yegor256/jare)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/jare)](https://hitsofcode.com/view/github/yegor256/jare)
 [![codecov](https://codecov.io/gh/yegor256/jare/branch/master/graph/badge.svg)](https://codecov.io/gh/yegor256/jare)
