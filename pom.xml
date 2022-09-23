@@ -324,7 +324,7 @@ software.
           <plugin>
             <groupId>com.samaxes.maven</groupId>
             <artifactId>minify-maven-plugin</artifactId>
-            <version>1.7.2</version>
+            <version>1.7.6</version>
             <configuration>
               <charset>UTF-8</charset>
               <nosuffix>true</nosuffix>
