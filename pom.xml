@@ -216,7 +216,7 @@ software.
     <dependency>
       <groupId>net.sf.saxon</groupId>
       <artifactId>Saxon-HE</artifactId>
-      <version>11.4</version>
+      <version>11.5</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
