@@ -316,33 +316,7 @@ software.
                 </goals>
                 <configuration>
                   <sassSourceDirectory>${basedir}/src/main/scss</sassSourceDirectory>
-                  <destination>${project.build.directory}/css</destination>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>com.samaxes.maven</groupId>
-            <artifactId>minify-maven-plugin</artifactId>
-            <version>1.7.6</version>
-            <configuration>
-              <charset>UTF-8</charset>
-              <nosuffix>true</nosuffix>
-              <webappTargetDir>${project.build.outputDirectory}</webappTargetDir>
-            </configuration>
-            <executions>
-              <execution>
-                <id>minify-css</id>
-                <goals>
-                  <goal>minify</goal>
-                </goals>
-                <configuration>
-                  <webappSourceDir>${project.build.directory}</webappSourceDir>
-                  <cssSourceDir>css</cssSourceDir>
-                  <cssSourceIncludes>
-                    <include>*.css</include>
-                  </cssSourceIncludes>
-                  <skipMerge>true</skipMerge>
+                  <destination>${project.build.outputDirectory}/css</destination>
                 </configuration>
               </execution>
             </executions>
@@ -359,7 +333,7 @@ software.
                   <goal>xml</goal>
                 </goals>
                 <configuration>
-                  <srcFolder>${basedir}/src/main/xsl</srcFolder>
+                  <srcFolder>${basedir}/src/main/resources/xsl</srcFolder>
                   <targetFolder>${project.build.outputDirectory}/xsl</targetFolder>
                   <fileExt>
                     <ext>xsl</ext>
@@ -398,7 +372,7 @@ software.
                     <artifactItem>
                       <groupId>com.jcabi</groupId>
                       <artifactId>DynamoDBLocal</artifactId>
-                      <version>2015-07-16</version>
+                      <version>2023-05-26</version>
                       <type>zip</type>
                       <outputDirectory>${project.build.directory}/dynamodb-dist</outputDirectory>
                       <overWrite>false</overWrite>

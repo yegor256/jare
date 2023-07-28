@@ -85,6 +85,7 @@ public final class TkAppTest {
         new FtRemote(app).exec(
             home -> {
                 new JdkRequest(home)
+                    .header("Accept", "text/html")
                     .fetch()
                     .as(RestResponse.class)
                     .assertStatus(HttpURLConnection.HTTP_OK)
