@@ -22,7 +22,6 @@
  */
 package io.jare.tk;
 
-import com.jcabi.aspects.Tv;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.takes.HttpException;
@@ -75,7 +74,7 @@ final class Destination {
                 String.format("URI \"%s\" doesn't have a host", this.uri)
             );
         }
-        final StringBuilder path = new StringBuilder(Tv.HUNDRED);
+        final StringBuilder path = new StringBuilder(100);
         if (this.uri.getRawPath().isEmpty()) {
             path.append('/');
         } else {

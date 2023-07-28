@@ -23,7 +23,6 @@
 package io.jare.dynamo;
 
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.jcabi.aspects.Tv;
 import com.jcabi.dynamo.Attributes;
 import com.jcabi.dynamo.Item;
 import com.jcabi.dynamo.Region;
@@ -66,7 +65,7 @@ public final class DyUsageTest {
     public void ignoresOldData() throws Exception {
         final Usage usage = new DyUsage(DyUsageTest.item());
         usage.add(new Date(), 1L);
-        usage.add(DateUtils.addDays(new Date(), -Tv.FIFTY), 1L);
+        usage.add(DateUtils.addDays(new Date(), -50), 1L);
         MatcherAssert.assertThat(usage.total(), Matchers.equalTo(1L));
     }
 

@@ -25,7 +25,6 @@ package io.jare.dynamo;
 import com.amazonaws.services.dynamodbv2.model.AttributeAction;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
-import com.jcabi.aspects.Tv;
 import com.jcabi.dynamo.Item;
 import com.jcabi.xml.XML;
 import com.jcabi.xml.XMLDocument;
@@ -93,7 +92,7 @@ public final class DyUsage implements Usage {
             new Directives().xpath(
                 String.format(
                     "/usage/day[number(@id) < %d]",
-                    DyUsage.asNumber(DateUtils.addDays(new Date(), -Tv.THIRTY))
+                    DyUsage.asNumber(DateUtils.addDays(new Date(), -30))
                 )
             ).remove()
         ).applyQuietly(node);

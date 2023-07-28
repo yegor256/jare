@@ -22,7 +22,6 @@
  */
 package io.jare.dynamo;
 
-import com.jcabi.aspects.Tv;
 import io.jare.model.Base;
 import io.jare.model.Domain;
 import io.jare.model.User;
@@ -68,17 +67,17 @@ public final class DyUserITCase {
     public void listsMineDomains() throws Exception {
         final Base base = new DyBase(new Dynamo());
         final User user = base.user("willy");
-        for (int idx = 0; idx < Tv.TEN; ++idx) {
+        for (int idx = 0; idx < 10; ++idx) {
             user.add(String.format("facebook-%d.com", idx));
         }
         final Iterable<Domain> list = user.mine();
         MatcherAssert.assertThat(
             list,
-            Matchers.iterableWithSize(Tv.TEN)
+            Matchers.iterableWithSize(10)
         );
         MatcherAssert.assertThat(
             list,
-            Matchers.iterableWithSize(Tv.TEN)
+            Matchers.iterableWithSize(10)
         );
     }
 

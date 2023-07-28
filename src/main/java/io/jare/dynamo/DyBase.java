@@ -23,7 +23,6 @@
 package io.jare.dynamo;
 
 import com.amazonaws.services.dynamodbv2.model.Select;
-import com.jcabi.aspects.Tv;
 import com.jcabi.dynamo.Conditions;
 import com.jcabi.dynamo.QueryValve;
 import com.jcabi.dynamo.Region;
@@ -100,7 +99,7 @@ public final class DyBase implements Base {
             .through(
                 new ScanValve()
                     .withAttributeToGet("user", "domain", "total", "usage")
-                    .withLimit(Tv.THOUSAND)
+                    .withLimit(1000)
             )
             .stream()
             .map(DyDomain::new)

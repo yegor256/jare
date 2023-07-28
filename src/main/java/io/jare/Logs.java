@@ -23,7 +23,6 @@
 package io.jare;
 
 import com.jcabi.aspects.ScheduleWithFixedDelay;
-import com.jcabi.aspects.Tv;
 import com.jcabi.log.Logger;
 import com.jcabi.s3.Bucket;
 import com.jcabi.s3.Ocket;
@@ -167,7 +166,7 @@ final class Logs implements Runnable {
         final CharSequence line) {
         final Matcher matcher = Logs.PTN.matcher(line);
         if (matcher.find()) {
-            final String domain = URI.create(matcher.group(Tv.THREE)).getHost();
+            final String domain = URI.create(matcher.group(3)).getHost();
             if (!map.containsKey(domain)) {
                 map.put(domain, new HashMap<>(0));
             }

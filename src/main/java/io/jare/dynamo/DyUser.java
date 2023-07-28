@@ -23,7 +23,6 @@
 package io.jare.dynamo;
 
 import com.amazonaws.services.dynamodbv2.model.Select;
-import com.jcabi.aspects.Tv;
 import com.jcabi.dynamo.Attributes;
 import com.jcabi.dynamo.Conditions;
 import com.jcabi.dynamo.QueryValve;
@@ -76,7 +75,7 @@ public final class DyUser implements User {
             .through(
                 new QueryValve()
                     .withSelect(Select.ALL_ATTRIBUTES)
-                    .withLimit(Tv.HUNDRED)
+                    .withLimit(100)
                     .withConsistentRead(false)
                     .withIndexName("mine")
             )
