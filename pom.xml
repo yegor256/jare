@@ -91,12 +91,12 @@ software.
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-dynamodb</artifactId>
-      <version>1.12.543</version>
+      <version>1.12.544</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-cloudfront</artifactId>
-      <version>1.12.543</version>
+      <version>1.12.544</version>
     </dependency>
     <dependency>
       <groupId>org.takes</groupId>
