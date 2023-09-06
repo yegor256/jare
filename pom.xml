@@ -86,7 +86,7 @@ software.
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-core</artifactId>
-      <version>1.12.544</version>
+      <version>1.12.545</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
@@ -96,7 +96,7 @@ software.
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-cloudfront</artifactId>
-      <version>1.12.544</version>
+      <version>1.12.545</version>
     </dependency>
     <dependency>
       <groupId>org.takes</groupId>
