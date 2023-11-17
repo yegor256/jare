@@ -450,7 +450,7 @@ software.
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>3.1.0</version>
+            <version>3.1.1</version>
             <executions>
               <execution>
                 <id>start-server</id>
