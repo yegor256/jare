@@ -99,15 +99,6 @@ software.
             <nav>
               <ul>
                 <li>
-                  <a href="https://www.0crat.com/p/C3RFVLU72">
-                    <img src="https://www.0crat.com/badge/C3RFVLU72.svg"/>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <nav>
-              <ul>
-                <li>
                   <a href="https://www.sixnines.io/h/c292">
                     <img src="https://www.sixnines.io/b/c292?style=flat"/>
                   </a>
