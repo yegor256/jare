@@ -96,7 +96,7 @@ software.
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-cloudfront</artifactId>
-      <version>1.12.700</version>
+      <version>1.12.701</version>
     </dependency>
     <dependency>
       <groupId>org.takes</groupId>
