@@ -26,7 +26,7 @@ software.
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.67.0</version>
+    <version>0.68.0</version>
   </parent>
   <groupId>io.jare</groupId>
   <artifactId>jare</artifactId>
