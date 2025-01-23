@@ -29,4 +29,3 @@ $ mvn clean install -Pqulice
 ```
 
 To avoid build errors use Maven 3.2+ and Java 8+.
-

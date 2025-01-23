@@ -9,17 +9,6 @@
       "AttributeType": "S"
     }
   ],
-  "KeySchema": [
-    {
-      "AttributeName": "domain",
-      "KeyType": "HASH"
-    }
-  ],
-  "ProvisionedThroughput": {
-    "ReadCapacityUnits": "1",
-    "WriteCapacityUnits": "1"
-  },
-  "TableName": "domains",
   "GlobalSecondaryIndexes": [
     {
       "IndexName": "mine",
@@ -41,5 +30,16 @@
         "WriteCapacityUnits": "1"
       }
     }
-  ]
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "domain",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": "1",
+    "WriteCapacityUnits": "1"
+  },
+  "TableName": "domains"
 }
