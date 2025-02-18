@@ -19,6 +19,7 @@
 # in connection with the software or  the  use  or other dealings in the
 # software.
 ---
+# yamllint disable rule:line-length
 docker:
   image: yegor256/rultor-image:1.21.0
 readers:
