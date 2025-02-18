@@ -19,6 +19,7 @@
 # in connection with the software or  the  use  or other dealings in the
 # software.
 ---
+# yamllint disable rule:line-length
 name: mvn
 'on':
   push:
