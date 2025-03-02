@@ -1,6 +1,7 @@
-target/
-.idea/
 *.iml
-.DS_Store
-ajcore.*
 *.log
+.DS_Store
+.idea/
+ajcore.*
+node_modules/
+target/
