@@ -1,5 +1,9 @@
 #!/bin/bash
-set -e
+
+# SPDX-FileCopyrightText: Copyright (c) 2016-2025 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+set -e -o pipefail
 
 cd "$(dirname "$0")" || exit 1
 cp /code/home/assets/jare/settings.xml .
