@@ -4,9 +4,6 @@
 version = 1
 [[annotations]]
 path = [
-    "src/main/resources/META-INF/services/javax.xml.transform.TransformerFactory",
-    "src/main/resources/META-INF/services/javax.xml.xpath.XPathFactory",
-    "src/test/resources/io/jare/test",
     ".DS_Store",
     ".gitattributes",
     ".gitignore",
@@ -37,6 +34,9 @@ path = [
     "Procfile",
     "README.md",
     "renovate.json",
+    "src/main/resources/META-INF/services/javax.xml.transform.TransformerFactory",
+    "src/main/resources/META-INF/services/javax.xml.xpath.XPathFactory",
+    "src/test/resources/io/jare/test",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Copyright (c) 2025 Yegor Bugayenko"
