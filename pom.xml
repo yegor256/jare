@@ -68,17 +68,17 @@
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-core</artifactId>
-      <version>1.12.702</version>
+      <version>1.12.791</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-dynamodb</artifactId>
-      <version>1.12.702</version>
+      <version>1.12.791</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-cloudfront</artifactId>
-      <version>1.12.702</version>
+      <version>1.12.791</version>
     </dependency>
     <dependency>
       <groupId>org.takes</groupId>
