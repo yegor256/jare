@@ -509,6 +509,7 @@
             <artifactId>qulice-maven-plugin</artifactId>
             <version>0.21.1</version>
             <configuration>
+              <license>file:${basedir}/.qulice-header.txt</license>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/main/resources/images/.*</exclude>
                 <exclude>findbugs:.*</exclude>
