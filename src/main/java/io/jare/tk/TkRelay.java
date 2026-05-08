@@ -93,7 +93,7 @@ final class TkRelay implements Take {
         final Domain domain = domains.next();
         return TkRelay.cached(
             new RsWithHeaders(
-                new TkProxy(uri.toString()).act(
+                new TkProxy(uri).act(
                     TkRelay.request(
                         req,
                         new Destination(uri).path()

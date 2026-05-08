@@ -62,14 +62,14 @@ final class TkAppAuth extends TkWrap {
                 ),
                 new PsByFlag(
                     new PsByFlag.Pair(
-                        PsGithub.class.getSimpleName(),
+                        Pattern.compile(PsGithub.class.getSimpleName()),
                         new PsGithub(
                             Manifests.read("Jare-GithubId"),
                             Manifests.read("Jare-GithubSecret")
                         )
                     ),
                     new PsByFlag.Pair(
-                        PsLogout.class.getSimpleName(),
+                        Pattern.compile(PsLogout.class.getSimpleName()),
                         new PsLogout()
                     )
                 ),

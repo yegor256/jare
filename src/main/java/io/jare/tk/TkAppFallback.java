@@ -85,7 +85,7 @@ final class TkAppFallback extends TkWrap {
         return new RsWithStatus(
             new RsWithType(
                 new RsVelocity(
-                    TkAppFallback.class.getResource("error.html.vm"),
+                    TkAppFallback.class.getResource("error.html.vm").openStream(),
                     new RsVelocity.Pair(
                         "err",
                         ExceptionUtils.getStackTrace(req.throwable())
