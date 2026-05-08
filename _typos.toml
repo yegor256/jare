@@ -1,0 +1,7 @@
+[default.extend-words]
+bse = "bse"
+
+[files]
+extend-exclude = [
+    "src/test/resources/io/jare/test",
+]

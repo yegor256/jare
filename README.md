@@ -1,4 +1,6 @@
-<img alt="logo" src="http://www.jare.io/images/logo.svg" width="64" height="64"/>
+# Jare
+
+![logo](http://www.jare.io/images/logo.svg)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](https://www.rultor.com/b/yegor256/jare)](https://www.rultor.com/p/yegor256/jare)
@@ -24,8 +26,8 @@ your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
-```
-$ mvn clean install -Pqulice
+```bash
+mvn clean install -Pqulice
 ```
 
 To avoid build errors use Maven 3.2+ and Java 8+.
