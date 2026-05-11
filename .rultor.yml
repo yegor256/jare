@@ -17,7 +17,7 @@ release:
   sensitive:
     - settings.xml
   script: |
-    mvn versions:set "-DnewVersion=${tag}"
+    mvn -ntp versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
     cp ../settings.xml settings.xml
     mvn clean package -Pqulice -Pjare --errors --batch-mode
