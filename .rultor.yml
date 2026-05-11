@@ -33,7 +33,7 @@ release:
     git reset HEAD~1
     rm -rf settings.xml
     curl -f --connect-timeout 15 --retry 5 --retry-delay 30 http://www.jare.io > /dev/null
-    # mvn clean site-deploy -Psite --batch-mode --settings ../settings.xml
+    # mvn -ntp clean site-deploy -Psite --batch-mode --settings ../settings.xml
 merge:
   script: |-
     mvn help:system clean install -Pqulice --settings ../settings.xml
