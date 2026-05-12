@@ -64,7 +64,7 @@ public final class DyUsage implements Usage {
         } else {
             before = Long.parseLong(items.get(0));
         }
-        final Node node = xml.node();
+        final Node node = xml.deepCopy();
         new Xembler(
             new Directives()
                 .xpath(xpath).up().remove()

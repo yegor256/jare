@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+[default.extend-words]
+bse = "bse"
+
+[files]
+extend-exclude = [
+    "src/test/resources/io/jare/test",
+]
