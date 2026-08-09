@@ -11,22 +11,21 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.zip.GZIPOutputStream;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
  * Test case for {@link Logs}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class LogsTest {
+final class LogsTest {
 
     /**
      * Logs can unzip and log.
      * @throws Exception If some problem inside
      */
     @Test
-    public void unzipsAndLogs() throws Exception {
+    void unzipsAndLogs() throws Exception {
         final Ocket ocket = Mockito.mock(Ocket.class);
         Mockito.doAnswer(
             inv -> {
@@ -45,6 +44,6 @@ public final class LogsTest {
         Mockito.doReturn(ocket).when(bucket).ocket(Mockito.anyString());
         Mockito.doReturn(Collections.singleton("x")).when(bucket).list("");
         new Logs(new FkBase(), bucket).run();
+        Mockito.verify(bucket).remove("x");
     }
-
 }

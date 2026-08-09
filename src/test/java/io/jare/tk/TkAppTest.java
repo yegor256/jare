@@ -13,8 +13,7 @@ import io.jare.fake.FkBase;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.Take;
+import org.junit.jupiter.api.Test;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -23,25 +22,21 @@ import org.takes.rs.RsPrint;
 /**
  * Test case for {@link TkApp}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class TkAppTest {
+final class TkAppTest {
 
     /**
      * App can render front page.
      * @throws Exception If some problem inside
      */
     @Test
-    public void rendersHomePage() throws Exception {
-        final Take take = new TkApp(new FkBase());
+    void rendersHomePage() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new RsPrint(
-                    take.act(
+                    new TkApp(new FkBase()).act(
                         new RqWithHeader(
                             new RqFake("GET", "/"),
-                            // @checkstyle MultipleStringLiteralsCheck (1 line)
                             "Accept",
                             "text/xml"
                         )
@@ -62,9 +57,8 @@ public final class TkAppTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void rendersHomePageViaHttp() throws Exception {
-        final Take app = new TkApp(new FkBase());
-        new FtRemote(app).exec(
+    void rendersHomePageViaHttp() throws Exception {
+        new FtRemote(new TkApp(new FkBase())).exec(
             home -> {
                 new JdkRequest(home)
                     .header("Accept", "text/html")
@@ -90,14 +84,12 @@ public final class TkAppTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void rendersNotFoundPage() throws Exception {
-        final Take take = new TkApp(new FkBase());
+    void rendersNotFoundPage() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
-                take.act(new RqFake("HEAD", "/not-found"))
+                new TkApp(new FkBase()).act(new RqFake("HEAD", "/not-found"))
             ).printBody(),
             Matchers.equalTo("Page not found")
         );
     }
-
 }

@@ -10,7 +10,6 @@ import java.util.Collections;
 
 /**
  * Fake user.
- *
  * @since 1.0
  */
 public final class FkUser implements User {
@@ -24,5 +23,4 @@ public final class FkUser implements User {
     public void add(final String name) {
         // nothing
     }
-
 }

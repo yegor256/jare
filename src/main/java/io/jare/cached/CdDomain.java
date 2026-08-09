@@ -13,7 +13,6 @@ import lombok.ToString;
 
 /**
  * Cached Domain.
- *
  * @since 1.0
  */
 @ToString

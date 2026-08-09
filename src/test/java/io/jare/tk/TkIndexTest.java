@@ -7,8 +7,7 @@ package io.jare.tk;
 import com.jcabi.matchers.XhtmlMatchers;
 import io.jare.fake.FkBase;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-import org.takes.Take;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
@@ -16,22 +15,19 @@ import org.takes.rs.RsPrint;
 /**
  * Test case for {@link TkIndex}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class TkIndexTest {
+final class TkIndexTest {
 
     /**
      * TkHome can render home page.
      * @throws Exception If some problem inside
      */
     @Test
-    public void rendersHomePage() throws Exception {
-        final Take take = new TkAppAuth(new TkIndex(new FkBase()));
+    void rendersHomePage() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new RsPrint(
-                    take.act(
+                    new TkAppAuth(new TkIndex(new FkBase())).act(
                         new RqWithHeader(
                             new RqFake("GET", "/"),
                             "Accept",
@@ -57,12 +53,12 @@ public final class TkIndexTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void rendersHomePageInHtml() throws Exception {
-        final Take take = new TkAppAuth(new TkIndex(new FkBase()));
+    void rendersHomePageInHtml() throws Exception {
         MatcherAssert.assertThat(
             XhtmlMatchers.xhtml(
                 new RsPrint(
-                    take.act(new RqFake("GET", "/"))
+                    new TkAppAuth(new TkIndex(new FkBase()))
+                        .act(new RqFake("GET", "/"))
                 ).printBody()
             ),
             XhtmlMatchers.hasXPaths(
@@ -71,5 +67,4 @@ public final class TkIndexTest {
             )
         );
     }
-
 }

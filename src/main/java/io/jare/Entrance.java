@@ -17,7 +17,6 @@ import org.takes.http.FtCli;
 
 /**
  * Command line entry.
- *
  * @since 1.0
  */
 public final class Entrance {
@@ -46,5 +45,4 @@ public final class Entrance {
         );
         new FtCli(new TkApp(base), args).start(Exit.NEVER);
     }
-
 }

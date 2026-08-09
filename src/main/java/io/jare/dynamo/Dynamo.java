@@ -14,9 +14,7 @@ import com.jcabi.manifests.Manifests;
 
 /**
  * Dynamo.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class Dynamo implements Region {
 
@@ -60,5 +58,4 @@ final class Dynamo implements Region {
         Logger.info(Dynamo.class, "DynamoDB connected as %s", key);
         return region;
     }
-
 }

@@ -31,19 +31,10 @@ import org.takes.tk.TkWrap;
 
 /**
  * App.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  * @checkstyle LineLength (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.ExcessiveImports", "PMD.ExcessiveMethodLength",
-        "PMD.AvoidDuplicateLiterals"
-    }
-)
 public final class TkApp extends TkWrap {
 
     /**
@@ -70,7 +61,7 @@ public final class TkApp extends TkWrap {
                                                             new RsWithBody(
                                                                 new RsWithStatus(req.code()),
                                                                 String.format(
-                                                                    "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues\n\n%s",
+                                                                    "Please, submit this stacktrace to GitHub and we'll try to help: https://github.com/yegor256/jare/issues%n%n%s",
                                                                     ExceptionUtils.getStackTrace(
                                                                         req.throwable()
                                                                     )
@@ -151,5 +142,4 @@ public final class TkApp extends TkWrap {
             )
         );
     }
-
 }

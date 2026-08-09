@@ -7,21 +7,20 @@ package io.jare.tk;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Destination}.
  * @since 0.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class DestinationTest {
+final class DestinationTest {
 
     /**
      * Destination can build a path.
      * @throws Exception If some problem inside
      */
     @Test
-    public void buildsPath() throws Exception {
+    void buildsPath() throws Exception {
         MatcherAssert.assertThat(
             new Destination(
                 new URI(
@@ -37,7 +36,7 @@ public final class DestinationTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void buildsEmptyPath() throws Exception {
+    void buildsEmptyPath() throws Exception {
         MatcherAssert.assertThat(
             new Destination(new URI("http://www.google.com")).path(),
             Matchers.equalTo("/")
@@ -49,7 +48,7 @@ public final class DestinationTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void buildsPathWithParams() throws Exception {
+    void buildsPathWithParams() throws Exception {
         MatcherAssert.assertThat(
             new Destination(
                 new URI("http://www.google.com?%D0%B0=1")
@@ -63,7 +62,7 @@ public final class DestinationTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void buildsPathWithFragment() throws Exception {
+    void buildsPathWithFragment() throws Exception {
         MatcherAssert.assertThat(
             new Destination(
                 new URI("http://www.google.com/%D0%B0?%D0%B0=1#t")
@@ -71,5 +70,4 @@ public final class DestinationTest {
             Matchers.equalTo("/%D0%B0?%D0%B0=1#t")
         );
     }
-
 }

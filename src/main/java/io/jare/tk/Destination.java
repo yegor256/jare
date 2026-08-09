@@ -10,7 +10,6 @@ import org.takes.HttpException;
 
 /**
  * Destination for relay.
- *
  * @since 0.4
  */
 final class Destination {
@@ -33,7 +32,7 @@ final class Destination {
      * @return Destination path
      * @throws HttpException If fails
      */
-    public String path() throws HttpException {
+    String path() throws HttpException {
         if (!this.uri.isAbsolute()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -70,5 +69,4 @@ final class Destination {
         }
         return path.toString();
     }
-
 }

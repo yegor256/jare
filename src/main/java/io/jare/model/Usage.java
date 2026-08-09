@@ -5,12 +5,11 @@
 package io.jare.model;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.SortedMap;
 
 /**
  * Usage.
- *
  * @since 0.7
  */
 public interface Usage {
@@ -21,7 +20,7 @@ public interface Usage {
      * @param bytes How many bytes
      * @throws IOException If fails
      */
-    void add(Date date, long bytes) throws IOException;
+    void add(LocalDate date, long bytes) throws IOException;
 
     /**
      * Total, over the last ten days.
@@ -35,6 +34,5 @@ public interface Usage {
      * @return Full usage history
      * @throws IOException If fails
      */
-    SortedMap<Date, Long> history() throws IOException;
-
+    SortedMap<LocalDate, Long> history() throws IOException;
 }

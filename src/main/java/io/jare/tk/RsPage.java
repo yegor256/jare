@@ -38,12 +38,9 @@ import org.takes.rs.xe.XeWhen;
 
 /**
  * Index resource, front page of the website.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.ExcessiveImports")
 public final class RsPage extends RsWrap {
 
     /**
@@ -141,5 +138,4 @@ public final class RsPage extends RsWrap {
         }
         return ver;
     }
-
 }

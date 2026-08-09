@@ -6,24 +6,25 @@ package io.jare.smarts;
 
 import io.jare.fake.FkUser;
 import io.jare.model.User;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link User}.
  * @since 0.5
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class SafeUserTest {
+final class SafeUserTest {
 
     /**
      * User.Safe can accept normal domain names.
-     * @throws Exception If some problem inside
      */
     @Test
-    public void acceptsValidDomains() throws Exception {
+    void acceptsValidDomains() {
         final User user = new SafeUser(new FkUser());
         final String[] domains = {
             "google.com",
@@ -32,18 +33,22 @@ public final class SafeUserTest {
             "google.ua",
             "www-8-9.google.ua",
         };
-        for (final String domain : domains) {
-            user.add(domain);
+        try {
+            for (final String domain : domains) {
+                user.add(domain);
+            }
+        } catch (final IOException ex) {
+            Assertions.fail(ex);
         }
     }
 
     /**
      * User.Safe can reject invalid domain names.
-     * @throws Exception If some problem inside
+     * @throws IOException If some domain triggers a real I/O failure
      */
     @Test
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
-    public void rejectsInvalidDomains() throws Exception {
+    void rejectsInvalidDomains() throws IOException {
         final User user = new SafeUser(new FkUser());
         final String[] domains = {
             "google-com",
@@ -53,17 +58,15 @@ public final class SafeUserTest {
             "www-8=9.google.ua",
             "127.0.0.1",
         };
+        final Collection<Boolean> rejected = new ArrayList<>(domains.length);
         for (final String domain : domains) {
             try {
                 user.add(domain);
-                Assert.fail(String.format("exception expected: %s", domain));
+                rejected.add(false);
             } catch (final SafeUser.InvalidNameException ex) {
-                MatcherAssert.assertThat(
-                    ex.getLocalizedMessage(),
-                    Matchers.containsString(domain)
-                );
+                rejected.add(ex.getLocalizedMessage().contains(domain));
             }
         }
+        MatcherAssert.assertThat(rejected, Matchers.everyItem(Matchers.is(true)));
     }
-
 }

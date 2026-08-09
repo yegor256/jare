@@ -27,9 +27,7 @@ import org.takes.tk.TkProxy;
 
 /**
  * Relay.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkRelay implements Take {
 
@@ -84,13 +82,11 @@ final class TkRelay implements Take {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "Domain \"%s\" is not registered, check your account at www.jare.io",
                     host
                 )
             );
         }
-        final Domain domain = domains.next();
         return TkRelay.cached(
             new RsWithHeaders(
                 new TkProxy(uri).act(
@@ -100,7 +96,9 @@ final class TkRelay implements Take {
                     )
                 ),
                 String.format("X-Jare-Target: %s", uri),
-                String.format("X-Jare-Usage: %d", domain.usage().total())
+                String.format(
+                    "X-Jare-Usage: %d", domains.next().usage().total()
+                )
             )
         );
     }

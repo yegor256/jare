@@ -6,7 +6,6 @@ package io.jare.tk;
 
 import io.jare.model.Base;
 import io.jare.model.Domain;
-import io.jare.model.Usage;
 import java.io.IOException;
 import org.takes.Request;
 import org.takes.Response;
@@ -21,12 +20,8 @@ import org.xembly.Directives;
 
 /**
  * Index page, for authenticated user.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkDomains implements Take {
 
     /**
@@ -67,13 +62,11 @@ final class TkDomains implements Take {
      */
     private static XeSource source(final Domain domain) throws IOException {
         final String name = domain.name();
-        final Usage usage = domain.usage();
         return new XeDirectives(
             new Directives()
                 .add("domain")
                 .add("name").set(name).up()
-                .add("usage").set(usage.total()).up()
-                .append(
+                .add("usage").set(domain.usage().total()).up().append(
                     new XeLink(
                         "delete",
                         new Href("/delete").with("name", name)
@@ -82,5 +75,4 @@ final class TkDomains implements Take {
                 .up()
         );
     }
-
 }

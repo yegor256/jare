@@ -12,31 +12,24 @@ import com.jcabi.xml.XML;
 import com.jcabi.xml.XMLDocument;
 import io.jare.model.Usage;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.SortedMap;
-import java.util.TimeZone;
 import java.util.TreeMap;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.apache.commons.lang3.time.DateUtils;
 import org.w3c.dom.Node;
 import org.xembly.Directives;
 import org.xembly.Xembler;
 
 /**
  * Dynamo usage.
- *
  * @since 0.7
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @ToString
 @EqualsAndHashCode(of = "item")
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyUsage implements Usage {
 
     /**
@@ -53,7 +46,7 @@ public final class DyUsage implements Usage {
     }
 
     @Override
-    public void add(final Date date, final long bytes) throws IOException {
+    public void add(final LocalDate date, final long bytes) throws IOException {
         final int day = DyUsage.asNumber(date);
         final XML xml = this.xml();
         final String xpath = String.format("/usage/day[@id='%d']/text()", day);
@@ -74,7 +67,7 @@ public final class DyUsage implements Usage {
             new Directives().xpath(
                 String.format(
                     "/usage/day[number(@id) < %d]",
-                    DyUsage.asNumber(DateUtils.addDays(new Date(), -30))
+                    DyUsage.asNumber(LocalDate.now(ZoneOffset.UTC).minusDays(30))
                 )
             ).remove()
         ).applyQuietly(node);
@@ -92,8 +85,8 @@ public final class DyUsage implements Usage {
     }
 
     @Override
-    public SortedMap<Date, Long> history() throws IOException {
-        final SortedMap<Date, Long> map = new TreeMap<>();
+    public SortedMap<LocalDate, Long> history() throws IOException {
+        final SortedMap<LocalDate, Long> map = new TreeMap<>();
         for (final XML day : this.xml().nodes("/usage/day")) {
             map.put(
                 DyUsage.asDate(Integer.parseInt(day.xpath("@id").get(0))),
@@ -148,11 +141,8 @@ public final class DyUsage implements Usage {
      * @param date The date
      * @return A number
      */
-    private static int asNumber(final Date date) {
-        final TimeZone zone = TimeZone.getTimeZone("UTC");
-        final DateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-        fmt.setTimeZone(zone);
-        return Integer.parseInt(fmt.format(date));
+    private static int asNumber(final LocalDate date) {
+        return Integer.parseInt(date.format(DateTimeFormatter.BASIC_ISO_DATE));
     }
 
     /**
@@ -160,15 +150,9 @@ public final class DyUsage implements Usage {
      * @param num The number
      * @return A date
      */
-    private static Date asDate(final int num) {
-        final TimeZone zone = TimeZone.getTimeZone("UTC");
-        final DateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-        fmt.setTimeZone(zone);
-        try {
-            return fmt.parse(Integer.toString(num));
-        } catch (final ParseException ex) {
-            throw new IllegalStateException(ex);
-        }
+    private static LocalDate asDate(final int num) {
+        return LocalDate.parse(
+            Integer.toString(num), DateTimeFormatter.BASIC_ISO_DATE
+        );
     }
-
 }

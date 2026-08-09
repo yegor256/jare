@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 /**
  * Safe user.
- *
  * @since 1.0
  */
 public final class SafeUser implements User {
@@ -51,10 +50,10 @@ public final class SafeUser implements User {
 
     /**
      * When name is not valid.
-     *
      * @since 0.1
      */
     public static final class InvalidNameException extends IOException {
+
         /**
          * Serialization marker.
          */

@@ -14,6 +14,7 @@ import com.amazonaws.services.cloudfront.model.InvalidationBatch;
 import com.amazonaws.services.cloudfront.model.Paths;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import org.takes.Request;
 import org.takes.Response;
@@ -24,9 +25,7 @@ import org.takes.rq.RqHref;
 
 /**
  * Invalidate an URL.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkInvalidate implements Take {
 
@@ -58,11 +57,11 @@ final class TkInvalidate implements Take {
             "/?u=%s",
             URLEncoder.encode(
                 url,
-                "UTF-8"
+                StandardCharsets.UTF_8
             )
         );
-        final AmazonCloudFront aws = AmazonCloudFrontClientBuilder.standard()
-            .withCredentials(
+        final AmazonCloudFront aws = AmazonCloudFrontClientBuilder
+            .standard().withCredentials(
                 new AWSStaticCredentialsProvider(
                     new BasicAWSCredentials(this.key, this.secret)
                 )
@@ -89,5 +88,4 @@ final class TkInvalidate implements Take {
             "/domains"
         );
     }
-
 }

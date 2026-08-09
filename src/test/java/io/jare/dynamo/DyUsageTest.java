@@ -12,30 +12,27 @@ import com.jcabi.dynamo.Table;
 import com.jcabi.dynamo.mock.H2Data;
 import com.jcabi.dynamo.mock.MkRegion;
 import io.jare.model.Usage;
-import java.util.Date;
-import org.apache.commons.lang3.time.DateUtils;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link DyUsage}.
  * @since 0.7
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class DyUsageTest {
+final class DyUsageTest {
 
     /**
      * DyUsage can be record usage.
      * @throws Exception If some problem inside
      */
     @Test
-    public void recordsUsage() throws Exception {
+    void recordsUsage() throws Exception {
         final Usage usage = new DyUsage(DyUsageTest.item());
-        usage.add(new Date(), 1L);
-        usage.add(new Date(), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC), 1L);
         MatcherAssert.assertThat(usage.total(), Matchers.equalTo(2L));
     }
 
@@ -44,10 +41,10 @@ public final class DyUsageTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresOldData() throws Exception {
+    void ignoresOldData() throws Exception {
         final Usage usage = new DyUsage(DyUsageTest.item());
-        usage.add(new Date(), 1L);
-        usage.add(DateUtils.addDays(new Date(), -50), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC).minusDays(50), 1L);
         MatcherAssert.assertThat(usage.total(), Matchers.equalTo(1L));
     }
 
@@ -56,14 +53,14 @@ public final class DyUsageTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void printsHistory() throws Exception {
+    void printsHistory() throws Exception {
         final Usage usage = new DyUsage(DyUsageTest.item());
-        usage.add(new Date(), 1L);
-        usage.add(new Date(), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC), 1L);
+        usage.add(LocalDate.now(ZoneOffset.UTC), 1L);
         MatcherAssert.assertThat(
             usage.history(),
             Matchers.hasEntry(
-                Matchers.any(Date.class),
+                Matchers.any(LocalDate.class),
                 Matchers.equalTo(2L)
             )
         );
@@ -94,5 +91,4 @@ public final class DyUsageTest {
             .where("domain", "yegor256.com")
             .iterator().next();
     }
-
 }

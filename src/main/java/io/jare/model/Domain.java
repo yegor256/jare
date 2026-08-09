@@ -8,7 +8,6 @@ import java.io.IOException;
 
 /**
  * Domain.
- *
  * @since 1.0
  */
 public interface Domain {
@@ -39,5 +38,4 @@ public interface Domain {
      * @throws IOException If fails
      */
     Usage usage() throws IOException;
-
 }

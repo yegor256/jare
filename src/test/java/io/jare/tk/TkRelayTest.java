@@ -5,13 +5,14 @@
 package io.jare.tk;
 
 import io.jare.fake.FkBase;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Take;
@@ -28,25 +29,25 @@ import org.takes.tk.TkWithHeaders;
 /**
  * Test case for {@link TkRelay}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkRelayTest {
+final class TkRelayTest {
 
     /**
      * TkRelay can send the request through.
      * @throws Exception If some problem inside
      */
     @Test
-    public void sendsRequestThroughToHome() throws Exception {
-        final Take target = new TkFork(
-            new FkRegex(
-                "/alpha/.*",
-                (Take) req -> new RsText(
-                    new RqHref.Base(req).href().toString()
+    void sendsRequestThroughToHome() throws Exception {
+        new FtRemote(
+            new TkFork(
+                new FkRegex(
+                    "/alpha/.*",
+                    (Take) req -> new RsText(
+                        new RqHref.Base(req).href().toString()
+                    )
                 )
             )
-        );
-        new FtRemote(target).exec(
+        ).exec(
             home -> MatcherAssert.assertThat(
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
@@ -69,15 +70,18 @@ public final class TkRelayTest {
      * TkRelay can fail if URL is not valid (space is not allowed).
      * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void catchesInvalidUrls() throws Exception {
-        new TkRelay(new FkBase()).act(
-            new RqFake(
-                Arrays.asList(
-                    "GET /?u=http://www.yegor256.com/a+b",
-                    "Host: 127.0.0.1"
-                ),
-                ""
+    @Test
+    void catchesInvalidUrls() throws Exception {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> new TkRelay(new FkBase()).act(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /?u=http://www.yegor256.com/a+b",
+                        "Host: 127.0.0.1"
+                    ),
+                    ""
+                )
             )
         );
     }
@@ -87,14 +91,15 @@ public final class TkRelayTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void setsCachingHeaders() throws Exception {
-        final Take target = new TkWithHeaders(
-            new TkText("cacheable forever"),
-            "age: 600",
-            "cache-control: max-age=600",
-            "expires: Thu, 08 Dec 2016 22:51:37 GMT"
-        );
-        new FtRemote(target).exec(
+    void setsCachingHeaders() throws Exception {
+        new FtRemote(
+            new TkWithHeaders(
+                new TkText("cacheable forever"),
+                "age: 600",
+                "cache-control: max-age=600",
+                "expires: Thu, 08 Dec 2016 22:51:37 GMT"
+            )
+        ).exec(
             home -> MatcherAssert.assertThat(
                 new RsPrint(
                     new TkRelay(new FkBase()).act(
@@ -116,17 +121,15 @@ public final class TkRelayTest {
      * @param home Base URI
      * @param path Path
      * @return Request
-     * @throws UnsupportedEncodingException If fails
      */
-    private static Request fake(final URI home, final String path)
-        throws UnsupportedEncodingException {
+    private static Request fake(final URI home, final String path) {
         return new RqFake(
             Arrays.asList(
                 String.format(
                     "GET /?u=%s",
                     URLEncoder.encode(
                         home.resolve(path).toString(),
-                        "UTF-8"
+                        StandardCharsets.UTF_8
                     )
                 ),
                 "Host: localhost"
@@ -134,5 +137,4 @@ public final class TkRelayTest {
             ""
         );
     }
-
 }

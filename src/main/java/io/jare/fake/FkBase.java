@@ -11,7 +11,6 @@ import java.util.Collections;
 
 /**
  * Fake Base.
- *
  * @since 1.0
  */
 public final class FkBase implements Base {
@@ -30,5 +29,4 @@ public final class FkBase implements Base {
     public Iterable<Domain> all() {
         return Collections.<Domain>singleton(new FkDomain());
     }
-
 }

@@ -5,36 +5,46 @@
 package io.jare.dynamo;
 
 import io.jare.model.Base;
-import io.jare.model.Domain;
 import io.jare.model.User;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Integration case for {@link DyUser}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class DyUserITCase {
+final class DyUserITCase {
 
     /**
-     * DyUser can add and remove domains.
+     * DyUser can add a domain.
      * @throws Exception If some problem inside
      */
     @Test
-    public void addsAndRemoveDomains() throws Exception {
+    void addsDomain() throws Exception {
         final Base base = new DyBase(new Dynamo());
         final User user = base.user("jeffrey");
         final String name = "google.com";
         user.add(name);
-        final Domain domain = base.domain(name).iterator().next();
         MatcherAssert.assertThat(
-            domain.name(),
+            base.domain(name).iterator().next().name(),
             Matchers.equalTo(name)
         );
-        domain.delete();
+    }
+
+    /**
+     * DyUser can remove a domain.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void removesDomain() throws Exception {
+        final Base base = new DyBase(new Dynamo());
+        final User user = base.user("jeffrey");
+        final String name = "google-removed.com";
+        user.add(name);
+        base.domain(name).iterator().next().delete();
         MatcherAssert.assertThat(
             base.domain(name).iterator().hasNext(),
             Matchers.equalTo(false)
@@ -46,19 +56,14 @@ public final class DyUserITCase {
      * @throws Exception If some problem inside
      */
     @Test
-    public void listsMineDomains() throws Exception {
+    void listsMineDomains() throws Exception {
         final Base base = new DyBase(new Dynamo());
         final User user = base.user("willy");
         for (int idx = 0; idx < 10; ++idx) {
             user.add(String.format("facebook-%d.com", idx));
         }
-        final Iterable<Domain> list = user.mine();
         MatcherAssert.assertThat(
-            list,
-            Matchers.iterableWithSize(10)
-        );
-        MatcherAssert.assertThat(
-            list,
+            user.mine(),
             Matchers.iterableWithSize(10)
         );
     }
@@ -67,12 +72,14 @@ public final class DyUserITCase {
      * DyUser can reject if domain is occupied.
      * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void rejectsIfOccupied() throws Exception {
+    @Test
+    void rejectsIfOccupied() throws Exception {
         final Base base = new DyBase(new Dynamo());
         base.user("melissa").add("yahoo.com");
         final User alex = base.user("alex");
-        alex.add("Yahoo.com");
+        Assertions.assertThrows(
+            IOException.class,
+            () -> alex.add("Yahoo.com")
+        );
     }
-
 }

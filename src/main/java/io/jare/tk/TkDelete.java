@@ -17,7 +17,6 @@ import org.takes.rq.RqHref;
 
 /**
  * Delete domain.
- *
  * @since 1.0
  */
 final class TkDelete implements Take {
@@ -48,8 +47,7 @@ final class TkDelete implements Take {
             );
         }
         final Domain domain = domains.next();
-        final String user = new RqUser(req).name();
-        if (!domain.owner().equals(user)) {
+        if (!domain.owner().equals(new RqUser(req).name())) {
             throw new RsForward(
                 new RsFlash(
                     String.format("domain \"%s\" is not yours", name)
@@ -66,5 +64,4 @@ final class TkDelete implements Take {
             "/domains"
         );
     }
-
 }

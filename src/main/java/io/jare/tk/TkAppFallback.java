@@ -24,9 +24,7 @@ import org.takes.tk.TkWrap;
 
 /**
  * App with fallback.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkAppFallback extends TkWrap {
 
@@ -97,5 +95,4 @@ final class TkAppFallback extends TkWrap {
             HttpURLConnection.HTTP_INTERNAL_ERROR
         );
     }
-
 }

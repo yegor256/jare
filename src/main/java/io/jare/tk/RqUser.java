@@ -14,7 +14,6 @@ import org.takes.rq.RqWrap;
 
 /**
  * User in request.
- *
  * @since 1.0
  */
 public final class RqUser extends RqWrap {
@@ -50,5 +49,4 @@ public final class RqUser extends RqWrap {
         }
         return identity.properties().get("login");
     }
-
 }

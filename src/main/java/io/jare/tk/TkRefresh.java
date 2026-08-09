@@ -16,9 +16,7 @@ import org.takes.tk.TkWrap;
 
 /**
  * Refresh on hit.
- *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkRefresh extends TkWrap {
 
@@ -44,5 +42,4 @@ final class TkRefresh extends TkWrap {
             )
         );
     }
-
 }

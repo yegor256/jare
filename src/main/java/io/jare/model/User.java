@@ -8,7 +8,6 @@ import java.io.IOException;
 
 /**
  * User.
- *
  * @since 1.0
  */
 public interface User {
@@ -25,5 +24,4 @@ public interface User {
      * @throws IOException If fails
      */
     void add(String name) throws IOException;
-
 }

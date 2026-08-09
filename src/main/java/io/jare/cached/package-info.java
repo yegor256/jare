@@ -5,7 +5,6 @@
 
 /**
  * Cached.
- *
  * @since 0.7
  */
 package io.jare.cached;

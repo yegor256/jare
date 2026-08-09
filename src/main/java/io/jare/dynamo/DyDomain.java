@@ -14,13 +14,10 @@ import lombok.ToString;
 
 /**
  * Dynamo domain.
- *
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @ToString
 @EqualsAndHashCode(of = "item")
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyDomain implements Domain {
 
     /**
@@ -57,5 +54,4 @@ public final class DyDomain implements Domain {
     public Usage usage() {
         return new DyUsage(this.item);
     }
-
 }

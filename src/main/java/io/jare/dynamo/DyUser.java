@@ -15,20 +15,24 @@ import io.jare.model.User;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * Dynamo user.
- *
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @ToString
 @EqualsAndHashCode(of = { "region", "handle" })
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyUser implements User {
+
+    /**
+     * Lock for adding domains.
+     */
+    private static final Lock LOCK = new ReentrantLock();
 
     /**
      * The region to work with.
@@ -43,18 +47,17 @@ public final class DyUser implements User {
     /**
      * Ctor.
      * @param reg Region
-     * @param name Name of him
+     * @param name Name of him, already lower-cased
      */
     public DyUser(final Region reg, final String name) {
         this.region = reg;
-        this.handle = name.toLowerCase(Locale.ENGLISH);
+        this.handle = name;
     }
 
     @Override
     public Iterable<Domain> mine() {
         return this.table()
-            .frame()
-            .through(
+            .frame().through(
                 new QueryValve()
                     .withSelect(Select.ALL_ATTRIBUTES)
                     .withLimit(100)
@@ -70,7 +73,8 @@ public final class DyUser implements User {
 
     @Override
     public void add(final String name) throws IOException {
-        synchronized (this.region) {
+        DyUser.LOCK.lock();
+        try {
             final Iterator<Domain> before = new DyBase(this.region)
                 .domain(name).iterator();
             if (before.hasNext()) {
@@ -89,6 +93,8 @@ public final class DyUser implements User {
                     .with("user", this.handle)
                     .with("domain", name.toLowerCase(Locale.ENGLISH))
             );
+        } finally {
+            DyUser.LOCK.unlock();
         }
     }
 
@@ -99,5 +105,4 @@ public final class DyUser implements User {
     private Table table() {
         return this.region.table("domains");
     }
-
 }

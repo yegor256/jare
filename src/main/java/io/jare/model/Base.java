@@ -6,7 +6,6 @@ package io.jare.model;
 
 /**
  * Base.
- *
  * @since 1.0
  */
 public interface Base {
@@ -30,5 +29,4 @@ public interface Base {
      * @return Full list of all domains
      */
     Iterable<Domain> all();
-
 }

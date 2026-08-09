@@ -20,13 +20,10 @@ import lombok.ToString;
 
 /**
  * Dynamo Base.
- *
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @ToString
 @EqualsAndHashCode(of = "region")
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class DyBase implements Base {
 
     /**
@@ -51,20 +48,18 @@ public final class DyBase implements Base {
 
     @Override
     public User user(final String name) {
-        return new DyUser(this.region, name);
+        return new DyUser(this.region, name.toLowerCase(Locale.ENGLISH));
     }
 
     @Override
     public Iterable<Domain> domain(final String name) {
         return this.table()
-            .frame()
-            .through(
+            .frame().through(
                 new QueryValve()
                     .withSelect(Select.ALL_ATTRIBUTES)
                     .withLimit(1)
                     .withConsistentRead(true)
-            )
-            .where(
+            ).where(
                 "domain",
                 Conditions.equalTo(name.toLowerCase(Locale.ENGLISH))
             )
@@ -77,8 +72,7 @@ public final class DyBase implements Base {
     @Override
     public Iterable<Domain> all() {
         return this.table()
-            .frame()
-            .through(
+            .frame().through(
                 new ScanValve()
                     .withAttributeToGet("user", "domain", "total", "usage")
                     .withLimit(1000)
@@ -96,5 +90,4 @@ public final class DyBase implements Base {
     private Table table() {
         return this.region.table("domains");
     }
-
 }

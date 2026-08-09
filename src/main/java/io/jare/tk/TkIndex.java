@@ -18,7 +18,6 @@ import org.xembly.Directives;
 
 /**
  * Index page, for anonymous users.
- *
  * @since 1.0
  */
 final class TkIndex implements Take {
@@ -67,5 +66,4 @@ final class TkIndex implements Take {
                 .up()
         );
     }
-
 }

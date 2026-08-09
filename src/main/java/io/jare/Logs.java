@@ -14,17 +14,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Logs in S3.
- *
  * @since 0.7
  */
 @ScheduleWithFixedDelay(delay = 1, unit = TimeUnit.MINUTES)
@@ -102,15 +97,17 @@ final class Logs implements Runnable {
         final Ocket ocket = this.bucket.ocket(name);
         final Path path = Files.createTempFile("jare", ".gz");
         ocket.read(Files.newOutputStream(path));
-        final BufferedReader input = new BufferedReader(
-            new InputStreamReader(
-                new GZIPInputStream(
-                    Files.newInputStream(path)
+        final Map<String, Map<LocalDate, Long>> map = new HashMap<>(0);
+        try (
+            BufferedReader input = new BufferedReader(
+                new InputStreamReader(
+                    new GZIPInputStream(
+                        Files.newInputStream(path)
+                    ),
+                    StandardCharsets.UTF_8
                 )
             )
-        );
-        final Map<String, Map<Date, Long>> map = new HashMap<>(0);
-        try {
+        ) {
             while (true) {
                 final String line = input.readLine();
                 if (line == null) {
@@ -118,12 +115,10 @@ final class Logs implements Runnable {
                 }
                 Logs.parse(map, line);
             }
-        } finally {
-            input.close();
         }
         long total = 0L;
-        for (final Map.Entry<String, Map<Date, Long>> entry : map.entrySet()) {
-            for (final Map.Entry<Date, Long> usg
+        for (final Map.Entry<String, Map<LocalDate, Long>> entry : map.entrySet()) {
+            for (final Map.Entry<LocalDate, Long> usg
                 : entry.getValue().entrySet()) {
                 final Iterator<Domain> domains =
                     this.base.domain(entry.getKey()).iterator();
@@ -144,7 +139,7 @@ final class Logs implements Runnable {
      * @param map Map to populate
      * @param line The line
      */
-    private static void parse(final Map<String, Map<Date, Long>> map,
+    private static void parse(final Map<String, Map<LocalDate, Long>> map,
         final CharSequence line) {
         final Matcher matcher = Logs.PTN.matcher(line);
         if (matcher.find()) {
@@ -152,8 +147,8 @@ final class Logs implements Runnable {
             if (!map.containsKey(domain)) {
                 map.put(domain, new HashMap<>(0));
             }
-            final Map<Date, Long> target = map.get(domain);
-            final Date date = Logs.asDate(matcher.group(1));
+            final Map<LocalDate, Long> target = map.get(domain);
+            final LocalDate date = LocalDate.parse(matcher.group(1));
             if (!target.containsKey(date)) {
                 target.put(date, 0L);
             }
@@ -163,23 +158,4 @@ final class Logs implements Runnable {
             );
         }
     }
-
-    /**
-     * Convert text to date.
-     * @param txt Text
-     * @return A date
-     */
-    private static Date asDate(final String txt) {
-        final TimeZone zone = TimeZone.getTimeZone("UTC");
-        final DateFormat fmt = new SimpleDateFormat(
-            "yyyy-MM-dd", Locale.ENGLISH
-        );
-        fmt.setTimeZone(zone);
-        try {
-            return fmt.parse(txt);
-        } catch (final ParseException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
 }
