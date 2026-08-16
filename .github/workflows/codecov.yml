@@ -7,6 +7,9 @@ name: codecov
   push:
     branches:
       - master
+permissions:
+  contents: read
+  id-token: write
 jobs:
   codecov:
     timeout-minutes: 15
@@ -26,6 +29,6 @@ jobs:
       - run: mvn install -Pjacoco
       - uses: codecov/codecov-action@v7
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          use_oidc: true
           files: ./target/site/jacoco/jacoco.xml
           fail_ci_if_error: true
