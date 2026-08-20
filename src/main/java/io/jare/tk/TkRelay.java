@@ -103,11 +103,6 @@ final class TkRelay implements Take {
         );
     }
 
-    /**
-     * Response that is cached forever.
-     * @param rsp Response
-     * @return New response
-     */
     private static Response cached(final Response rsp) {
         return new RsWithHeaders(
             new RsWithoutHeader(
@@ -123,12 +118,6 @@ final class TkRelay implements Take {
         );
     }
 
-    /**
-     * The request to send.
-     * @param req Original request
-     * @param path Destination path
-     * @return Request
-     */
     private static Request request(final Request req, final String path) {
         return new Request() {
             @Override

@@ -98,10 +98,6 @@ public final class DyUser implements User {
         }
     }
 
-    /**
-     * Table to work with.
-     * @return Table
-     */
     private Table table() {
         return this.region.table("domains");
     }

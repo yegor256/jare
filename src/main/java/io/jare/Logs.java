@@ -87,12 +87,6 @@ final class Logs implements Runnable {
         }
     }
 
-    /**
-     * Process one ocket.
-     * @param name The name of the ocket
-     * @return Bytes in total
-     * @throws IOException If fails
-     */
     private long process(final String name) throws IOException {
         final Ocket ocket = this.bucket.ocket(name);
         final Path path = Files.createTempFile("jare", ".gz");
@@ -134,11 +128,6 @@ final class Logs implements Runnable {
         return total;
     }
 
-    /**
-     * Parse one line.
-     * @param map Map to populate
-     * @param line The line
-     */
     private static void parse(final Map<String, Map<LocalDate, Long>> map,
         final CharSequence line) {
         final Matcher matcher = Logs.PTN.matcher(line);

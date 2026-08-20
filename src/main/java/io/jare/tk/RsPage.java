@@ -68,14 +68,6 @@ public final class RsPage extends RsWrap {
         super(RsPage.make(xsl, req, src));
     }
 
-    /**
-     * Make it.
-     * @param xsl XSL
-     * @param req Request
-     * @param src Source
-     * @return Response
-     * @throws IOException If fails
-     */
     private static Response make(final String xsl, final Request req,
         final Iterable<XeSource> src) throws IOException {
         final Response raw = new RsXembly(
@@ -127,10 +119,6 @@ public final class RsPage extends RsWrap {
         );
     }
 
-    /**
-     * Current Heroku release version.
-     * @return The version
-     */
     private static String heroku() {
         String ver = System.getenv("HEROKU_RELEASE_VERSION");
         if (ver == null) {

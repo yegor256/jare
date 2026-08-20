@@ -50,12 +50,6 @@ final class TkIndex implements Take {
         );
     }
 
-    /**
-     * Convert event to Xembly.
-     * @param domain The event
-     * @return Xembly
-     * @throws IOException If fails
-     */
     private static XeSource source(final Domain domain) throws IOException {
         return new XeDirectives(
             new Directives()

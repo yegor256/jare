@@ -83,10 +83,6 @@ public final class DyBase implements Base {
             .collect(Collectors.toList());
     }
 
-    /**
-     * Table to work with.
-     * @return Table
-     */
     private Table table() {
         return this.region.table("domains");
     }

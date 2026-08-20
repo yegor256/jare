@@ -43,33 +43,8 @@ public final class SafeUser implements User {
     @Override
     public void add(final String name) throws IOException {
         if (!SafeUser.PTN.matcher(name).matches()) {
-            throw new SafeUser.InvalidNameException(name);
+            throw new InvalidNameException(name);
         }
         this.origin.add(name);
-    }
-
-    /**
-     * When name is not valid.
-     * @since 0.1
-     */
-    public static final class InvalidNameException extends IOException {
-
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = -869776873934626730L;
-
-        /**
-         * Ctor.
-         * @param name Domain name
-         */
-        public InvalidNameException(final String name) {
-            super(
-                String.format(
-                    "domain name \"%s\" is not valid",
-                    name
-                )
-            );
-        }
     }
 }

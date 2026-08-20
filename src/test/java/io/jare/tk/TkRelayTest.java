@@ -116,12 +116,6 @@ final class TkRelayTest {
         );
     }
 
-    /**
-     * Fake request.
-     * @param home Base URI
-     * @param path Path
-     * @return Request
-     */
     private static Request fake(final URI home, final String path) {
         return new RqFake(
             Arrays.asList(

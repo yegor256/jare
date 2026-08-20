@@ -54,12 +54,6 @@ final class TkDomains implements Take {
         );
     }
 
-    /**
-     * Convert event to Xembly.
-     * @param domain The event
-     * @return Xembly
-     * @throws IOException If fails
-     */
     private static XeSource source(final Domain domain) throws IOException {
         final String name = domain.name();
         return new XeDirectives(

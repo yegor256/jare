@@ -63,7 +63,7 @@ final class SafeUserTest {
             try {
                 user.add(domain);
                 rejected.add(false);
-            } catch (final SafeUser.InvalidNameException ex) {
+            } catch (final InvalidNameException ex) {
                 rejected.add(ex.getLocalizedMessage().contains(domain));
             }
         }

@@ -5,6 +5,7 @@
 package io.jare.tk;
 
 import io.jare.model.Base;
+import io.jare.smarts.InvalidNameException;
 import io.jare.smarts.SafeUser;
 import java.io.IOException;
 import org.takes.Request;
@@ -39,7 +40,7 @@ final class TkAdd implements Take {
             .iterator().next().trim();
         try {
             new SafeUser(this.base.user(new RqUser(req).name())).add(name);
-        } catch (final SafeUser.InvalidNameException ex) {
+        } catch (final InvalidNameException ex) {
             throw TkAdd.forward(new RsFlash(ex));
         }
         return TkAdd.forward(
@@ -51,11 +52,6 @@ final class TkAdd implements Take {
         );
     }
 
-    /**
-     * Make forward.
-     * @param rsp Response
-     * @return Forward
-     */
     private static RsForward forward(final Response rsp) {
         return new RsForward(rsp, "/domains");
     }

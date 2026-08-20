@@ -66,11 +66,6 @@ final class DyUsageTest {
         );
     }
 
-    /**
-     * The item to work with.
-     * @return Item to work with
-     * @throws Exception If some problem inside
-     */
     private static Item item() throws Exception {
         final Region region = new MkRegion(
             new H2Data().with(

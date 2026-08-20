@@ -96,11 +96,6 @@ public final class DyUsage implements Usage {
         return map;
     }
 
-    /**
-     * Load XML.
-     * @return The XML with usage
-     * @throws IOException If fails
-     */
     private XML xml() throws IOException {
         if (!this.item.has("usage")) {
             this.save("<usage/>");
@@ -108,11 +103,6 @@ public final class DyUsage implements Usage {
         return new XMLDocument(this.item.get("usage").getS());
     }
 
-    /**
-     * Save XML.
-     * @param xml The XML to save
-     * @throws IOException If fails
-     */
     private void save(final String xml) throws IOException {
         this.item.put(
             "usage",
@@ -122,11 +112,6 @@ public final class DyUsage implements Usage {
         );
     }
 
-    /**
-     * Save total.
-     * @param total Total usage
-     * @throws IOException If fails
-     */
     private void save(final long total) throws IOException {
         this.item.put(
             "total",
@@ -136,20 +121,10 @@ public final class DyUsage implements Usage {
         );
     }
 
-    /**
-     * Convert date to number.
-     * @param date The date
-     * @return A number
-     */
     private static int asNumber(final LocalDate date) {
         return Integer.parseInt(date.format(DateTimeFormatter.BASIC_ISO_DATE));
     }
 
-    /**
-     * Convert number to date.
-     * @param num The number
-     * @return A date
-     */
     private static LocalDate asDate(final int num) {
         return LocalDate.parse(
             Integer.toString(num), DateTimeFormatter.BASIC_ISO_DATE
