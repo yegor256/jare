@@ -28,12 +28,14 @@ import org.takes.tk.TkWithHeaders;
 
 /**
  * Test case for {@link TkRelay}.
+ *
  * @since 1.0
  */
 final class TkRelayTest {
 
     /**
      * TkRelay can send the request through.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -68,6 +70,7 @@ final class TkRelayTest {
 
     /**
      * TkRelay can fail if URL is not valid (space is not allowed).
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -88,6 +91,7 @@ final class TkRelayTest {
 
     /**
      * TkRelay can set cache headers to "forever".
+     *
      * @throws Exception If some problem inside
      */
     @Test

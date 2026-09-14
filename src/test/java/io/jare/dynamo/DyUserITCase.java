@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Integration case for {@link DyUser}.
+ *
  * @since 1.0
  */
 final class DyUserITCase {
 
     /**
      * DyUser can add a domain.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -36,6 +38,7 @@ final class DyUserITCase {
 
     /**
      * DyUser can remove a domain.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -53,6 +56,7 @@ final class DyUserITCase {
 
     /**
      * DyUser can list domains.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -70,6 +74,7 @@ final class DyUserITCase {
 
     /**
      * DyUser can reject if domain is occupied.
+     *
      * @throws Exception If some problem inside
      */
     @Test

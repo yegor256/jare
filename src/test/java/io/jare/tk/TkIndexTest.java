@@ -14,12 +14,14 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkIndex}.
+ *
  * @since 1.0
  */
 final class TkIndexTest {
 
     /**
      * TkHome can render home page.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -50,6 +52,7 @@ final class TkIndexTest {
 
     /**
      * TkIndex can render home page in HTML.
+     *
      * @throws Exception If some problem inside
      */
     @Test

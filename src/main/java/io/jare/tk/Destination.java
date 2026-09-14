@@ -10,6 +10,7 @@ import org.takes.HttpException;
 
 /**
  * Destination for relay.
+ *
  * @since 0.4
  */
 final class Destination {
@@ -21,6 +22,7 @@ final class Destination {
 
     /**
      * Ctor.
+     *
      * @param dst Destination URI (full)
      */
     Destination(final URI dst) {
@@ -29,6 +31,7 @@ final class Destination {
 
     /**
      * Build destination path.
+     *
      * @return Destination path
      * @throws HttpException If fails
      */

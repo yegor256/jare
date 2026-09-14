@@ -15,6 +15,7 @@ import org.cactoos.iterable.Mapped;
 
 /**
  * Cached Base.
+ *
  * @since 1.0
  */
 @ToString
@@ -28,6 +29,7 @@ public final class CdBase implements Base {
 
     /**
      * Ctor.
+     *
      * @param base Original
      */
     public CdBase(final Base base) {

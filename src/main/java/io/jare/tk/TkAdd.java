@@ -17,6 +17,7 @@ import org.takes.rq.form.RqFormBase;
 
 /**
  * Add pipe.
+ *
  * @since 1.0
  */
 final class TkAdd implements Take {
@@ -28,6 +29,7 @@ final class TkAdd implements Take {
 
     /**
      * Ctor.
+     *
      * @param bse Base
      */
     TkAdd(final Base bse) {

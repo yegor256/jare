@@ -14,6 +14,7 @@ import org.takes.rq.RqWrap;
 
 /**
  * User in request.
+ *
  * @since 1.0
  */
 public final class RqUser extends RqWrap {
@@ -27,6 +28,7 @@ public final class RqUser extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      */
     public RqUser(final Request req) {
@@ -35,6 +37,7 @@ public final class RqUser extends RqWrap {
 
     /**
      * Get user name (GitHub handle).
+     *
      * @return Name
      * @throws IOException If fails
      */

@@ -10,9 +10,17 @@ import java.io.IOException;
 
 /**
  * Fake domain.
+ *
  * @since 1.0
  */
 public final class FkDomain implements Domain {
+
+    /**
+     * Ctor.
+     */
+    public FkDomain() {
+        // ctor
+    }
 
     @Override
     public String owner() {

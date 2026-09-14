@@ -16,12 +16,14 @@ import org.mockito.Mockito;
 
 /**
  * Test case for {@link Logs}.
+ *
  * @since 1.0
  */
 final class LogsTest {
 
     /**
      * Logs can unzip and log.
+     *
      * @throws Exception If some problem inside
      */
     @Test

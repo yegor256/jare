@@ -20,12 +20,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link DyUsage}.
+ *
  * @since 0.7
  */
 final class DyUsageTest {
 
     /**
      * DyUsage can be record usage.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -38,6 +40,7 @@ final class DyUsageTest {
 
     /**
      * DyUsage can be ignore old data.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -50,6 +53,7 @@ final class DyUsageTest {
 
     /**
      * DyUsage can be print history.
+     *
      * @throws Exception If some problem inside
      */
     @Test

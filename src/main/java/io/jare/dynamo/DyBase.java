@@ -20,6 +20,7 @@ import lombok.ToString;
 
 /**
  * Dynamo Base.
+ *
  * @since 1.0
  */
 @ToString
@@ -40,6 +41,7 @@ public final class DyBase implements Base {
 
     /**
      * Ctor.
+     *
      * @param reg Region
      */
     public DyBase(final Region reg) {

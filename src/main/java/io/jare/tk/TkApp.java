@@ -31,6 +31,7 @@ import org.takes.tk.TkWrap;
 
 /**
  * App.
+ *
  * @since 1.0
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  * @checkstyle LineLength (500 lines)
@@ -39,6 +40,7 @@ public final class TkApp extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param base Base
      * @throws IOException If fails
      */

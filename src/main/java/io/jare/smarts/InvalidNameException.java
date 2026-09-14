@@ -8,6 +8,7 @@ import java.io.IOException;
 
 /**
  * When name is not valid.
+ *
  * @since 0.1
  */
 public final class InvalidNameException extends IOException {
@@ -19,6 +20,7 @@ public final class InvalidNameException extends IOException {
 
     /**
      * Ctor.
+     *
      * @param name Domain name
      */
     public InvalidNameException(final String name) {

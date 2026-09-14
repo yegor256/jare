@@ -8,12 +8,14 @@ import java.io.IOException;
 
 /**
  * Domain.
+ *
  * @since 1.0
  */
 public interface Domain {
 
     /**
      * Owner of it.
+     *
      * @return The owner's GitHub handle
      * @throws IOException If fails
      */
@@ -21,6 +23,7 @@ public interface Domain {
 
     /**
      * Name.
+     *
      * @return The name
      * @throws IOException If fails
      */
@@ -28,12 +31,14 @@ public interface Domain {
 
     /**
      * Delete it.
+     *
      * @throws IOException If fails
      */
     void delete() throws IOException;
 
     /**
      * Usage.
+     *
      * @return Usage
      * @throws IOException If fails
      */

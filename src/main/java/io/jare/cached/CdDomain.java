@@ -13,6 +13,7 @@ import lombok.ToString;
 
 /**
  * Cached Domain.
+ *
  * @since 1.0
  */
 @ToString
@@ -26,6 +27,7 @@ final class CdDomain implements Domain {
 
     /**
      * Ctor.
+     *
      * @param domain Original
      */
     CdDomain(final Domain domain) {

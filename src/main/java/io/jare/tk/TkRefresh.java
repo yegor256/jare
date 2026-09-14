@@ -16,12 +16,14 @@ import org.takes.tk.TkWrap;
 
 /**
  * Refresh on hit.
+ *
  * @since 1.0
  */
 final class TkRefresh extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param path Path of files
      * @throws IOException If fails
      */
@@ -30,16 +32,21 @@ final class TkRefresh extends TkWrap {
             new TkFork(
                 new FkHitRefresh(
                     new File(path),
-                    () -> new VerboseProcess(
-                        new ProcessBuilder(
-                            "mvn",
-                            "generate-resources"
-                        )
-                    ).stdout(),
+                    TkRefresh::rebuild,
                     new TkFiles("./target/classes")
                 ),
                 new FkFixed(new TkClasspath())
             )
         );
+    }
+
+    private static void rebuild() {
+        try (
+            VerboseProcess proc = new VerboseProcess(
+                new ProcessBuilder("mvn", "generate-resources")
+            )
+        ) {
+            proc.stdout();
+        }
     }
 }

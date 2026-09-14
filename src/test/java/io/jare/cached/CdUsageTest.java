@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link CdUsage}.
+ *
  * @since 0.7
  */
 final class CdUsageTest {
 
     /**
      * CdUsage can make objects right.
+     *
      * @throws Exception If some problem inside
      */
     @Test

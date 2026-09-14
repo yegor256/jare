@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link User}.
+ *
  * @since 0.5
  */
 final class SafeUserTest {
@@ -44,6 +45,7 @@ final class SafeUserTest {
 
     /**
      * User.Safe can reject invalid domain names.
+     *
      * @throws IOException If some domain triggers a real I/O failure
      */
     @Test

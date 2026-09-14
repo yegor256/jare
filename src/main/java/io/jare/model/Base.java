@@ -6,12 +6,14 @@ package io.jare.model;
 
 /**
  * Base.
+ *
  * @since 1.0
  */
 public interface Base {
 
     /**
      * Get user by GitHub handle.
+     *
      * @param name GitHub name of the user
      * @return The user
      */
@@ -19,6 +21,7 @@ public interface Base {
 
     /**
      * Find domain by hostname.
+     *
      * @param name The name
      * @return The domain
      */
@@ -26,6 +29,7 @@ public interface Base {
 
     /**
      * All domains.
+     *
      * @return Full list of all domains
      */
     Iterable<Domain> all();

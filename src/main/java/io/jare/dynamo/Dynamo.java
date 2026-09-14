@@ -14,6 +14,7 @@ import com.jcabi.manifests.Manifests;
 
 /**
  * Dynamo.
+ *
  * @since 1.0
  */
 final class Dynamo implements Region {

@@ -5,6 +5,7 @@
 
 /**
  * Jare, tests.
+ *
  * @since 0.7
  */
 package io.jare;

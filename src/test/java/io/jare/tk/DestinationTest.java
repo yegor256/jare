@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Destination}.
+ *
  * @since 0.4
  */
 final class DestinationTest {
 
     /**
      * Destination can build a path.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -33,6 +35,7 @@ final class DestinationTest {
 
     /**
      * Destination can build an empty path.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -45,6 +48,7 @@ final class DestinationTest {
 
     /**
      * Destination can build path with params.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -59,6 +63,7 @@ final class DestinationTest {
 
     /**
      * Destination can build path with fragment.
+     *
      * @throws Exception If some problem inside
      */
     @Test

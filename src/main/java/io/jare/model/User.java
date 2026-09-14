@@ -8,18 +8,21 @@ import java.io.IOException;
 
 /**
  * User.
+ *
  * @since 1.0
  */
 public interface User {
 
     /**
      * All my domains.
+     *
      * @return All domains
      */
     Iterable<Domain> mine();
 
     /**
      * Add a domain.
+     *
      * @param name The name of the domain
      * @throws IOException If fails
      */

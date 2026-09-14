@@ -23,6 +23,7 @@ import lombok.ToString;
 
 /**
  * Dynamo user.
+ *
  * @since 1.0
  */
 @ToString
@@ -46,6 +47,7 @@ public final class DyUser implements User {
 
     /**
      * Ctor.
+     *
      * @param reg Region
      * @param name Name of him, already lower-cased
      */

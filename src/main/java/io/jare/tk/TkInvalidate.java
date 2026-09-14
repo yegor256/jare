@@ -25,6 +25,7 @@ import org.takes.rq.RqHref;
 
 /**
  * Invalidate an URL.
+ *
  * @since 1.0
  */
 final class TkInvalidate implements Take {
@@ -41,6 +42,7 @@ final class TkInvalidate implements Take {
 
     /**
      * Ctor.
+     *
      * @param akey AWS key
      * @param scrt AWS secret
      */

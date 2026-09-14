@@ -20,6 +20,7 @@ import org.xembly.Directives;
 
 /**
  * Index page, for authenticated user.
+ *
  * @since 1.0
  */
 final class TkDomains implements Take {
@@ -31,6 +32,7 @@ final class TkDomains implements Take {
 
     /**
      * Ctor.
+     *
      * @param bse Base
      */
     TkDomains(final Base bse) {

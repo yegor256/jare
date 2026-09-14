@@ -11,9 +11,17 @@ import java.util.Collections;
 
 /**
  * Fake Base.
+ *
  * @since 1.0
  */
 public final class FkBase implements Base {
+
+    /**
+     * Ctor.
+     */
+    public FkBase() {
+        // ctor
+    }
 
     @Override
     public User user(final String name) {

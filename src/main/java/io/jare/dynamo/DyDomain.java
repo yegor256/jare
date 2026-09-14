@@ -14,6 +14,7 @@ import lombok.ToString;
 
 /**
  * Dynamo domain.
+ *
  * @since 1.0
  */
 @ToString
@@ -27,6 +28,7 @@ public final class DyDomain implements Domain {
 
     /**
      * Ctor.
+     *
      * @param itm Item
      */
     public DyDomain(final Item itm) {

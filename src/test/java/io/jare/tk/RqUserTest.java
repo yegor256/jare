@@ -11,12 +11,14 @@ import org.takes.facets.auth.RqWithAuth;
 
 /**
  * Test case for {@link RqUser}.
+ *
  * @since 0.2
  */
 final class RqUserTest {
 
     /**
      * RqUser can fetch user name.
+     *
      * @throws Exception If some problem inside
      */
     @Test

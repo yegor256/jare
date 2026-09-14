@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Integration case for {@link DyUsage}.
+ *
  * @since 0.7
  */
 final class DyUsageITCase {
 
     /**
      * DyUsage can be record usage.
+     *
      * @throws Exception If some problem inside
      */
     @Test

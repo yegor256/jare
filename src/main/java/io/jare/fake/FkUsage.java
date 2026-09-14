@@ -12,9 +12,17 @@ import java.util.TreeMap;
 
 /**
  * Fake usage.
+ *
  * @since 0.7
  */
 public final class FkUsage implements Usage {
+
+    /**
+     * Ctor.
+     */
+    public FkUsage() {
+        // ctor
+    }
 
     @Override
     public void add(final LocalDate date, final long bytes) {

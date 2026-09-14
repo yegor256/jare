@@ -17,6 +17,7 @@ import org.takes.rq.RqHref;
 
 /**
  * Delete domain.
+ *
  * @since 1.0
  */
 final class TkDelete implements Take {
@@ -28,6 +29,7 @@ final class TkDelete implements Take {
 
     /**
      * Ctor.
+     *
      * @param bse Base
      */
     TkDelete(final Base bse) {

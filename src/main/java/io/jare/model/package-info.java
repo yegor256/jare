@@ -5,6 +5,7 @@
 
 /**
  * The model.
+ *
  * @since 0.1
  */
 package io.jare.model;

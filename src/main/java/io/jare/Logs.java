@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Logs in S3.
+ *
  * @since 0.7
  */
 @ScheduleWithFixedDelay(delay = 1, unit = TimeUnit.MINUTES)
@@ -64,6 +65,7 @@ final class Logs implements Runnable {
 
     /**
      * Ctor.
+     *
      * @param bse Base
      * @param bkt Bucket
      */

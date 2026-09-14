@@ -12,12 +12,14 @@ import org.takes.rq.RqFake;
 
 /**
  * Integration case for {@link TkInvalidate}.
+ *
  * @since 1.0
  */
 final class TkInvalidateITCase {
 
     /**
      * TkInvalidate can invalidate URL.
+     *
      * @throws Exception If some problem inside
      */
     @Test

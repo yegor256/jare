@@ -5,6 +5,7 @@
 
 /**
  * Smarts.
+ *
  * @since 1.0
  */
 package io.jare.smarts;

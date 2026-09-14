@@ -26,6 +26,7 @@ import org.xembly.Xembler;
 
 /**
  * Dynamo usage.
+ *
  * @since 0.7
  */
 @ToString
@@ -39,6 +40,7 @@ public final class DyUsage implements Usage {
 
     /**
      * Ctor.
+     *
      * @param itm Item
      */
     public DyUsage(final Item itm) {

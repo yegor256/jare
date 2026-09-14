@@ -12,12 +12,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Integration case for {@link DyBase}.
+ *
  * @since 1.0
  */
 final class DyBaseITCase {
 
     /**
      * DyBase can list domains.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -33,6 +35,7 @@ final class DyBaseITCase {
 
     /**
      * DyBase can list domain by name.
+     *
      * @throws Exception If some problem inside
      */
     @Test

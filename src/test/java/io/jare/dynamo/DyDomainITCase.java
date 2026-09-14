@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Integration case for {@link DyDomain}.
+ *
  * @since 1.0
  */
 final class DyDomainITCase {
 
     /**
      * DyDomain can report its own name.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -32,6 +34,7 @@ final class DyDomainITCase {
 
     /**
      * DyDomain can report its own owner.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -47,6 +50,7 @@ final class DyDomainITCase {
 
     /**
      * DyDomain can be removed.
+     *
      * @throws Exception If some problem inside
      */
     @Test

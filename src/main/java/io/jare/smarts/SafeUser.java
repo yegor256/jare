@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Safe user.
+ *
  * @since 1.0
  */
 public final class SafeUser implements User {
@@ -29,6 +30,7 @@ public final class SafeUser implements User {
 
     /**
      * Ctor.
+     *
      * @param user Original user
      */
     public SafeUser(final User user) {

@@ -5,6 +5,7 @@
 
 /**
  * Takes, tests.
+ *
  * @since 1.0
  */
 package io.jare.tk;

@@ -10,9 +10,17 @@ import java.util.Collections;
 
 /**
  * Fake user.
+ *
  * @since 1.0
  */
 public final class FkUser implements User {
+
+    /**
+     * Ctor.
+     */
+    public FkUser() {
+        // ctor
+    }
 
     @Override
     public Iterable<Domain> mine() {

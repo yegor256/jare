@@ -27,12 +27,14 @@ import org.takes.tk.TkProxy;
 
 /**
  * Relay.
+ *
  * @since 1.0
  */
 final class TkRelay implements Take {
 
     /**
      * Validation pattern for destination URLs.
+     *
      * @link https://tools.ietf.org/html/rfc3986
      */
     private static final Pattern PTN = Pattern.compile(
@@ -46,6 +48,7 @@ final class TkRelay implements Take {
 
     /**
      * Ctor.
+     *
      * @param bse Base
      */
     TkRelay(final Base bse) {

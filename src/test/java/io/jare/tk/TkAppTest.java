@@ -21,12 +21,14 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkApp}.
+ *
  * @since 1.0
  */
 final class TkAppTest {
 
     /**
      * App can render front page.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -54,6 +56,7 @@ final class TkAppTest {
 
     /**
      * App can render front page.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -81,6 +84,7 @@ final class TkAppTest {
 
     /**
      * App can render not found.
+     *
      * @throws Exception If some problem inside
      */
     @Test

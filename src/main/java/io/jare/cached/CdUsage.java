@@ -15,6 +15,7 @@ import lombok.ToString;
 
 /**
  * Cached Usage.
+ *
  * @since 0.7
  */
 @ToString
@@ -28,6 +29,7 @@ final class CdUsage implements Usage {
 
     /**
      * Ctor.
+     *
      * @param usage Original
      */
     CdUsage(final Usage usage) {
