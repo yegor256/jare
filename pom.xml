@@ -115,10 +115,15 @@
       <version>1.4.01</version>
     </dependency>
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
+      <groupId>ch.qos.reload4j</groupId>
+      <artifactId>reload4j</artifactId>
+      <version>1.2.27</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-reload4j</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -299,12 +304,18 @@
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
           <configuration>
+            <systemPropertyVariables>
+              <log4j.configuration>file:${project.basedir}/src/test/resources/reload4j.properties</log4j.configuration>
+            </systemPropertyVariables>
             <argLine>@{argLine} -Djava.awt.headless=true</argLine>
           </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
+            <systemPropertyVariables>
+              <log4j.configuration>file:${project.basedir}/src/test/resources/reload4j.properties</log4j.configuration>
+            </systemPropertyVariables>
             <argLine>@{argLine} -Duser.language=en -Duser.region=US -Djava.awt.headless=true</argLine>
           </configuration>
         </plugin>
