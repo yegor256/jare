@@ -6,6 +6,7 @@ package io.jare.tk;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cloudfront.AmazonCloudFront;
 import com.amazonaws.services.cloudfront.AmazonCloudFrontClientBuilder;
 import com.amazonaws.services.cloudfront.model.CreateInvalidationRequest;
@@ -62,13 +63,7 @@ final class TkInvalidate implements Take {
                 StandardCharsets.UTF_8
             )
         );
-        final AmazonCloudFront aws = AmazonCloudFrontClientBuilder
-            .standard().withCredentials(
-                new AWSStaticCredentialsProvider(
-                    new BasicAWSCredentials(this.key, this.secret)
-                )
-            )
-            .build();
+        final AmazonCloudFront aws = TkInvalidate.client(this.key, this.secret);
         final CreateInvalidationResult result = aws.createInvalidation(
             new CreateInvalidationRequest(
                 "E2QC66VZY6F0QA",
@@ -89,5 +84,16 @@ final class TkInvalidate implements Take {
             ),
             "/domains"
         );
+    }
+
+    static AmazonCloudFront client(final String akey, final String scrt) {
+        return AmazonCloudFrontClientBuilder
+            .standard().withCredentials(
+                new AWSStaticCredentialsProvider(
+                    new BasicAWSCredentials(akey, scrt)
+                )
+            )
+            .withRegion(Regions.US_EAST_1)
+            .build();
     }
 }
