@@ -143,40 +143,45 @@ final class TkRelayTest {
      */
     @Test
     void rejectsUrlsWithoutHost() throws Exception {
-        final HttpException error = Assertions.assertThrows(
-                HttpException.class,
-                () -> new TkRelay(new FkBase()).act(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /?u=/relative/path",
-                                        "Host: 127.0.0.1"
-                                ),
-                                ""
+        Assertions.assertEquals(
+                400,
+                Assertions.assertThrows(
+                        HttpException.class,
+                        () -> new TkRelay(new FkBase()).act(
+                                new RqFake(
+                                        Arrays.asList(
+                                                "GET /?u=/relative/path",
+                                                "Host: 127.0.0.1"
+                                        ),
+                                        ""
+                                )
                         )
-                )
+                ).code()
         );
-        Assertions.assertEquals(400, error.code());
     }
 
     /**
      * TkRelay rejects URLs with a missing host after the scheme.
+     *
      * @throws Exception If some problem inside
      */
     @Test
     void rejectsUrlsWithMissingHostAfterScheme() throws Exception {
-        final HttpException error = Assertions.assertThrows(
-                HttpException.class,
-                () -> new TkRelay(new FkBase()).act(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /?u=http:///example.com/path",
-                                        "Host: 127.0.0.1"
-                                ),
-                                ""
+        Assertions.assertEquals(
+                400,
+                Assertions.assertThrows(
+                        HttpException.class,
+                        () -> new TkRelay(new FkBase()).act(
+                                new RqFake(
+                                        Arrays.asList(
+                                                "GET /?u=http:///example.com/path",
+                                                "Host: 127.0.0.1"
+                                        ),
+                                        ""
+                                )
                         )
-                )
+                ).code()
         );
-        Assertions.assertEquals(400, error.code());
     }
 
 }
