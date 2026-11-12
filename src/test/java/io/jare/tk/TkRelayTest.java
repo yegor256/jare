@@ -136,6 +136,28 @@ final class TkRelayTest {
         );
     }
 
+    /**
+     * TkRelay rejects URLs with a missing host after the scheme.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void rejectsUrlsWithMissingHostAfterScheme() throws Exception {
+        Assertions.assertEquals(
+                400,
+                Assertions.assertThrows(
+                        HttpException.class,
+                        () -> new TkRelay(new FkBase()).act(
+                                new RqFake(
+                                        Arrays.asList(
+                                                "GET /?u=http:///example.com/path",
+                                                "Host: 127.0.0.1"
+                                        ),
+                                        ""
+                                )
+                        )
+                ).code()
+        );
+    }
 
     /**
      * TkRelay can reject URLs without a host.
@@ -159,29 +181,4 @@ final class TkRelayTest {
                 ).code()
         );
     }
-
-    /**
-     * TkRelay rejects URLs with a missing host after the scheme.
-     *
-     * @throws Exception If some problem inside
-     */
-    @Test
-    void rejectsUrlsWithMissingHostAfterScheme() throws Exception {
-        Assertions.assertEquals(
-                400,
-                Assertions.assertThrows(
-                        HttpException.class,
-                        () -> new TkRelay(new FkBase()).act(
-                                new RqFake(
-                                        Arrays.asList(
-                                                "GET /?u=http:///example.com/path",
-                                                "Host: 127.0.0.1"
-                                        ),
-                                        ""
-                                )
-                        )
-                ).code()
-        );
-    }
-
 }
