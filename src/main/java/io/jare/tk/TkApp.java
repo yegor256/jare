@@ -107,13 +107,6 @@ public final class TkApp extends TkWrap {
                                                             )
                                                         ),
                                                         new FkRegex("/", new TkIndex(base)),
-                                                        new FkRegex(
-                                                            "/invalidate",
-                                                            new TkInvalidate(
-                                                                Manifests.read("Jare-CloudFrontKey"),
-                                                                Manifests.read("Jare-CloudFrontSecret")
-                                                            )
-                                                        ),
                                                         new FkAuthenticated(
                                                             new TkSecure(
                                                                 new TkFork(
@@ -122,7 +115,15 @@ public final class TkApp extends TkWrap {
                                                                         "/add",
                                                                         new TkMethods(new TkAdd(base), "POST")
                                                                     ),
-                                                                    new FkRegex("/delete", new TkDelete(base))
+                                                                    new FkRegex("/delete", new TkDelete(base)),
+                                                                    new FkRegex(
+                                                                        "/invalidate",
+                                                                        new TkInvalidate(
+                                                                            base,
+                                                                            Manifests.read("Jare-CloudFrontKey"),
+                                                                            Manifests.read("Jare-CloudFrontSecret")
+                                                                        )
+                                                                    )
                                                                 )
                                                             )
                                                         )
