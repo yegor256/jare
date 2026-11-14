@@ -79,7 +79,14 @@ final class TkRelay implements Take {
             );
         }
         final URI uri = URI.create(target);
-        final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
+        final String rawhost = uri.getHost();
+        if (rawhost == null) {
+            throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format("Target URL \"%s\" does not contain a host", target)
+            );
+        }
+        final String host = rawhost.toLowerCase(Locale.ENGLISH);
         final Iterator<Domain> domains = this.base.domain(host).iterator();
         if (!domains.hasNext()) {
             throw new HttpException(
