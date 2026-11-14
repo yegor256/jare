@@ -323,6 +323,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-failsafe-plugin</artifactId>
+          <version>3.6.1</version>
           <configuration>
             <systemPropertyVariables>
               <log4j.configuration>file:${project.basedir}/src/test/resources/reload4j.properties</log4j.configuration>
@@ -332,12 +333,22 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.6.1</version>
           <configuration>
             <systemPropertyVariables>
               <log4j.configuration>file:${project.basedir}/src/test/resources/reload4j.properties</log4j.configuration>
             </systemPropertyVariables>
             <argLine>@{argLine} -Duser.language=en -Duser.region=US -Djava.awt.headless=true</argLine>
           </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.16</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -351,6 +362,22 @@
     </plugins>
   </build>
   <profiles>
+    <profile>
+      <id>site</id>
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>3.6.1</version>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.16</version>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
     <profile>
       <id>resources</id>
       <activation>
