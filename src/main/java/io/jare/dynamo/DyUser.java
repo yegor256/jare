@@ -89,6 +89,7 @@ public final class DyUser implements User {
                         )
                     );
                 }
+                return;
             }
             this.table().put(
                 new Attributes()
