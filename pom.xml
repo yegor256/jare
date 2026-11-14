@@ -317,6 +317,10 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>3.16.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>3.8.0</version>
