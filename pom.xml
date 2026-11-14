@@ -344,6 +344,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.2.0</version>
         <configuration>
           <skip>true</skip>
         </configuration>
