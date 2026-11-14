@@ -5,6 +5,7 @@
 package io.jare.tk;
 
 import io.jare.fake.FkBase;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -120,6 +121,63 @@ final class TkRelayTest {
         );
     }
 
+    /**
+     * TkRelay can relay a target URL that has a host.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void relaysTargetWithHost() throws Exception {
+        new FtRemote(
+            new TkFork(
+                new FkRegex(
+                    "/alpha/.*",
+                    (Take) req -> new RsText("body")
+                )
+            )
+        ).exec(
+            home -> MatcherAssert.assertThat(
+                new RsPrint(
+                    new TkRelay(new FkBase()).act(
+                        TkRelayTest.fake(home, "/alpha/logo.png")
+                    )
+                ).printBody(),
+                Matchers.equalTo("body")
+            )
+        );
+    }
+
+    /**
+     * TkRelay can reject a target without a host, e.g. "?u=foo".
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void rejectsTargetWithoutHost() throws Exception {
+        TkRelayTest.assertRejectedAsBadRequest("foo");
+    }
+
+    /**
+     * TkRelay can reject a file:// target, which has no host.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void rejectsFileTargetWithoutHost() throws Exception {
+        TkRelayTest.assertRejectedAsBadRequest("file:///etc/passwd");
+    }
+
+    /**
+     * TkRelay can reject a target with an underscore in the authority,
+     * which makes {@link URI#getHost()} return NULL.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void rejectsTargetWithUnderscoreInHost() throws Exception {
+        TkRelayTest.assertRejectedAsBadRequest("http://my_site.com/a.png");
+    }
+
     private static Request fake(final URI home, final String path) {
         return new RqFake(
             Arrays.asList(
@@ -133,6 +191,37 @@ final class TkRelayTest {
                 "Host: localhost"
             ),
             ""
+        );
+    }
+
+    private static void assertRejectedAsBadRequest(final String target) {
+        final HttpException err = Assertions.assertThrows(
+            HttpException.class,
+            () -> new TkRelay(new FkBase()).act(
+                new RqFake(
+                    Arrays.asList(
+                        String.format(
+                            "GET /?u=%s",
+                            URLEncoder.encode(
+                                target,
+                                StandardCharsets.UTF_8
+                            )
+                        ),
+                        "Host: 127.0.0.1"
+                    ),
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            err.code(),
+            Matchers.equalTo(HttpURLConnection.HTTP_BAD_REQUEST)
+        );
+        MatcherAssert.assertThat(
+            err.getMessage(),
+            Matchers.containsString(
+                String.format("Target URL \"%s\" has no host", target)
+            )
         );
     }
 }

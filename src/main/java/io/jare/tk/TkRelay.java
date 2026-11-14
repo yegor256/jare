@@ -79,6 +79,15 @@ final class TkRelay implements Take {
             );
         }
         final URI uri = URI.create(target);
+        if (uri.getHost() == null) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    "Target URL \"%s\" has no host",
+                    target
+                )
+            );
+        }
         final String host = uri.getHost().toLowerCase(Locale.ENGLISH);
         final Iterator<Domain> domains = this.base.domain(host).iterator();
         if (!domains.hasNext()) {
