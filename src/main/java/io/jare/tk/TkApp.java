@@ -45,6 +45,17 @@ public final class TkApp extends TkWrap {
      * @throws IOException If fails
      */
     public TkApp(final Base base) throws IOException {
+        this(Manifests.read("Jare-DynamoKey").startsWith("AAAA"), base);
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param fake Enable fake authentication, when TRUE
+     * @param base Base
+     * @throws IOException If fails
+     */
+    TkApp(final boolean fake, final Base base) throws IOException {
         super(
             new TkWithHeaders(
                 new TkVersioned(
@@ -52,6 +63,7 @@ public final class TkApp extends TkWrap {
                         new TkFlash(
                             new TkAppFallback(
                                 new TkAppAuth(
+                                    fake,
                                     new TkForward(
                                         new TkFork(
                                             new FkHost(
