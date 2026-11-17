@@ -101,6 +101,21 @@
         <version>4.4.16</version>
       </dependency>
       <dependency>
+        <groupId>org.jspecify</groupId>
+        <artifactId>jspecify</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml</groupId>
+        <artifactId>classmate</artifactId>
+        <version>1.8.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>9.1.6.Final</version>
+      </dependency>
+      <dependency>
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
         <version>1.4.0</version>
@@ -331,6 +346,10 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.16.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>3.8.0</version>
@@ -367,6 +386,11 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.7.0</version>
+      </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
         <version>3.2.0</version>
