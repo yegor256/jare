@@ -12,6 +12,7 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URI;
@@ -99,11 +100,10 @@ final class Logs implements Runnable {
             }
             final Map<String, Map<LocalDate, Long>> map = new HashMap<>(0);
             try (
+                InputStream raw = Files.newInputStream(path);
                 BufferedReader input = new BufferedReader(
                     new InputStreamReader(
-                        new GZIPInputStream(
-                            Files.newInputStream(path)
-                        ),
+                        new GZIPInputStream(raw),
                         StandardCharsets.UTF_8
                     )
                 )
