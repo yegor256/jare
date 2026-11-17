@@ -332,6 +332,11 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>com.jcabi</groupId>
+          <artifactId>jcabi-maven-plugin</artifactId>
+          <version>0.17.2</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>3.8.0</version>
