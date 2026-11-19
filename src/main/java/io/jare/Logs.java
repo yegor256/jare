@@ -12,7 +12,9 @@ import io.jare.model.Base;
 import io.jare.model.Domain;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -92,42 +94,48 @@ final class Logs implements Runnable {
     private long process(final String name) throws IOException {
         final Ocket ocket = this.bucket.ocket(name);
         final Path path = Files.createTempFile("jare", ".gz");
-        ocket.read(Files.newOutputStream(path));
-        final Map<String, Map<LocalDate, Long>> map = new HashMap<>(0);
-        try (
-            BufferedReader input = new BufferedReader(
-                new InputStreamReader(
-                    new GZIPInputStream(
-                        Files.newInputStream(path)
-                    ),
-                    StandardCharsets.UTF_8
+        try {
+            try (OutputStream output = Files.newOutputStream(path)) {
+                ocket.read(output);
+            }
+            final Map<String, Map<LocalDate, Long>> map = new HashMap<>(0);
+            try (
+                InputStream raw = Files.newInputStream(path);
+                BufferedReader input = new BufferedReader(
+                    new InputStreamReader(
+                        new GZIPInputStream(raw),
+                        StandardCharsets.UTF_8
+                    )
                 )
-            )
-        ) {
-            while (true) {
-                final String line = input.readLine();
-                if (line == null) {
-                    break;
+            ) {
+                while (true) {
+                    final String line = input.readLine();
+                    if (line == null) {
+                        break;
+                    }
+                    Logs.parse(map, line);
                 }
-                Logs.parse(map, line);
             }
-        }
-        long total = 0L;
-        for (final Map.Entry<String, Map<LocalDate, Long>> entry : map.entrySet()) {
-            for (final Map.Entry<LocalDate, Long> usg
-                : entry.getValue().entrySet()) {
-                final Iterator<Domain> domains =
-                    this.base.domain(entry.getKey()).iterator();
-                if (domains.hasNext()) {
-                    domains.next().usage().add(
-                        usg.getKey(),
-                        usg.getValue()
-                    );
+            long total = 0L;
+            for (final Map.Entry<String, Map<LocalDate, Long>> entry
+                : map.entrySet()) {
+                for (final Map.Entry<LocalDate, Long> usg
+                    : entry.getValue().entrySet()) {
+                    final Iterator<Domain> domains =
+                        this.base.domain(entry.getKey()).iterator();
+                    if (domains.hasNext()) {
+                        domains.next().usage().add(
+                            usg.getKey(),
+                            usg.getValue()
+                        );
+                    }
+                    total += usg.getValue();
                 }
-                total += usg.getValue();
             }
+            return total;
+        } finally {
+            Files.deleteIfExists(path);
         }
-        return total;
     }
 
     private static void parse(final Map<String, Map<LocalDate, Long>> map,
