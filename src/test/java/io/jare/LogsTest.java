@@ -124,6 +124,11 @@ final class LogsTest {
             IllegalStateException.class,
             () -> new Logs(new FkBase(), bucket).run()
         );
+        LogsTest.confirmsNoJareLeftovers(tmp, before);
+    }
+
+    private static void confirmsNoJareLeftovers(final Path tmp,
+        final long before) throws IOException {
         final long after;
         try (Stream<Path> files = Files.list(tmp)) {
             after = files.filter(LogsTest::isTempFile).count();
@@ -139,23 +144,24 @@ final class LogsTest {
             "open file descriptors are only visible on linux"
         );
         try (Stream<Path> handles = Files.list(fds)) {
-            final long leaked = handles.filter(
-                handle -> {
-                    try {
-                        return Files.readSymbolicLink(handle)
-                            .toString()
-                            .matches(".*jare.*\\.gz.*");
-                    } catch (final IOException ex) {
-                        return false;
-                    }
-                }
-            ).count();
             MatcherAssert.assertThat(
                 "the raw input stream must not stay open after a malformed gzip",
-                leaked,
+                handles.filter(LogsTest::isJareHandle).count(),
                 Matchers.equalTo(0L)
             );
         }
+    }
+
+    private static boolean isJareHandle(final Path handle) {
+        boolean jare;
+        try {
+            jare = Files.readSymbolicLink(handle)
+                .toString()
+                .matches(".*jare.*\\.gz.*");
+        } catch (final IOException ex) {
+            jare = false;
+        }
+        return jare;
     }
 
     private static boolean isTempFile(final Path file) {
