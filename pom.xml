@@ -97,11 +97,6 @@
         <version>4.4.16</version>
       </dependency>
       <dependency>
-        <groupId>org.jspecify</groupId>
-        <artifactId>jspecify</artifactId>
-        <version>1.0.1</version>
-      </dependency>
-      <dependency>
         <groupId>com.fasterxml</groupId>
         <artifactId>classmate</artifactId>
         <version>1.8.0</version>

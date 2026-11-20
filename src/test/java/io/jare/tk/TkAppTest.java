@@ -96,4 +96,70 @@ final class TkAppTest {
             Matchers.equalTo("Page not found")
         );
     }
+
+    /**
+     * App can redirect to the front page, when /invalidate is called
+     * without the url parameter, instead of failing.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void invalidationRedirectsWhenUrlIsMissing() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkApp(new FkBase()).act(
+                    new RqFake("GET", "/invalidate")
+                )
+            ).printHead(),
+            Matchers.allOf(
+                Matchers.containsString("HTTP/1.1 303"),
+                Matchers.containsString("RsFlash=url+parameter+is+required")
+            )
+        );
+    }
+
+    /**
+     * App can refuse to invalidate a URL of a foreign domain.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void invalidationRejectsForeignDomain() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkApp(new FkBase()).act(
+                    new RqFake(
+                        "GET",
+                        "/invalidate?url=https://example.com/a.png"
+                    )
+                )
+            ).printHead(),
+            Matchers.containsString("is+not+yours")
+        );
+    }
+
+    /**
+     * App can reject an anonymous request to /invalidate, before
+     * TkInvalidate gets a chance to run, since the route is registered
+     * inside the authenticated fork.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void invalidationRejectsAnonymousRequest() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkApp(false, new FkBase()).act(
+                    new RqFake("GET", "/invalidate")
+                )
+            ).print(),
+            Matchers.allOf(
+                Matchers.containsString("HTTP/1.1 404"),
+                Matchers.containsString("Page not found"),
+                Matchers.not(
+                    Matchers.containsString("HTTP/1.1 303")
+                )
+            )
+        );
+    }
 }
