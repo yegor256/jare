@@ -58,13 +58,19 @@
   </ciManagement>
   <properties>
     <argLine/>
+    <byte-buddy.version>1.18.17</byte-buddy.version>
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.jspecify</groupId>
-        <artifactId>jspecify</artifactId>
-        <version>1.0.1</version>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>${byte-buddy.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
