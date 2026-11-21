@@ -58,9 +58,21 @@
   </ciManagement>
   <properties>
     <argLine/>
+    <xmlresolver.version>6.1.1</xmlresolver.version>
   </properties>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.xmlresolver</groupId>
+        <artifactId>xmlresolver</artifactId>
+        <version>${xmlresolver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlresolver</groupId>
+        <artifactId>xmlresolver</artifactId>
+        <version>${xmlresolver.version}</version>
+        <classifier>data</classifier>
+      </dependency>
       <dependency>
         <groupId>org.jspecify</groupId>
         <artifactId>jspecify</artifactId>
