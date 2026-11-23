@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.73.4</version>
+    <version>0.73.5</version>
   </parent>
   <groupId>io.jare</groupId>
   <artifactId>jare</artifactId>
@@ -65,6 +65,20 @@
         <groupId>jakarta.inject</groupId>
         <artifactId>jakarta.inject-api</artifactId>
         <version>2.0.1.MR</version>
+      </dependency>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>2.59.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>4.1.140.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
@@ -152,7 +166,7 @@
     <dependency>
       <groupId>com.jcabi.incubator</groupId>
       <artifactId>xembly</artifactId>
-      <version>0.32.2</version>
+      <version>0.32.3</version>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -173,6 +187,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-reload4j</artifactId>
+      <version>2.0.20</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -352,6 +367,11 @@
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.25.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>3.8.0</version>
         </plugin>
@@ -407,9 +427,31 @@
   </build>
   <profiles>
     <profile>
+      <id>clojure</id>
+      <activation>
+        <file>
+          <exists>${basedir}/src/main/clojure</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.theoryinpractise</groupId>
+            <artifactId>clojure-maven-plugin</artifactId>
+            <version>1.9.4</version>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>site</id>
       <reporting>
         <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <version>2.25.3</version>
+          </plugin>
           <plugin>
             <artifactId>maven-surefire-report-plugin</artifactId>
             <version>3.6.1</version>
