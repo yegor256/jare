@@ -29,7 +29,7 @@ final class DestinationTest {
                     "http://www.google.com/a/b/%D0%B4%D0%B0?z=%D0%B0#%D0%B0"
                 )
             ).path(),
-            Matchers.equalTo("/a/b/%D0%B4%D0%B0?z=%D0%B0#%D0%B0")
+            Matchers.equalTo("/a/b/%D0%B4%D0%B0?z=%D0%B0")
         );
     }
 
@@ -72,7 +72,22 @@ final class DestinationTest {
             new Destination(
                 new URI("http://www.google.com/%D0%B0?%D0%B0=1#t")
             ).path(),
-            Matchers.equalTo("/%D0%B0?%D0%B0=1#t")
+            Matchers.equalTo("/%D0%B0?%D0%B0=1")
+        );
+    }
+
+    /**
+     * Destination can build path dropping fragment with sub-resource.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void buildsPathDroppingFragment() throws Exception {
+        MatcherAssert.assertThat(
+            new Destination(
+                new URI("https://example.com/image.svg#icon")
+            ).path(),
+            Matchers.equalTo("/image.svg")
         );
     }
 }
