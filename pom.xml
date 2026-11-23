@@ -62,9 +62,18 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.jspecify</groupId>
-        <artifactId>jspecify</artifactId>
-        <version>1.0.1</version>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>2.59.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>4.1.140.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
