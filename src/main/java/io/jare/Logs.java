@@ -20,12 +20,14 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import org.apache.commons.lang3.StringUtils;
+import org.takes.misc.Href;
 
 /**
  * Logs in S3.
@@ -49,8 +51,19 @@ final class Logs implements Runnable {
             "[a-z0-9]+.cloudfront.net\t",
             "/\t",
             "\\d{3}\t",
-            "(https?://[^\t]+)\t"
+            "[^\t]+\t",
+            "[^\t]+\t",
+            "([^\t]*)\t"
         )
+    );
+
+    /**
+     * Validation pattern for target URLs.
+     *
+     * @link https://tools.ietf.org/html/rfc3986
+     */
+    private static final Pattern VALID = Pattern.compile(
+        "[A-Za-z0-9-%._~:/\\?#@!\\$&'\\(\\)\\*\\+,;=`\\[\\]]+"
     );
 
     /**
@@ -134,7 +147,13 @@ final class Logs implements Runnable {
         final CharSequence line) {
         final Matcher matcher = Logs.PTN.matcher(line);
         if (matcher.find()) {
-            final String domain = URI.create(matcher.group(3)).getHost();
+            Logs.credit(map, matcher, Logs.domain(matcher.group(3)));
+        }
+    }
+
+    private static void credit(final Map<String, Map<LocalDate, Long>> map,
+        final Matcher matcher, final String domain) {
+        if (domain != null) {
             if (!map.containsKey(domain)) {
                 map.put(domain, new HashMap<>(0));
             }
@@ -148,5 +167,32 @@ final class Logs implements Runnable {
                 target.get(date) + Long.parseLong(matcher.group(2))
             );
         }
+    }
+
+    private static String domain(final String query) {
+        String host = null;
+        final Iterator<String> params = new Href(
+            String.format("?%s", query)
+        ).param("u").iterator();
+        if (params.hasNext()) {
+            host = Logs.host(params.next().trim());
+        }
+        return host;
+    }
+
+    private static String host(final String target) {
+        String result = null;
+        if (Logs.VALID.matcher(target).matches()) {
+            result = Logs.parsed(URI.create(target));
+        }
+        return result;
+    }
+
+    private static String parsed(final URI uri) {
+        String result = null;
+        if (uri.getHost() != null) {
+            result = uri.getHost().toLowerCase(Locale.ENGLISH);
+        }
+        return result;
     }
 }
