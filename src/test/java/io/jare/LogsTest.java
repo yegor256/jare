@@ -186,6 +186,36 @@ final class LogsTest {
         Mockito.verifyNoInteractions(usage);
     }
 
+    /**
+     * Logs can skip a record with a malformed percent escape in the target,
+     * and still process the next record in the same file.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void skipsRecordWithMalformedEscape() throws Exception {
+        final Usage usage = Mockito.mock(Usage.class);
+        final Domain domain = Mockito.mock(Domain.class);
+        Mockito.doReturn(usage).when(domain).usage();
+        final Base base = Mockito.mock(Base.class);
+        Mockito.doReturn(Collections.singleton(domain))
+            .when(base).domain(Mockito.anyString());
+        LogsTest.runs(
+            base,
+            String.join(
+                System.lineSeparator(),
+                LogsTest.RECORD.replace(
+                    "u=http://images.example.net/image.png",
+                    "u=http://x/%zz"
+                ),
+                LogsTest.RECORD
+            )
+        );
+        Mockito.verify(base).domain("images.example.net");
+        Mockito.verify(usage).add(LogsTest.DATE, LogsTest.BYTES);
+        Mockito.verifyNoMoreInteractions(usage);
+    }
+
     private static void runs(final Base base, final String line)
         throws Exception {
         final Ocket ocket = Mockito.mock(Ocket.class);

@@ -183,7 +183,15 @@ final class Logs implements Runnable {
     private static String host(final String target) {
         String result = null;
         if (Logs.VALID.matcher(target).matches()) {
-            result = Logs.parsed(URI.create(target));
+            try {
+                result = Logs.parsed(URI.create(target));
+            } catch (final IllegalArgumentException ex) {
+                Logger.info(
+                    Logs.class,
+                    "target %s has a malformed escape, skipping it",
+                    target
+                );
+            }
         }
         return result;
     }
