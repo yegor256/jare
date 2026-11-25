@@ -44,7 +44,7 @@ final class Logs implements Runnable {
             "\\d{2}:\\d{2}:\\d{2}\t",
             "[A-Z0-9]+\t",
             "(\\d+)\t",
-            "\\d+\\.\\d+\\.\\d+\\.\\d+\t",
+            "[^\\t]+\t",
             "GET\t",
             "[a-z0-9]+.cloudfront.net\t",
             "/\t",
