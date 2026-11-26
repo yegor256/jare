@@ -45,6 +45,17 @@ public final class TkApp extends TkWrap {
      * @throws IOException If fails
      */
     public TkApp(final Base base) throws IOException {
+        this(Manifests.read("Jare-DynamoKey").startsWith("AAAA"), base);
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param fake Enable fake authentication, when TRUE
+     * @param base Base
+     * @throws IOException If fails
+     */
+    TkApp(final boolean fake, final Base base) throws IOException {
         super(
             new TkWithHeaders(
                 new TkVersioned(
@@ -52,6 +63,7 @@ public final class TkApp extends TkWrap {
                         new TkFlash(
                             new TkAppFallback(
                                 new TkAppAuth(
+                                    fake,
                                     new TkForward(
                                         new TkFork(
                                             new FkHost(
@@ -107,13 +119,6 @@ public final class TkApp extends TkWrap {
                                                             )
                                                         ),
                                                         new FkRegex("/", new TkIndex(base)),
-                                                        new FkRegex(
-                                                            "/invalidate",
-                                                            new TkInvalidate(
-                                                                Manifests.read("Jare-CloudFrontKey"),
-                                                                Manifests.read("Jare-CloudFrontSecret")
-                                                            )
-                                                        ),
                                                         new FkAuthenticated(
                                                             new TkSecure(
                                                                 new TkFork(
@@ -122,7 +127,15 @@ public final class TkApp extends TkWrap {
                                                                         "/add",
                                                                         new TkMethods(new TkAdd(base), "POST")
                                                                     ),
-                                                                    new FkRegex("/delete", new TkDelete(base))
+                                                                    new FkRegex("/delete", new TkDelete(base)),
+                                                                    new FkRegex(
+                                                                        "/invalidate",
+                                                                        new TkInvalidate(
+                                                                            base,
+                                                                            Manifests.read("Jare-CloudFrontKey"),
+                                                                            Manifests.read("Jare-CloudFrontSecret")
+                                                                        )
+                                                                    )
                                                                 )
                                                             )
                                                         )

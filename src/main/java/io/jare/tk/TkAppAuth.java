@@ -38,10 +38,20 @@ final class TkAppAuth extends TkWrap {
      * @param take Take
      */
     TkAppAuth(final Take take) {
-        super(TkAppAuth.make(take));
+        this(Manifests.read("Jare-DynamoKey").startsWith("AAAA"), take);
     }
 
-    private static Take make(final Take take) {
+    /**
+     * Ctor.
+     *
+     * @param fake Enable fake authentication, when TRUE
+     * @param take Take
+     */
+    TkAppAuth(final boolean fake, final Take take) {
+        super(TkAppAuth.make(fake, take));
+    }
+
+    private static Take make(final boolean fake, final Take take) {
         return new TkAuth(
             new TkFork(
                 new FkParams(
@@ -52,9 +62,7 @@ final class TkAppAuth extends TkWrap {
                 new FkFixed(take)
             ),
             new PsChain(
-                new PsFake(
-                    Manifests.read("Jare-DynamoKey").startsWith("AAAA")
-                ),
+                new PsFake(fake),
                 new PsByFlag(
                     new PsByFlag.Pair(
                         Pattern.compile(PsGithub.class.getSimpleName()),
