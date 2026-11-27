@@ -58,9 +58,20 @@
   </ciManagement>
   <properties>
     <argLine/>
+    <byte-buddy.version>1.18.17</byte-buddy.version>
   </properties>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
       <dependency>
         <groupId>software.amazon.awssdk</groupId>
         <artifactId>bom</artifactId>
